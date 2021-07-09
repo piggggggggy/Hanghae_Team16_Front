@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Grid = (props) => {
 
-    const {is_flex, width, margin, padding, bg, children, height} = props;
+    const {is_flex, width, margin, padding, bg, children, height, space, align} = props;
     const styles = {
 		is_flex: is_flex,
 		width: width,
@@ -12,6 +12,8 @@ const Grid = (props) => {
 		padding: padding,
 		bg: bg,
         height: height,
+        space: space,
+        align: align,
 	};
 
     return (
@@ -31,6 +33,8 @@ Grid.defaultProps = {
     padding: false,
     margin: false,
     bg: false,
+    space: false,
+    align: false,
 };
 
 const GridBox = styled.div`
@@ -42,6 +46,8 @@ const GridBox = styled.div`
   ${(props) => (props.margin? `margin: ${props.margin}`: '' )};
   ${(props) => (props.bg? `background-color: ${props.bg}`: '' )};
   ${(props) => (props.is_flex? `display: flex; justify-content: space-around; align-items: center;` : '')};
+  ${(props) => (props.space? `justify-content: ${props.space}`: '' )};
+  ${(props) => (props.align? `align-items: ${props.align}`: '' )};
 `;
 
 

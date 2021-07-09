@@ -10,7 +10,7 @@ const QnaCard = (props) => {
             text(내용)
             text(이름)
             text(댓글 수)
-            button
+            button(버튼)
 
 
         </React.Fragment>

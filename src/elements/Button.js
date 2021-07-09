@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Button = (props) => {
 
-    const {width,height, backgroundcolor, border, borderradius, _onclick, text, color, size} = props;
+    const {width, height, backgroundcolor, border, borderradius, _onclick, text, color, size, is_float} = props;
 
     const styles = {
         width: width,
@@ -15,12 +15,20 @@ const Button = (props) => {
         color: color,
         size: size,
     };
-
-    return (
-        <React.Fragment>
-            <DfButton {...styles} onclick={_onclick}>{text}</DfButton>
-        </React.Fragment>
-    );
+    if(is_float){
+        return(
+            <React.Fragment>
+                <FloatBtn {...styles} onclick={_onclick}>{text}</FloatBtn>
+            </React.Fragment>
+        )
+    }else{
+        return (
+            <React.Fragment>
+                <DfButton {...styles} onclick={_onclick}>{text}</DfButton>
+            </React.Fragment>
+        );
+    }
+    
 };
 
 Button.defaultProps = {
@@ -33,10 +41,24 @@ Button.defaultProps = {
     text: '버튼',
     color: 'white',
     size: '', 
+    is_float: false,
 };
 
 
 const DfButton = styled.button`
+    width: ${(props) => props.width};
+    height: ${(props) => props.height};
+    background-color: ${(props) => props.backgroundcolor};
+    border: ${(props) => props.border};
+    border-radius: ${(props) => props.borderradius};
+    color: ${(props) => props.color};
+    font-size: ${(props) => props.size};
+`;
+
+const FloatBtn = styled.button`
+    position: relative;
+    left: 70%;
+    margin-bottom: 10px;
     width: ${(props) => props.width};
     height: ${(props) => props.height};
     background-color: ${(props) => props.backgroundcolor};

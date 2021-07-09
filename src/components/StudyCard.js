@@ -13,6 +13,7 @@ const StudyCard = (props) => {
             text(카테고리)
             button
             button
+            button
             
         </React.Fragment>
     )

@@ -8,12 +8,14 @@ import QnaWrite from "../pages/QnaWrite";
 import Study from "../pages/Study";
 import StudyDetail from "../pages/StudyDetail";
 import './App.css';
-
-
+import Header from "./Header";
+import Container from '@material-ui/core/Container';
 function App() {
   return (
     <React.Fragment>
       <BrowserRouter>
+        <Header></Header>
+        <Container maxWidth="lg">
         <Route path='/' exact component={Main}/>
         <Route path='/mypage' exact component={MyPage}/>
         <Route path='/qna' exact component={Qna}/>
@@ -21,6 +23,7 @@ function App() {
         <Route path='/qnawrite' exact component={QnaWrite}/>
         <Route path='/study' exact component={Study}/>
         <Route path='/study/id' exact component={StudyDetail}/>
+        </Container>
       </BrowserRouter>
     </React.Fragment>
   );

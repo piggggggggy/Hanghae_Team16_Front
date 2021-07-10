@@ -53,6 +53,7 @@ const DfButton = styled.button`
     border-radius: ${(props) => props.borderradius};
     color: ${(props) => props.color};
     font-size: ${(props) => props.size};
+    cursor: pointer;
 `;
 
 const FloatBtn = styled.button`
@@ -66,6 +67,7 @@ const FloatBtn = styled.button`
     border-radius: ${(props) => props.borderradius};
     color: ${(props) => props.color};
     font-size: ${(props) => props.size};
+    cursor: pointer;
 `;
 
 export default Button;

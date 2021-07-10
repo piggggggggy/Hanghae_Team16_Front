@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from './Grid';
+import { Text } from '.';
 
 const CardMt = (props) => {
 
@@ -36,10 +37,10 @@ const CardMt = (props) => {
             </Typography>
             </Grid>
 
-            <Grid is_flex>
-                <Typography variant="body2" component="p">
+            <Grid textalign="right"  padding="0 20px 0 0">
+                <Text>
                 2021-07-10 시작!
-                </Typography>
+                </Text>
             </Grid>
 
             </Grid>
@@ -62,10 +63,10 @@ const CardMt = (props) => {
             </Typography>
             </Grid>
 
-            <Grid is_flex>
-                <Typography variant="body2" component="p">
+            <Grid textalign="right"  padding="0 20px 0 0">
+                <Text>
                 2021-07-10 시작!
-                </Typography>
+                </Text>
             </Grid>
 
             </Grid>
@@ -88,10 +89,10 @@ const CardMt = (props) => {
             </Typography>
             </Grid>
 
-            <Grid is_flex>
-                <Typography variant="body2" component="p">
+            <Grid textalign="right"  padding="0 20px 0 0">
+                <Text>
                 2021-07-10 시작!
-                </Typography>
+                </Text>
             </Grid>
 
             </Grid>

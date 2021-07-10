@@ -1,13 +1,16 @@
 import React from "react";
-
+import StudyDetailBody from "../components/StudyDetailBody";
+import PageHeader from "../components/PageHeader";
+import { Grid } from "@material-ui/core";
 
 const StudyDetail = (props) => {
 
  	return (
 		<React.Fragment>
-			study_detail
-                page_header
-                study_detail_body
+	        <Grid>
+			    <PageHeader text="Study"/>
+                <StudyDetailBody/>
+			</Grid>
 		</React.Fragment>
 	)  
 };

@@ -8,7 +8,7 @@ const StudyCard = (props) => {
 
     return (
         <React.Fragment>
-            <Grid width="47%" margin="16px" bg="lightgray">
+            <Grid width="100%" margin="16px" bg="lightgray">
                 <Grid is_flex padding="10px">
                     <Text>LEVEL : {props.level}</Text>
                     <Text>{props.studyDeadline} 마감</Text>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "../elements";
+import { Grid, Button } from "../elements";
 import StudyCard from "./StudyCard";
 
 
@@ -92,17 +92,35 @@ const StudyList = (props) => {
         },
     ];
     
+    // return (
+    //     <React.Fragment>
+    //         <Grid wrap>
+    //             {study_list.map((c,idx) => {
+    //                 return(
+    //                     <StudyCard key={idx} {...c}/>
+    //                 )
+    //             })}
+    //         </Grid>
+    //     </React.Fragment>
+    // );
+
     return (
         <React.Fragment>
-            <Grid wrap>
-                {study_list.map((c,idx) => {
-                    return(
-                        <StudyCard key={idx} {...c}/>
-                    )
-                })}
+            <Grid width="60%" float="left">
+                <Grid is_flex>
+                    <Button text="전체보기"/>
+                    <Button text="진행 중인 스터디"/>
+                </Grid>
+                <Grid>
+                    {study_list.map((c,idx) => {
+                        return(
+                            <StudyCard key={idx} {...c}/>
+                        )
+                    })}
+                </Grid>
             </Grid>
         </React.Fragment>
-    );
+    )
 };
 
 export default StudyList;

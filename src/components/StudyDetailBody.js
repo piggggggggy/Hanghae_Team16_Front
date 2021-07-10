@@ -7,21 +7,8 @@ import PageHeader from "./PageHeader";
 
 const StudyDetailBody = (props) => {
 
-    const test = {
-        studyTitle: "리액트 스터디 모집합니다.",
-        studyIndex: 11,
-        studyStart: "2021-07-10",
-        studyDeadline: "2021-07-20",
-        studySize: 5,
-        joinNum: 2,
-        studyExplain: "리린이들 모집합니다.",
-        category: "front-end",
-        level: 3,
-        is_full: false,
-        leader: "박용태",
-    }
 
-    const is_full = test.studySize === test.joinNum
+    const is_full = props.size === props.joinNum
 
 
     return (
@@ -29,8 +16,8 @@ const StudyDetailBody = (props) => {
             <DetailContainer>
                 <DetailHeader>
                     <RowBox>
-                        <Text>팀장 : {test.leader}</Text>
-                        <Text>LEVEL : {test.level}</Text>
+                        <Text>팀장 : {props.leader}</Text>
+                        <Text>LEVEL : {props.level}</Text>
                     </RowBox>
                     <div>
                         <Button backgroundcolor="gray" text="수정"/>
@@ -38,16 +25,16 @@ const StudyDetailBody = (props) => {
                     </div>
                 </DetailHeader>
                 <Grid margin="10px 0px">
-                    <Text weight="600" size="32px">{test.studyTitle}</Text>
+                    <Text weight="600" size="32px">{props.name}</Text>
                 </Grid>
                 <DetailHeader>
                     <Grid>
                         <RowBox>
-                            <Text>현재인원 : {test.joinNum} / {test.studySize}</Text>
+                            <Text>현재인원 : {props.joinNum} / {props.size}</Text>
                             <Button text="인원보기"/>
                         </RowBox>
                         <Grid>
-                            <Text>카테고리 : {test.category}</Text>
+                            <Text>Type : {props.studyType}</Text>
                         </Grid>
                     </Grid>
                     <div>
@@ -57,12 +44,33 @@ const StudyDetailBody = (props) => {
                     </div>
                 </DetailHeader>
                 <ContentBox>
-                    <Text>{test.studyExplain}</Text>
+                    <Text>{props.explain}</Text>
                 </ContentBox>
             </DetailContainer>
         </React.Fragment>
     )
 }
+
+StudyDetailBody.defaultProps = {
+    _id: "60e9217b12df1a1e04c79084",
+    studyId: 1,
+    name: "[일정변경]스터디 구합니다",
+    schedule: "2021-09-01-2021-09-07",
+    startDate: "2021-07-21",
+    endJoinDate: "2021-07-30",
+    writeDate: "2021-07-10",
+    size: 5,
+    explain: "초보 고수 모두 환영~",
+    joinLater: false,
+    userId: 5,
+    level: 2,
+    studyType: 1,
+    joinNum: 0,
+}
+
+
+
+
 
 const DetailContainer = styled.div`
     max-width: 100%;

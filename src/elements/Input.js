@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid } from ".";
 const Input = (props) => {
-    const {width, height, margin, padding, placeholder, type, multiLine} = props;
+    const {width, height, margin, padding, placeholder, type, multiLine, _onChange, name} = props;
 
     const styles = {
         width: width,
@@ -11,6 +11,7 @@ const Input = (props) => {
         padding: padding,
         placeholder: placeholder,
         type: type,
+        name: name,
     }
 
     if (multiLine) {
@@ -26,7 +27,7 @@ const Input = (props) => {
     
     return (
         <React.Fragment>
-            <ElInput {...styles} type={type} placeholder={placeholder}></ElInput>
+            <ElInput {...styles} type={type} placeholder={placeholder} onChange={_onChange} name={name}></ElInput>
         </React.Fragment>
     )
 }
@@ -39,6 +40,7 @@ Input.defaultProps = {
     padding: "12px 4px",
     placeholder: "텍스트를 입력해주세요.",
     type: "text",
+    _onChange: () => {},
 }
 
 const ElInput = styled.input`

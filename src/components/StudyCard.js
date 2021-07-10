@@ -1,11 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { Text, Button, Grid } from "../elements";
+import { useSelector, useDispatch } from "react-redux";
 // import SType from "../shared/StudyType";
 
 const StudyCard = (props) => {
 
-    
+    const study_list = useSelector((state) => state.study.list);
+    console.log(study_list);
+
+
     const Type = () => {
         if (props.studyType === 0){
             return ("감시형")

@@ -1,7 +1,36 @@
 import React from "react";
 import { Text, Input, Button, Grid } from "../elements";
+import { fetchLogin } from "../redux/modules/user";
+import { useDispatch } from "react-redux";
+import { actionCreators as userActions } from "../redux/modules/user";
 
 const Login = (props) => {
+
+//     const dispatch = useDispatch();
+
+//     const [account, setAccount] = React.useState({
+//         id: "",
+//         password: "",
+//     });
+
+//     const onChangeAccount = (e) => {
+        
+//         setAccount({
+//             ...account,
+//             [e.target.name]: e.target.value,
+//         })
+        
+//     };
+
+//     const onSubmitAccount = async () => {
+//         try {
+//             const user = await fetchLogin(account);
+//             setUser(user);
+//         } catch (error) {
+//             window.alert(error);
+//         }
+//     };
+
 
     return (
 		<React.Fragment>
@@ -9,19 +38,19 @@ const Login = (props) => {
 
             <Grid display="flex"align="center" width="70%" margin="50px auto">
                 <Grid width="30%">
-                <Text>비밀번호</Text>
+                <Text>아이디</Text>
                 </Grid>
                 <Grid width="70%">
-                <Input type="password" placeholder="비밀번호를 입력해주세요." padding="10px 20px" width="100%" height="40px"></Input>
+                <Input name="id" type="text" placeholder="아이디를 입력해주세요." padding="10px 20px" width="100%" height="40px"></Input>
                 </Grid>
             </Grid>
 
             <Grid display="flex"align="center" width="70%" margin="50px auto">
                 <Grid width="30%">
-                <Text>비밀번호 확인</Text>
+                <Text>비밀번호</Text>
                 </Grid>
                 <Grid width="70%">
-                <Input type="password" placeholder="비밀번호를 한 번 더 입력해주세요." padding="10px 20px" width="100%" height="40px"></Input>
+                <Input name="password" type="password" placeholder="비밀번호를 입력해주세요." padding="10px 20px" width="100%" height="40px"></Input>
                 </Grid>
             </Grid>
 

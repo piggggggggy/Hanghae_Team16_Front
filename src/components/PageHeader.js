@@ -10,8 +10,10 @@ const PageHeader = (props) => {
 
     return (
         <React.Fragment>
-            <Grid is_flex margin="16px 30px">
-                <Text bold size="48px" weight="800">{text}</Text>
+            <Grid display="flex" space="space-between" padding="0 50px" align="center" margin="20px 0">
+                
+                <Text size="48px" weight="800">{text}</Text>
+                
                 <Button backgroundcolor="gray" text={btntext}/>
             </Grid>
         </React.Fragment>

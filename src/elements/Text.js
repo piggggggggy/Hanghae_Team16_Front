@@ -3,13 +3,14 @@ import styled from "styled-components";
 
 const Text = (props) => {
     
-    const {size, weight, color, children, margin} = props;
+    const {size, weight, color, children, margin, align} = props;
 
     const styles = {
         size: size,
         weight: weight,
         color: color,
         margin: margin,
+        align: align,
     }
 
 
@@ -32,6 +33,7 @@ const ElText = styled.p`
     font-weight: ${(props) => props.weight};
     color: ${(props) => props.color};
     margin: ${(props) => props.margin};
+    text-align: ${(props) => props.align};
 `;
 
 export default Text;

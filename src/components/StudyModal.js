@@ -43,9 +43,9 @@ const StudyModal = (props) => {
         </React.Fragment>
     );
 }
-
-
-
+// name/level/studyType/joinLater/startDate/explain   + writeDate
+// schedule/endJoinDate/
+// 팀장이름은 어떻게 해야할까// userId로 보내야하나? // joinNum 자동으로 붙이기 // 유저정보 합쳐서 보내기
 const ModalBox = styled.div`
     width: 60%;
     height: 70%;

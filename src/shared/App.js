@@ -26,7 +26,7 @@ function App() {
         <Route path='/qna/id' exact component={QnaDetail}/>
         <Route path='/qnawrite' exact component={QnaWrite}/>
         <Route path='/study' exact component={Study}/>
-        <Route path='/study/id' exact component={StudyDetail}/>
+        <Route path='/study/:id' exact component={StudyDetail}/>
         <Route path='/login' exact component={Login}></Route>
         <Route path='/signup' exact component={SignUp}></Route>
 

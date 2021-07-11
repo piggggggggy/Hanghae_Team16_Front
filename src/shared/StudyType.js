@@ -21,6 +21,21 @@
 //     }
 // };
 
+const SType = (data) => {
 
 
-// export default SType;
+    if (data === 0){
+        return ("감시형")
+    }else if(data === 1){
+        return ("토이")
+    }else if(data === 2){
+        return ("개인")
+    }else if(data === 3){
+        return ("독서실")
+    }else if(data === 4){
+        return ("알고리즘")
+    }
+};
+
+
+export default SType;

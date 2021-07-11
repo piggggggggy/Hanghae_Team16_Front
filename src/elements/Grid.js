@@ -34,10 +34,10 @@ const Grid = (props) => {
 Grid.defaultProps = {
     children: null,
     is_flex: false,
-    width: "100%",
+    width: false,
     height: false,
-    padding: false,
-    margin: false,
+    padding: "0px",
+    margin: "0px",
     bg: false,
     space: false,
     align: false,
@@ -47,7 +47,7 @@ Grid.defaultProps = {
 
 const GridBox = styled.div`
     width: ${(props) => props.width};
-    height: 100%;
+    height: ${(props) => props.height};
     ${(props) => (props.height? `padding: ${props.height}`: '' )};
     box-sizing: border-box;
     ${(props) => (props.padding? `padding: ${props.padding}`: '' )};

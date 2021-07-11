@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { BrowserRouter, Route } from "react-router-dom";
 import Main from "../pages/Main";
 import MyPage from "../pages/MyPage";
@@ -35,5 +36,10 @@ function App() {
     </React.Fragment>
   );
 }
+
+
+const Coontainer = styled.div`
+  
+`;
 
 export default App;

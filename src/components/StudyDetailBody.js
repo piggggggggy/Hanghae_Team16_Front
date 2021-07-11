@@ -1,8 +1,7 @@
-import { text } from "dom-helpers";
 import React from "react";
 import styled from "styled-components";
 import { Text, Grid, Button } from "../elements";
-import PageHeader from "./PageHeader";
+import SType from "../shared/StudyType";
 
 
 const StudyDetailBody = (props) => {
@@ -34,7 +33,7 @@ const StudyDetailBody = (props) => {
                             <Button text="인원보기"/>
                         </RowBox>
                         <Grid>
-                            <Text>Type : {props.studyType}</Text>
+                            <Text>Type : {SType(props.studyType)}</Text>
                         </Grid>
                     </Grid>
                     <div>
@@ -73,7 +72,7 @@ StudyDetailBody.defaultProps = {
 
 
 const DetailContainer = styled.div`
-    max-width: 100%;
+    max-width: 1000px;
     max-height: 1000px;
     background-color: lightgray;
     padding: 10px 10% 30px 10%;

@@ -1,7 +1,6 @@
 import React from "react";
 import StudyDetailBody from "../components/StudyDetailBody";
-import PageHeader from "../components/PageHeader";
-import { Grid } from "@material-ui/core";
+import { Grid, Text } from "../elements";
 import { useSelector } from "react-redux";
 
 const StudyDetail = (props) => {
@@ -16,7 +15,9 @@ const StudyDetail = (props) => {
  	return (
 		<React.Fragment>
 	        <Grid>
-			    <PageHeader text="Study"/>
+				<Grid padding="0 50px" margin="20px 0">
+                	<Text size="48px" weight="800">Study</Text>
+            	</Grid>
                 <StudyDetailBody {...detail_study}/>
 			</Grid>
 		</React.Fragment>

@@ -2,10 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 const DropBox = (props) => {
-   const {name, text1, text2, text3, text4, text5, two, width} = props;
+   const {name, text1, text2, text3, text4, text5, two, width, margin, padding, height} = props;
 
    const styles = {
     width: width,
+    height: height,
+    margin: margin,
+    padding: padding,
 
 };
 
@@ -26,7 +29,7 @@ const DropBox = (props) => {
     return (
         
         <React.Fragment>
-            <DropDown>
+            <DropDown {...styles}>
                 <option selected>{name}</option>
                 <option>{text1}</option>
                 <option>{text2}</option>
@@ -41,10 +44,11 @@ const DropBox = (props) => {
 
 
 const DropDown = styled.select`
-    width:150px;
-    height:50px;
+    ${(props) => (props.width? `margin: ${props.width}`:'width: 150px')};
+    ${(props) => (props.height? `margin: ${props.height}`:'height: 50px')};
     border: 1px solid black;
-    width: ${(props) => props.width};
+    ${(props) => (props.magin? `margin: ${props.margin}`:'')};
+    ${(props) => (props.padding? `margin: ${props.padding}`:'')};
 `;
 
 export default DropBox;

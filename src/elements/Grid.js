@@ -34,10 +34,10 @@ const Grid = (props) => {
 Grid.defaultProps = {
     children: null,
     is_flex: false,
-    width: "100%",
+    width: false,
     height: false,
-    padding: false,
-    margin: false,
+    padding: "0px",
+    margin: "0px",
     bg: false,
     space: false,
     align: false,
@@ -47,9 +47,10 @@ Grid.defaultProps = {
 
 const GridBox = styled.div`
     width: ${(props) => props.width};
-    height: 100%;
+    height: ${(props) => props.height};
     ${(props) => (props.height? `padding: ${props.height}`: '' )};
     box-sizing: border-box;
+    display: ${(props) => props.display};
     ${(props) => (props.padding? `padding: ${props.padding}`: '' )};
     ${(props) => (props.margin? `margin: ${props.margin}`: '' )};
     ${(props) => (props.bg? `background-color: ${props.bg}`: '' )};
@@ -59,7 +60,6 @@ const GridBox = styled.div`
     ${(props) => (props.wrap? 'display: flex; flex-wrap: wrap;' : '')};
     ${(props) => (props.scrollWrap? 'display: flex; white-space: nowrap; overflow-x: scroll;': '')};
     text-align: ${(props) => props.textalign};
-    display: ${(props) => props.display};
     float: ${(props) => props.float};
     flex-direction: ${(props) => props.direction};
 `;

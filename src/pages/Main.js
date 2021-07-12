@@ -1,23 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 import Banner from "../components/Banner";
-import CardMt from "../elements/CardMt";
-import CardMt2 from "../elements/CardMt2";
 import Grid from "../elements/Grid";
+import MainStudyCardList from "../components/MainStudyCardList";
 
 const Main = (props) => {
+	const {history} = props;
 
  	return (
 		<React.Fragment>
 			<Banner></Banner>
-			<Grid is_flex align="start" margin="60px 0">
+			<Grid display="flex" space="space-around" margin="60px 0">
 
 			<Grid width="500px">
-			<CardMt></CardMt>
+			<MainStudyCardList name="스터디"/>
 			</Grid>
 
 			<Grid width="500px">
-			<CardMt2></CardMt2>
+			<MainStudyCardList name="QnA"/>
 			</Grid>
 
 			</Grid>

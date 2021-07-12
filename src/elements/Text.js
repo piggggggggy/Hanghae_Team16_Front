@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Text = (props) => {
     
-    const {size, weight, color, children, margin, align} = props;
+    const {size, weight, color, children, margin, align, overflow} = props;
 
     const styles = {
         size: size,
@@ -11,6 +11,7 @@ const Text = (props) => {
         color: color,
         margin: margin,
         align: align,
+        overflow: overflow,
     }
 
 
@@ -26,6 +27,7 @@ Text.defaultProps = {
     weight: "normal",
     color: "#000",
     margin: "0",
+    overflow: false,
 }
 
 const ElText = styled.p`
@@ -34,6 +36,7 @@ const ElText = styled.p`
     color: ${(props) => props.color};
     margin: ${(props) => props.margin};
     text-align: ${(props) => props.align};
+    ${(props) => (props.overflow? 'text-overflow: ellipsis;': '')};
 `;
 
 export default Text;

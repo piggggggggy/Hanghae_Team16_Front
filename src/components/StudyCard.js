@@ -2,33 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { Text, Button, Grid } from "../elements";
 import { useSelector, useDispatch } from "react-redux";
-// import SType from "../shared/StudyType";
+import SType from "../shared/StudyType";
 
 const StudyCard = (props) => {
-
-    const study_list = useSelector((state) => state.study.list);
-    console.log(study_list);
-
-
-    const Type = () => {
-        if (props.studyType === 0){
-            return ("감시형")
-        }else if(props.studyType === 1){
-            return ("토이")
-        }else if(props.studyType === 2){
-            return ("개인")
-        }else if(props.studyType === 3){
-            return ("독서실")
-        }else if(props.studyType === 4){
-            return ("알고리즘")
-        }
-
-    }
+    const {history} = props;
 
     return (
         <React.Fragment>
-            <Grid width="100%" margin="16px" bg="lightgray">
-                <Grid is_flex padding="10px">
+            <Card>
+                <Grid is_flex padding="10px" width="90%" margin="auto">
                     <Text>LEVEL : {props.level}</Text>
                     <Text>{props.endJoinDate} 마감</Text>
                 </Grid>
@@ -37,12 +19,10 @@ const StudyCard = (props) => {
                     <Text>{props.startDate} 시작</Text>
                     <Text>{props.explain}</Text>
                     <Text>인원 : {props.joinNum + 1} / {props.size}</Text>
-                    <Text>Type : {Type()}</Text>
+                    <Text>스터디 방식 : {SType(props.studyType)}</Text>
                 </Grid>
-                <Grid>
-                    <Button is_float backgroundcolor="gray" text="자세히 보기"/>
-                </Grid>
-            </Grid>
+                <Button _onClick={()=>{history.push('/study/:id')}} is_float backgroundcolor="gray" text="자세히 보기"/>
+            </Card>
         </React.Fragment>
     );
 };
@@ -67,6 +47,13 @@ StudyCard.defaultProps = {
     __v: 0,
 };
 
-
+const Card = styled.div`
+    max-width: 90%;
+    margin: 20px auto;
+    background-color: lightgray;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px gray;
+`;
 
 export default StudyCard;

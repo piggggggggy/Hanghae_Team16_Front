@@ -23,7 +23,8 @@ const deleteStudy = createAction(DELETE_STUDY, (study_id) => ({study_id}));
 
 // initialState
 const initialState = {
-    list: [{
+    list: [
+    {
     _id: "abc",
     studyId: 1,
     name: "스터디 구해용",
@@ -39,7 +40,59 @@ const initialState = {
     studyType: 1,
     joinNum: 0,
     __v: 0,
-    }]
+    },
+    {
+    _id: "abc",
+    studyId: 1,
+    name: "스터디 구해용",
+    schedule: "2021-07-30 ~ 2021-10-23",
+    startDate: "2021-07-21",
+    endJoinDate: "2021-07-30",
+    writeDate: "2021-07-20 오후 18:31:22",
+    size: 5,
+    explain: "초보도 가능합니다.",
+    joinLater: false,
+    userId: 5,
+    level: 2,
+    studyType: 1,
+    joinNum: 0,
+    __v: 0,
+    },
+    {
+    _id: "abc",
+    studyId: 1,
+    name: "스터디 구해용",
+    schedule: "2021-07-30 ~ 2021-10-23",
+    startDate: "2021-07-21",
+    endJoinDate: "2021-07-30",
+    writeDate: "2021-07-20 오후 18:31:22",
+    size: 5,
+    explain: "초보도 가능합니다.",
+    joinLater: false,
+    userId: 5,
+    level: 2,
+    studyType: 1,
+    joinNum: 0,
+    __v: 0,
+    },
+    {
+    _id: "abc",
+    studyId: 1,
+    name: "스터디 구해용",
+    schedule: "2021-07-30 ~ 2021-10-23",
+    startDate: "2021-07-21",
+    endJoinDate: "2021-07-30",
+    writeDate: "2021-07-20 오후 18:31:22",
+    size: 5,
+    explain: "초보도 가능합니다.",
+    joinLater: false,
+    userId: 5,
+    level: 2,
+    studyType: 1,
+    joinNum: 0,
+    __v: 0,
+    }
+    ]
 };
 
 const initialStudy = {

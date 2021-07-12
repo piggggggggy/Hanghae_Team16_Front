@@ -50,6 +50,7 @@ const GridBox = styled.div`
     height: ${(props) => props.height};
     ${(props) => (props.height? `padding: ${props.height}`: '' )};
     box-sizing: border-box;
+    display: ${(props) => props.display};
     ${(props) => (props.padding? `padding: ${props.padding}`: '' )};
     ${(props) => (props.margin? `margin: ${props.margin}`: '' )};
     ${(props) => (props.bg? `background-color: ${props.bg}`: '' )};
@@ -59,7 +60,6 @@ const GridBox = styled.div`
     ${(props) => (props.wrap? 'display: flex; flex-wrap: wrap;' : '')};
     ${(props) => (props.scrollWrap? 'display: flex; white-space: nowrap; overflow-x: scroll;': '')};
     text-align: ${(props) => props.textalign};
-    display: ${(props) => props.display};
     float: ${(props) => props.float};
     flex-direction: ${(props) => props.direction};
 `;

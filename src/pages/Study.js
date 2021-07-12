@@ -1,9 +1,10 @@
 import React from "react";
+import styled from "styled-components";
 import PageHeader from "../components/PageHeader";
 import StudyList from "../components/StudyList";
+import StudyExplain from "../components/StudyExplain";
 import StudyModal from "../components/StudyModal";
-import { Button } from "../elements";
-import styled from "styled-components";
+import { Grid, Button } from "../elements";
 import ModalBg from "../components/ModalBg";
 
 const Study = (props) => {
@@ -22,12 +23,13 @@ const Study = (props) => {
 
  	return (
 		<React.Fragment>
-            <PageHeader text="Study" btntext="모집하기"></PageHeader>
-			<Button text="모집하기"></Button>
 			<button onClick={toggleModalSetting}>ssdfsdf</button>
 			{settingModal === true ? <StudyModal />: <div />}
 			
-           <StudyList></StudyList>
+           	<Grid display="flex" space="space-between">
+				<StudyExplain/>
+				<StudyList/>
+			</Grid>
 
 		</React.Fragment>
 	)  

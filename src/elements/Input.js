@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid } from ".";
 const Input = (props) => {
-    const {width, height, margin, padding, placeholder, type, multiLine, _onChange, name} = props;
+    const {width, height, margin, padding, placeholder, type, multiLine, _onChange, name, _ref, maxlength} = props;
 
     const styles = {
         width: width,
@@ -18,8 +18,10 @@ const Input = (props) => {
         return (
           <Grid>
             <ElTextarea
+              {...styles}
               rows={10}
               placeholder={placeholder}
+              ref={_ref}
             ></ElTextarea>
           </Grid>
         );
@@ -27,7 +29,7 @@ const Input = (props) => {
     
     return (
         <React.Fragment>
-            <ElInput {...styles} type={type} placeholder={placeholder} onChange={_onChange} name={name}></ElInput>
+            <ElInput {...styles} type={type} placeholder={placeholder} ref={_ref} onChange={_onChange} name={name} maxLength={maxlength}></ElInput>
         </React.Fragment>
     )
 }
@@ -48,7 +50,6 @@ const ElInput = styled.input`
     height: ${(props) => props.height};
     margin: ${(props) => props.margin};
     padding: ${(props) => props.padding};
-    placeholder: ${(props) => props.placeholder};
     border: 1px solid black;
     box-sizing: border-box;
 `;
@@ -56,8 +57,10 @@ const ElInput = styled.input`
 const ElTextarea = styled.textarea`
   border: 1px solid #212121;
   width: 100%;
-  padding: 12px 4px;
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
   box-sizing: border-box;
+  resize: none
 `;
 
 export default Input;

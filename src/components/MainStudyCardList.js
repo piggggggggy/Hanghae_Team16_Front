@@ -6,6 +6,7 @@ import MainStudyCard from "./MainStudyCard";
 
 const MainStudyCardList = (props) => {
 
+    const {history} = props;
 
     const mainList = [
         {
@@ -45,7 +46,7 @@ const MainStudyCardList = (props) => {
             <CardContainer>
                 <Grid is_flex>
                     <Text size="24px">{props.name}</Text>
-                    <Button text="더보기"/>
+                    <Button _onClick={() => {history.push('/study')}} text="더보기"/>
                 </Grid>           
 
                 {mainList.map((s, idx) => {

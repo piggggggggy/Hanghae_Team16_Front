@@ -20,18 +20,17 @@ function App() {
     <React.Fragment>
       <BrowserRouter>
         <Header></Header>
-        <Container maxWidth="lg">
-        <Route path='/' exact component={Main}/>
-        <Route path='/mypage' exact component={MyPage}/>
-        <Route path='/qna' exact component={Qna}/>
-        <Route path='/qna/id' exact component={QnaDetail}/>
-        <Route path='/qnawrite' exact component={QnaWrite}/>
-        <Route path='/study' exact component={Study}/>
-        <Route path='/study/:id' exact component={StudyDetail}/>
-        <Route path='/login' exact component={Login}></Route>
-        <Route path='/signup' exact component={SignUp}></Route>
-
-        </Container>
+        <Coontainer>
+          <Route path='/' exact component={Main}/>
+          <Route path='/mypage' exact component={MyPage}/>
+          <Route path='/qna' exact component={Qna}/>
+          {/* <Route path='/qna/id' exact component={QnaDetail}/>
+          <Route path='/qnawrite' exact component={QnaWrite}/> */}
+          <Route path='/study' exact component={Study}/>
+          <Route path='/study/:id' exact component={StudyDetail}/>
+          <Route path='/login' exact component={Login}></Route>
+          <Route path='/signup' exact component={SignUp}></Route>
+        </Coontainer>
       </BrowserRouter>
     </React.Fragment>
   );
@@ -39,7 +38,8 @@ function App() {
 
 
 const Coontainer = styled.div`
-  
+  max-width: 1280px;
+  margin: auto;
 `;
 
 export default App;

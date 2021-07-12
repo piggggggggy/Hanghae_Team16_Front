@@ -5,9 +5,37 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreators as userActions } from "../redux/modules/user";
 
 const Header = (props) => {
+
+    const dispatch = useDispatch();
+
+    const is_login = useSelector((state) => state.user.is_login);
+
+    const logOutBtn = () => {
+        dispatch(userActions.logOutDB());
+    };
+
+    if (is_login) {
+        return (
+            <React.Fragment>
+            <HeaderBg>
+            <Container maxWidth="lg">
+                <HeaderGrid>
+                <div>로고</div>
+                <BtnBox>
+                    <Button size="large" onClick={logOutBtn}>로그아웃</Button>
+                </BtnBox>
+                </HeaderGrid>
+                
+            </Container>
+            </HeaderBg>
+        </React.Fragment>
+        );
+    }
+
 
     return (
         <React.Fragment>
@@ -24,7 +52,7 @@ const Header = (props) => {
             </Container>
             </HeaderBg>
         </React.Fragment>
-    )
+    );
 
 };
 

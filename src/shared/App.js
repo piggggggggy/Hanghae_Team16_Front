@@ -12,12 +12,14 @@ import SignUp from "../pages/SignUp";
 import './App.css';
 import Header from "./Header";
 import Container from '@material-ui/core/Container';
+import { ConnectedRouter } from "connected-react-router";
+import { history } from "../redux/configStore";
 
 
 function App() {
   return (
     <React.Fragment>
-      <BrowserRouter>
+      <ConnectedRouter history={history}>
         <Header></Header>
         <Container maxWidth="lg">
         <Route path='/' exact component={Main}/>
@@ -31,7 +33,7 @@ function App() {
         <Route path='/signup' exact component={SignUp}></Route>
 
         </Container>
-      </BrowserRouter>
+      </ConnectedRouter>
     </React.Fragment>
   );
 }

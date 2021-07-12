@@ -1,35 +1,35 @@
 import React from "react";
 import { Text, Input, Button, Grid } from "../elements";
-import { fetchLogin } from "../redux/modules/user";
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
+import { history } from "../redux/configStore";
+import { actionCreators } from "../redux/modules/study";
+import { useSelector } from "react-redux";
+
+
 
 const Login = (props) => {
+   
+    const dispatch = useDispatch();
 
-//     const dispatch = useDispatch();
+    const [id, setId] = React.useState("");
+    const [password, setPassword] = React.useState("");
 
-//     const [account, setAccount] = React.useState({
-//         id: "",
-//         password: "",
-//     });
 
-//     const onChangeAccount = (e) => {
-        
-//         setAccount({
-//             ...account,
-//             [e.target.name]: e.target.value,
-//         })
-        
-//     };
+    const onId = (e) => {
+        setId(e.target.value);
+    };
 
-//     const onSubmitAccount = async () => {
-//         try {
-//             const user = await fetchLogin(account);
-//             setUser(user);
-//         } catch (error) {
-//             window.alert(error);
-//         }
-//     };
+    const onPwd = (e) => {
+        setPassword(e.target.value);
+    };
+
+    const logIn = () => {
+        dispatch(userActions.LoginDB(id, password));
+    };
+
+
+
 
 
     return (
@@ -41,7 +41,7 @@ const Login = (props) => {
                 <Text>아이디</Text>
                 </Grid>
                 <Grid width="70%">
-                <Input name="id" type="text" placeholder="아이디를 입력해주세요." padding="10px 20px" width="100%" height="40px"></Input>
+                <Input name="id" type="text" placeholder="아이디를 입력해주세요." padding="10px 20px" width="100%" height="40px" _onChange={onId}></Input>
                 </Grid>
             </Grid>
 
@@ -50,12 +50,12 @@ const Login = (props) => {
                 <Text>비밀번호</Text>
                 </Grid>
                 <Grid width="70%">
-                <Input name="password" type="password" placeholder="비밀번호를 입력해주세요." padding="10px 20px" width="100%" height="40px"></Input>
+                <Input name="password" type="password" placeholder="비밀번호를 입력해주세요." padding="10px 20px" width="100%" height="40px" _onChange={onPwd}></Input>
                 </Grid>
             </Grid>
 
             <Grid display="flex" margin="100px auto" width="70%">
-                <Button text="로그인" width="30%" margin="0 auto"></Button>
+                <Button text="로그인" width="30%" margin="0 auto" _onClick={logIn}></Button>
                 <Button text="회원가입" width="30%" margin="0 auto"></Button>
             </Grid>
 

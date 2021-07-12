@@ -1,78 +1,90 @@
+import axios from "axios";
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
-import axios from "axios";
-
-export const getUsers = async () => {
-    const response = await axios.get("http://localhost:4000/users");
-    return response.data;
-};
-
-export const getUsersbyUserId = async userId => {
-    const response = await axios.get("http://localhost:4000/users/${userI}");
-    return response.data;
-};
-export const fetchLogin = async ({ id, password }) => {
-    const response = await fetch("http://localhost:4000/users");
-  
-    if (response.ok) {
-        //서버통신이 성공적으로 이루어지면 users에 json값 대입
-      const users = await response.json();
-  
-      //users안 객체들을 순회하면서 그 객체들의 id값과 form 컴포넌트에서 받음 account의 id값과 비교
-      //서로 일치하는 것만 user에 대입
-      const user = users.find((user) => user.id === id);
-      //일치하는 user가 없거나, 비밀번호가 틀리면 해당 에러 생성
-      if (!user || user.password !== password) {
-        throw new Error("아이디 또는 비밀번호가 일치하지 않습니다.");
-      }
-  
-      //모든게 일치하면 그 user 정보 return -> 이 return값이 form 컴포넌트 내 fetchLogin 함수 값으로 출력되는것
-      //form 컴포넌트에서 setUser값에 넣어야함
-      return user;
-    }
-  
-    //서버 통신이 안이루어졌을떄
-    throw new Error("서버 통신이 원할하지 않습니다.");
-  };
+import { act } from "react-dom/cjs/react-dom-test-utils.production.min";
 
 
+const GET_USER = "GET_USER";
+const SET_USER = "SET_USER";
 
-
-
-
-const LOG_IN = "LOG_IN";
-
-const logIn = createAction(LOG_IN, (user) => ({ user }));
+const setUser = createAction(SET_USER, (user) => ({ user }));
+const getUser = createAction(GET_USER, (user) => ({ user }));
 
 const initialState = {
     user: null,
-    
+};
+  
+
+const SignUpDB = (id, password, user_name, pwd_check) => {
+    return function (dispatch, getState, {history}) {
+        axios.post('http://localhost:4000/users',
+            {id: id, password: password, nick: user_name},
+        ).then(function (response) {
+            console.log(response);
+            dispatch(
+                setUser({
+                    id: id,
+                    password: password,
+                })
+            );
+            history.push("/");
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
+}
+
+const LoginDB = (id, password) => {
+    return function (dispatch, getState, {history}) {
+        axios.post('http://localhost:4000/users',
+            {id: id, password: password},
+        ).then(function (response) {
+            console.log(response);
+            if (response === true) {
+                
+                dispatch(
+                    setUser({
+                        id: response.data.id,
+                        password: response.data.password,
+                    })
+                );
+
+                // const accessToken = response.data.token;
+                // setCookie("is_login", `${accessToken}`);
+                history.push('/');
+            } else {
+                window.alert("로그인에 실패하였습니다.");
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+    };
+};
+
+
+
+
+export default handleActions(
+    {
+        [SET_USER]: (state, action) =>
+        produce(state, (draft) => {
+            draft.user = action.payload.user;
+        }),
+
+        [GET_USER]: (state, action) => 
+        produce(state, (draft) => {}),
+    },
+    initialState
+);
+
+const actionCreators = {
+   SignUpDB,
+   LoginDB,
+   setUser,
+   getUser,
   };
-
-  const loginDB = (account) => {
-    //   return function (dispatch, getState, {history}){
-    //       dispatch(
-    //           setUser({
-    //             account: account,
-    //           });
-    //       );
-    //   };
-  };
+  
+  export { actionCreators };
 
 
-  export default handleActions(
-      {
-          [LOG_IN]: (state, action) =>
-          produce(state, (draft) => {
-              draft.user = action.payload.user;
-          }),
-      },
-      initialState
-  );
-
-  const actionsCreators = {
-      logIn,
-      loginDB,
-  }
-
-  export { actionsCreators };

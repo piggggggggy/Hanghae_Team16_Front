@@ -28,10 +28,12 @@ const initialState = {
 
 const SignUpDB = (email, password, nickname, group) => {
     return function (dispatch, getState, {history}) {
-        axios.post('http://localhost:4000/users',
+        axios.post('http://54.180.139.140/api/register',
             {email: email, nickname: nickname, group: group, password: password},
         ).then(function (response) {
             console.log(response);
+            console.log(response.result);
+            console.log(response.data.result);
             dispatch(
                 setUser({
                     email: email,
@@ -53,8 +55,8 @@ const LoginDB = (email, password) => {
         axios.post('http://54.180.139.140/api/login',
             {email: email, password: password},
         ).then(function (response) {
-            console.log(response);
-            if (response.result === "success") {
+            console.log(response.data.result);
+            if (response.data.result === "success") {
                 
                 dispatch(
                     setUser({
@@ -62,9 +64,12 @@ const LoginDB = (email, password) => {
                         password: response.data.password,
                     })
                 );
+                console.log(response);
+                const accessToken = response.data.token;
+                console.log(accessToken);
                 
-                // const accessToken = response.token;
-                // setCookie("is_login", `${accessToken}`);
+               
+                console.log(document.cookie);
                 history.push('/');
                 
             } else {

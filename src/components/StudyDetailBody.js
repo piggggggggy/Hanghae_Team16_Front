@@ -2,18 +2,43 @@ import React from "react";
 import styled from "styled-components";
 import { Text, Grid, Button } from "../elements";
 import SType from "../shared/StudyType";
+import StudyModal from "./StudyModal";
+
+import {history} from "../redux/configStore";
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreator as studyActions, deleteStudyDB } from "../redux/modules/study";
 
 
 const StudyDetailBody = (props) => {
 
-    const {history} = props;
+    // const {history} = props;
 
-    const is_full = props.size === props.joinNum
+    const dispatch = useDispatch();
 
+    const is_full = props.size === props.joinNum;
+
+    const [Modal, setModal] = React.useState(false);
+ 
+	const ModalOpen = () => {
+        setModal(true);
+    };
+    
+    const ModalClose = () => {
+        setModal(false);
+    }
+
+    
+    const study_id = props.studyId;
+
+    const deleteStudy = () => {
+        dispatch(studyActions.deleteStudyDB(study_id));
+        history.replace('/study');
+    };
 
     return (
         <React.Fragment>
             <DetailContainer>
+                <StudyModal Open={Modal} Close={ModalClose} study_idx={study_id}/>
                 <Grid width="100%" is_flex>
                     {/* <Grid width="15%" is_flex>
                         <Text>팀장 : {props.userId}</Text>
@@ -27,8 +52,8 @@ const StudyDetailBody = (props) => {
                         
                     </Grid>
                     <Grid  is_flex>
-                        <Button backgroundcolor="gray" text="수정" margin="0px 25px 0px 0px"/>
-                        <Button backgroundcolor="gray" text="삭제"/>
+                        <Button backgroundcolor="gray" text="수정" _onClick={ModalOpen} margin="0px 25px 0px 0px"/>
+                        <Button backgroundcolor="gray" text="삭제" _onClick={deleteStudy}/>
                     </Grid>
                 </Grid>
                 
@@ -58,7 +83,7 @@ const StudyDetailBody = (props) => {
                 </Grid>
                 <Grid display="flex" space="flex-end" align="center" margin="20px 0px">
                     <Button backgroundcolor="gray" text="신청하기" margin="0px 25px"/>
-                    <Button backgroundcolor="gray" text="목록으로"/>
+                    <Button backgroundcolor="gray" text="목록으로" _onClick={()=>{history.replace('/study')}}/>
                 </Grid>
             </DetailContainer>
         </React.Fragment>
@@ -79,7 +104,7 @@ StudyDetailBody.defaultProps = {
     userId: 5,
     level: 2,
     studyType: 1,
-    joinNum: 3,
+    joinNum: 5,
 }
 
 

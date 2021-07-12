@@ -72,7 +72,7 @@ export default handleActions(
             draft.user = action.payload.user;
         }),
 
-        [GET_USER]: (state, action) => 
+        [GET_USER]: (state, action  ) => 
         produce(state, (draft) => {}),
     },
     initialState

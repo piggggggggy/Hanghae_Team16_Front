@@ -2,11 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Button, Text } from "../elements/index";
 import MainStudyCard from "./MainStudyCard";
+import { history } from "../redux/configStore";
 
 
 const MainStudyCardList = (props) => {
 
-    const {history} = props;
+    // const {history} = props;
 
     const mainList = [
         {

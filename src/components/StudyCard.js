@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { Text, Button, Grid } from "../elements";
 import { useSelector, useDispatch } from "react-redux";
 import SType from "../shared/StudyType";
+import { history } from "../redux/configStore";
 
 const StudyCard = (props) => {
-    const {history} = props;
+    // const {history} = props;
 
     return (
         <React.Fragment>
@@ -43,7 +44,7 @@ StudyCard.defaultProps = {
     userId: 5,
     level: 2,
     studyType: 1,
-    joinNum: 0,
+    joinNum: 3,
     __v: 0,
 };
 

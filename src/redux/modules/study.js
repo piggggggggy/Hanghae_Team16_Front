@@ -27,7 +27,7 @@ const initialState = {
     {
     _id: "abc",
     studyId: 1,
-    name: "스터디 구해용",
+    name: "스터디 구해용1",
     schedule: "2021-07-30 ~ 2021-10-23",
     startDate: "2021-07-21",
     endJoinDate: "2021-07-30",
@@ -42,8 +42,8 @@ const initialState = {
     },
     {
     _id: "abc",
-    studyId: 1,
-    name: "스터디 구해용",
+    studyId: 2,
+    name: "스터디 구해용2",
     schedule: "2021-07-30 ~ 2021-10-23",
     startDate: "2021-07-21",
     endJoinDate: "2021-07-30",
@@ -58,8 +58,8 @@ const initialState = {
     },
     {
     _id: "abc",
-    studyId: 1,
-    name: "스터디 구해용",
+    studyId: 3,
+    name: "스터디 구해용3",
     schedule: "2021-07-30 ~ 2021-10-23",
     startDate: "2021-07-21",
     endJoinDate: "2021-07-30",
@@ -74,8 +74,8 @@ const initialState = {
     },
     {
     _id: "abc",
-    studyId: 1,
-    name: "스터디 구해용",
+    studyId: 4,
+    name: "스터디 구해용4",
     schedule: "2021-07-30 ~ 2021-10-23",
     startDate: "2021-07-21",
     endJoinDate: "2021-07-30",
@@ -160,14 +160,6 @@ const editStudyDB = (studyId=null, study={}) => {
             console.log('게시물 정보가 없어요 힝')
             return; 
         }
-
-                // 이렇게 해야하나???????????????????????????????
-        // if(!studyId){
-        //     console.log("스터디가 없어용.");
-        //     return;
-        // };
-
-
         
         instance.put("/api/study/:studyId", study).then((res) =>{
             console.log(res)
@@ -182,20 +174,19 @@ const editStudyDB = (studyId=null, study={}) => {
 // delete
 export const deleteStudyDB = (studyId) => {
     return function (dispatch, getState, {history}) {
-        let studyIdx = getState().study.list.findIndex(s => s.id === studyId);
-        let study = getState().study.list[studyIdx];
+        let studyIdx = getState().study.list.findIndex(s => s.studyId === studyId);
+        console.log(studyId)
+        console.log(studyIdx);
+        let _study = getState().study.list[studyIdx];
             // studyId 가 인덱스인가???? 그렇다면 위의 식은 축약될 수 있음.........
+        
+        console.log(_study);
 
-        if(!study.studyId){
+
+        if(!_study.studyId){
             console.log("스터디가 없어용.")
             return;
         }; // 에러 미연에 방지 (혹시나 있을 에러)
-
-        // 이렇게 해야하나???????????????????????????????
-        // if(!studyId){
-        //     console.log("스터디가 없어용.");
-        //     return;
-        // };
 
         instance.delete("/api/study/:studyId").then((res) => {
             console.log(res);
@@ -239,7 +230,7 @@ export default handleActions({
 }, initialState);
 
 
-export const actionCreators = {
+export const actionCreator = {
     loadStudy,
     createStudy,
     editStudy,

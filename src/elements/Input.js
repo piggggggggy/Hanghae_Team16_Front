@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid } from ".";
 const Input = (props) => {
-    const {width, height, margin, padding, placeholder, type, multiLine, _onChange, name, _ref, maxlength} = props;
+    const {width, height, margin, padding, placeholder, type, multiLine, _onChange, name, _ref, maxlength, _value} = props;
 
     const styles = {
         width: width,
@@ -29,7 +29,7 @@ const Input = (props) => {
     
     return (
         <React.Fragment>
-            <ElInput {...styles} type={type} placeholder={placeholder} ref={_ref} onChange={_onChange} name={name} maxLength={maxlength}></ElInput>
+            <ElInput {...styles} type={type} placeholder={placeholder} ref={_ref} onChange={_onChange} name={name} maxLength={maxlength} value={_value}></ElInput>
         </React.Fragment>
     )
 }

@@ -12,7 +12,7 @@ const StudyList = (props) => {
     return (
         <React.Fragment>
             <Container>
-                <Grid width="80%" margin="auto" is_flex>
+                <Grid width="80%" margin="20px auto" is_flex>
                     <Button backgroundcolor="gray" width="45%" height="30px" text="전체보기"/>
                     <Button backgroundcolor="gray" width="45%" height="30px" text="진행 중인 스터디"/>
                 </Grid>

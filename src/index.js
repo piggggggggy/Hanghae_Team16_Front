@@ -5,10 +5,12 @@ import App from './shared/App';
 import reportWebVitals from './reportWebVitals';
 
 import { Provider } from "react-redux";
-import store  from"./redux/configStore";
+import store from "./redux/configStore";
+import Header from "./shared/Header";
 
 ReactDOM.render(
-  <Provider store ={store}>
+  <Provider store={store}>
+    <Header/>
     <App />
   </Provider>,
     

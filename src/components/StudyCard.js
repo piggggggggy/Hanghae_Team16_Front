@@ -10,7 +10,7 @@ const StudyCard = (props) => {
     return (
         <React.Fragment>
             <Card>
-                <Grid is_flex padding="10px">
+                <Grid is_flex padding="10px" width="90%" margin="auto">
                     <Text>LEVEL : {props.level}</Text>
                     <Text>{props.endJoinDate} 마감</Text>
                 </Grid>

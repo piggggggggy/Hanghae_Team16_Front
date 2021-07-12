@@ -19,7 +19,7 @@ const Input = (props) => {
           <Grid>
             <ElTextarea
               {...styles}
-              rows={10}
+              rows={5}
               placeholder={placeholder}
               ref={_ref}
             ></ElTextarea>

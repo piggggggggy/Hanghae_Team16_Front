@@ -15,12 +15,19 @@ const StudyDetailBody = (props) => {
         <React.Fragment>
             <DetailContainer>
                 <Grid width="100%" is_flex>
-                    <Grid width="15%" is_flex>
+                    {/* <Grid width="15%" is_flex>
                         <Text>팀장 : {props.userId}</Text>
                         <Text>LEVEL : {props.level}</Text>
+                    </Grid> */}
+                    <Grid width="20%">
+                        {!is_full?
+                        <Grid display="flex" space="center" align="center" width="100%" height="40px" bg="#00e676"><Text bold color="#ffffff" size="20px">모집중!!</Text></Grid> :
+                        <Grid display="flex" space="center" align="center" width="100%" height="40px" bg="red"><Text bold color="#ffffff" size="20px">마감되었어요..</Text></Grid>
+                        }
+                        
                     </Grid>
-                    <Grid width="25%" is_flex>
-                        <Button backgroundcolor="gray" text="수정"/>
+                    <Grid  is_flex>
+                        <Button backgroundcolor="gray" text="수정" margin="0px 25px 0px 0px"/>
                         <Button backgroundcolor="gray" text="삭제"/>
                     </Grid>
                 </Grid>
@@ -30,7 +37,7 @@ const StudyDetailBody = (props) => {
                 </Grid>
 
                 <Grid margin="10px 0px">
-                    <Text size="20px">일정 : {props.schedule}</Text>
+                    <Text size="20px">스터디 기간 : {props.schedule}</Text>
                 </Grid>
 
                 
@@ -44,15 +51,14 @@ const StudyDetailBody = (props) => {
                             <Text size="20px">스터디 방식 : {SType(props.studyType)}</Text>
                         </Grid>
                     </Grid>
-                    <div>
-                        {!is_full? 
-                        <Button backgroundcolor="#00e676" width="100%" size="20px" text="신청하기!"/>:
-                        <Button backgroundcolor="#37474f" width="100%" size="20px" text="마감되었습니다.."/>}
-                    </div>
                 </Grid>
                 
                 <Grid width="100%" height="300px" margin="auto" padding="30px" bg="#ffffff">
                     <Text size="18px">{props.explain}</Text>
+                </Grid>
+                <Grid display="flex" space="flex-end" align="center" margin="20px 0px">
+                    <Button backgroundcolor="gray" text="신청하기" margin="0px 25px"/>
+                    <Button backgroundcolor="gray" text="목록으로"/>
                 </Grid>
             </DetailContainer>
         </React.Fragment>
@@ -63,7 +69,7 @@ StudyDetailBody.defaultProps = {
     _id: "60e9217b12df1a1e04c79084",
     studyId: 1,
     name: "[일정변경]스터디 구합니다",
-    schedule: "2021-09-01-2021-09-07",
+    schedule: "5주",
     startDate: "2021-07-21",
     endJoinDate: "2021-07-30",
     writeDate: "2021-07-10",
@@ -73,7 +79,7 @@ StudyDetailBody.defaultProps = {
     userId: 5,
     level: 2,
     studyType: 1,
-    joinNum: 0,
+    joinNum: 3,
 }
 
 
@@ -81,38 +87,22 @@ StudyDetailBody.defaultProps = {
 
 
 const DetailContainer = styled.div`
-    max-width: 1100px;
+    max-width: 80%;
     max-height: 1000px;
     box-sizing: border-box;
     background-color: lightgray;
     margin: 0px auto;
-    padding: 30px 60px;
+    padding: 30px 5%;
 
 
 `;
 
-const DetailHeader = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-`;
 
 const RowBox = styled.div`
     display: flex;
     gap: 20px;
     align-items: center;
 `;
-const RowBoxRight = styled.div`
-    display: flex;
-    justify-content: flex-end;
-`;
 
-const ContentBox = styled.div`
-    min-height: 300px;
-    background-color: #ffffff;
-    margin: 30px 0px;
-`;
 
 export default StudyDetailBody;

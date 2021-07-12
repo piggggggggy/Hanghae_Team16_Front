@@ -39,7 +39,6 @@ const initialState = {
     level: 2,
     studyType: 1,
     joinNum: 0,
-    __v: 0,
     },
     {
     _id: "abc",
@@ -56,7 +55,6 @@ const initialState = {
     level: 2,
     studyType: 1,
     joinNum: 0,
-    __v: 0,
     },
     {
     _id: "abc",
@@ -73,7 +71,6 @@ const initialState = {
     level: 2,
     studyType: 1,
     joinNum: 0,
-    __v: 0,
     },
     {
     _id: "abc",
@@ -90,7 +87,6 @@ const initialState = {
     level: 2,
     studyType: 1,
     joinNum: 0,
-    __v: 0,
     }
     ]
 };
@@ -110,7 +106,6 @@ const initialStudy = {
     level: 2,
     studyType: 1,
     joinNum: 0,
-    __v: 0,
 };
 
 // 함수
@@ -154,7 +149,6 @@ const createStudyDB = (contents="") => {
 };
 
 // update
-// export const editStudyDB = ()
 const editStudyDB = (studyId=null, study={}) => {
     return function (dispatch, getState, {history}){
 

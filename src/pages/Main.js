@@ -5,6 +5,7 @@ import Grid from "../elements/Grid";
 import MainStudyCardList from "../components/MainStudyCardList";
 
 const Main = (props) => {
+	const {history} = props;
 
  	return (
 		<React.Fragment>

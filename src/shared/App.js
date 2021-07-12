@@ -12,14 +12,13 @@ import StudyDetail from "../pages/StudyDetail";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import './App.css';
-// import Header from "./Header";
-
 
 
 function App() {
   return (
     <React.Fragment>
       <ConnectedRouter history={history}>
+
         {/* <Header></Header> */}
         <Coontainer>
           <Route path='/' exact component={Main}/>

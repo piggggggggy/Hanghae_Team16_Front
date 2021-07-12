@@ -12,12 +12,12 @@ const Login = (props) => {
    
     const dispatch = useDispatch();
 
-    const [id, setId] = React.useState("");
+    const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
 
 
     const onId = (e) => {
-        setId(e.target.value);
+        setEmail(e.target.value);
     };
 
     const onPwd = (e) => {
@@ -25,7 +25,8 @@ const Login = (props) => {
     };
 
     const logIn = () => {
-        dispatch(userActions.LoginDB(id, password));
+        dispatch(userActions.LoginDB(email, password));
+
     };
 
 

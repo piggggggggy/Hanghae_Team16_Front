@@ -1,31 +1,35 @@
 import React from "react";
 import { Text, Input, Button, Grid } from "../elements";
-
+import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
-
-import { emailCheck } from "../shared/common";
+import { emailCheck, passwordCheck } from "../shared/common";
 
 
 const SignUp = (props) => {
     
     const dispatch = useDispatch();
 
-    const [id, setId] = React.useState("");
+    const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const [group, setGroup] = React.useState("");
     const [pwd_check, setPwdCheck] = React.useState("");
-    const [user_name, setUserName] = React.useState("");
+    const [nickname, setNickname] = React.useState("");
 
     const onId = (e) => {
-        setId(e.target.value);
+        setEmail(e.target.value);
     };
 
     const onPwd = (e) => {
         setPassword(e.target.value);
     };
 
+    const onGroup = (e) => {
+        setGroup(e.target.value);
+    };
+
     const onNick = (e) => {
-        setUserName(e.target.value);
+        setNickname(e.target.value);
     }
 
     const onPwdCheck = (e) => {
@@ -34,13 +38,18 @@ const SignUp = (props) => {
 
     const signup = () => {
 
-        if(id === "" || password === "" || pwd_check === "" || user_name === "") {
+        if(email === "" || password === "" || pwd_check === "" || nickname === "") {
             window.alert("아이디, 비밀번호, 닉네임을 모두 입력해주세요.");
             return;
         }
     
-        if(!emailCheck(id)) {
+        if(!emailCheck(email)) {
             window.alert("이메일 형식이 맞지 않습니다.");
+            return;
+        }
+
+        if(!passwordCheck(password)) {
+            window.alert("비밀번호 형식이 맞지 않습니다.");
             return;
         }
     
@@ -49,7 +58,7 @@ const SignUp = (props) => {
             return;
         }
 
-        dispatch(userActions.SignUpDB(id, password, user_name, pwd_check));
+        dispatch(userActions.SignUpDB(email, password, nickname, group));
     };
 
     
@@ -63,13 +72,8 @@ const SignUp = (props) => {
                 <Text>아이디</Text>
                 </Grid>
 
-                <Grid display="float" width="70%" space="space-between">
-                <Grid width="80%">
+                <Grid width="70%">
                 <Input placeholder="아이디를 입력해주세요." padding="10px 20px" width="100%" height="40px" _onChange={onId}></Input>
-                </Grid>
-                <Grid width="20%">
-                    <Button text="중복 확인" width="90%" margin="0 0 0 12px"></Button>
-                </Grid>
                 </Grid>
             </Grid>
 
@@ -78,23 +82,34 @@ const SignUp = (props) => {
                 <Text>닉네임</Text>
                 </Grid>
 
-                <Grid display="float" width="70%" space="space-between">
-                <Grid width="80%">
+                <Grid width="70%">
                 <Input placeholder="닉네임을 입력해주세요." padding="10px 20px" width="100%" height="40px"  _onChange={onNick}></Input>
-                </Grid>
-                <Grid width="20%">
-                    <Button text="중복 확인" width="90%" margin="0 0 0 12px"></Button>
-                </Grid>
                 </Grid>
             </Grid>
 
+            <Grid display="flex"align="center" width="70%" margin="50px auto">
+                <Grid width="30%">
+                <Text>항해 기수</Text>
+                </Grid>
+                <Grid width="70%">
+                
+                <DropBox onChange={onGroup}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">없음</option>
+                </DropBox>
+                
+                </Grid>
+            </Grid>
 
             <Grid display="flex"align="center" width="70%" margin="50px auto">
                 <Grid width="30%">
                 <Text>비밀번호</Text>
                 </Grid>
-                <Grid width="70%">
+                <Grid width="70%" display="flex" direction="column">
                 <Input type="password" placeholder="비밀번호를 입력해주세요." padding="10px 20px" width="100%" height="40px"  _onChange={onPwd}></Input>
+                <Text size="11px" margin="3px 0 0 5px">특수문자, 문자, 숫자를 각 하나 이상 포함한 형태의 8~15자리 비밀번호를 설정해 주세요.</Text>
                 </Grid>
             </Grid>
 
@@ -117,6 +132,12 @@ const SignUp = (props) => {
 		</React.Fragment>
 	)  
 };
+
+const DropBox = styled.select`
+    width: 40%;
+    height: 40px;
+    padding: 10px 20px;
+`;
 
 
 export default SignUp;

@@ -1,17 +1,17 @@
 import axios from "axios";
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
-
+import instance from "../../shared/instance";
 
 const LOG_OUT = "LOG_OUT";
 const GET_USER = "GET_USER";
 const SET_USER = "SET_USER";
-
+const GET_TOKEN = "GET_TOKEN";
 
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
-
+const getToken = createAction(GET_TOKEN, (user_token) => ({ user_token }));
 
 const initialState = {
     user: {
@@ -21,6 +21,7 @@ const initialState = {
         password: "비밀번호",
     },
     is_login: false,
+    user_token: "",
 };
   
 
@@ -60,18 +61,36 @@ const LoginDB = (email, password) => {
                 
                 dispatch(
                     setUser({
-                        email: response.data.email,
-                        password: response.data.password,
+                        email: email,
+                        password: password
                     })
                 );
                 console.log(response);
-                const accessToken = response.data.token;
-                console.log(accessToken);
-                
+                const USER_TOKEN = response.data.token;
+                console.log(USER_TOKEN);
                
+                dispatch(
+                    getToken({
+                        user_token: USER_TOKEN,
+                    })
+                );
+               
+
+               localStorage.setItem('logInEmail', email);
+               
+               
+
+                let date = new Date(Date.now() + 86400e3);
+                date = date.toUTCString();
+                // const email_Id = email.split('@')[0];
+                document.cookie = "USER_TOKEN" + "=" + USER_TOKEN + "; " + "expires=" + date;
                 console.log(document.cookie);
+                // instance.defaults.headers.common["Authorization"] = USER_TOKEN;
+                axios.defaults.headers.Authorization = "Bearer " + USER_TOKEN;
+                console.log("header: ", axios.defaults.headers.Authorization);
+
+
                 history.push('/');
-                
             } else {
                 window.alert("로그인에 실패하였습니다.");
                 console.log(response);
@@ -86,20 +105,19 @@ const LoginDB = (email, password) => {
 const logOutDB = () => {
     return function (dispatch, getState, {history}) {
         dispatch(logOut());
+        document.cookie = "USER_TOKEN" + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
         history.push("/");
     }
 }
 
 const loginCheckDB = () => {
     return function (dispatch, getState, { history }) {
-        const user_info = getState().user.user
-        if(user_info) {
+        const is_Token = document.cookie.match("USER_TOKEN") ? true : false;
+        console.log(is_Token);
+        if(is_Token) {
             dispatch(
                 setUser({
-                    email: user_info.email,
-                    nickname: user_info.nickname,
-                    group: user_info.group,
-                    password: user_info.password,
+                    is_login: true,
                 })
             );
         } else {
@@ -123,8 +141,15 @@ export default handleActions(
             draft.is_login = true;
         }),
 
+        [GET_TOKEN]: (state, action) =>
+        produce(state, (draft) => {
+            draft.user_token = action.payload.user_token;
+        }),
+
         [GET_USER]: (state, action  ) => 
         produce(state, (draft) => {}),
+        
+
     },
     initialState
 );
@@ -137,6 +162,8 @@ const actionCreators = {
    logOut,
    logOutDB,
    loginCheckDB,
+   getToken,
+   
   };
   
   export { actionCreators };

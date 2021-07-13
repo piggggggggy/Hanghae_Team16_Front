@@ -6,23 +6,21 @@ import { useSelector, useDispatch } from "react-redux";
 import { actionCreator as studyActions } from "../redux/modules/study";
 
 
-const StudyModal = (props) => {
+const EditModal = (props) => {
     const dispatch = useDispatch();
-    const userId = useSelector((state) => state.user.user.userId)
+    const userId = useSelector((state) => state.user.user.userId);
     const {Open, Close} = props;
 
-    const name = useRef(null);
-    const startDate = useRef(null);
-    const endJoinDate = useRef(null);
-    const size = useRef(null);
-    const explain = useRef(null);
-    const schedule = useRef(null);
-
-
-    // const [explain, setExplain] = React.useState('');
+    const [name, setName] = React.useState('');
+    const [startDate, setStart] = React.useState('');
+    const [endJoinDate, setEnd] = React.useState('');
+    const [schedule, setSchedule] = React.useState('');
+    const [size, setSize] = React.useState('');
+    const [explain, setExplain] = React.useState('');
     const [joinLater, setJoin] = React.useState('');
     const [studyType, setType] = React.useState('');
     const [level, setLevel] = React.useState('');
+
 
 
     // joinLater 값 boolean으로 바꿔주기
@@ -46,36 +44,69 @@ const StudyModal = (props) => {
         setLevel(lv);
     };
 
-    // const changeExplain = (e) => {
-    //     setExplain(e.target.value);
-    // }
+    const editName = (e) => {
+        setName(e.target.value);
+    };
+
+    const editStart = (e) => {
+        setStart(e.target.value);
+    };
+
+    const editEnd = (e) => {
+        setEnd(e.target.value);
+    };
+
+    const editSize = (e) => {
+        setSize(e.target.value);
+    };
+
+    const editSchedule = (e) => {
+        setSchedule(e.target.value);
+    };
+
+    const editExplain = (e) => {
+        setExplain(e.target.value);
+    };
 
     
     
-    // CREATE
-    const createStudy = () => {    
+    // 부모 컴포넌트로부터 받은 props 갑 중 studyIdx 값으로 
+    const study_lst = useSelector((state) => state.study.list);
+    // const study_idx = study_lst.findIndex((s) => s.studyId === _study_id)
+    // const _study = study_lst[study_idx];
+    // console.log(_study_id);
+    // console.log(study_idx);
+    // console.log(study_lst);
+    // console.log(_study);
+    // console.log(_study.explain);
+
+
+
     
-        let study = {
-            name: name.current.value,
-            startDate: startDate.current.value,
-            endJoinDate: endJoinDate.current.value,
-            schedule: schedule.current.value,
+
+
+
+    const editStudy = () => {
+        const study_data = {
+            name: name,
+            startDate: startDate,
+            endJoinDate: endJoinDate,
+            schedule: schedule,
             size: parseInt(size),
             level: level,
-            explain: explain.current.value,
+            explain: explain,
             studyType: studyType,
             joinLater: joinLater,
             joinNum: 0,
-            userId: userId,
+            userId: userId
         }
-        console.log(study);
 
-        dispatch(studyActions.createStudyDB(study));
+        const new_study = {...props, ...study_data};
+        console.log(new_study);
+
+        dispatch(studyActions.editStudyDB(props.studyId, {new_study: new_study}));
         Close();
-    }
-
-
-
+    };
 
 
 
@@ -86,16 +117,16 @@ const StudyModal = (props) => {
                 (
                 <ModalBox>
                     <Grid display="flex" direction="column" width="70%" margin="0 auto">
-                        <Text margin="10px 0px" size="24px" weight="bold">스터디 모집하기</Text>
+                        <Text margin="10px 0px" size="24px" weight="bold">수정하기</Text>
 
                         <Grid margin="10px 0px" is_flex>
-                            <Input _ref={name} padding="0px 0px 0px 20px" placeholder="스터디 이름" width="70%" maxlength={32}/>
-                            <Input _ref={size} padding="0px 0px 0px 20px" placeholder="모집 인원" width="25%"/>
+                            <Input _onChange={editName} padding="0px 0px 0px 20px" placeholder="스터디 이름" width="70%" maxlength={32} _value={props.name}/>
+                            <Input _onChange={editSize} padding="0px 0px 0px 20px" placeholder="모집 인원" width="25%" _value={props.size}/>
                         </Grid>
 
                         <Grid margin="10px 0px" is_flex>
-                            <Input _ref={startDate} type="date" padding="0px 0px 0px 20px" placeholder="스터디 시작일"  width="70%"/>
-                            <DropDown onChange={changeLevel}>
+                            <Input _onChange={editStart} type="date" padding="0px 0px 0px 20px" placeholder="스터디 시작일"  width="70%" _value={props.startDate}/>
+                            <DropDown onChange={changeLevel} value={props.level}>
                                 <option selected>스터디 난이도</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -106,8 +137,8 @@ const StudyModal = (props) => {
                         </Grid>
 
                         <Grid margin="10px 0px" is_flex>
-                            <Input _ref={endJoinDate} type="date" padding="0px 0px 0px 20px" placeholder="스터디 마감일"  width="70%"/>
-                            <DropDown onChange={changeType}>
+                            <Input _onChange={editEnd} type="date" padding="0px 0px 0px 20px" placeholder="스터디 마감일"  width="70%" _value={props.endJoinDate}/>
+                            <DropDown onChange={changeType} value={props.studyType}>
                                 <option selected>스터디 방식</option>
                                 <option value="0">감시형</option>
                                 <option value="1">토이</option>
@@ -118,17 +149,17 @@ const StudyModal = (props) => {
                         </Grid>
 
                         <Grid margin="10px 0px" is_flex>
-                            <Input _ref={schedule} type="text" padding="0px 0px 0px 20px" placeholder="스터디 기간"  width="70%"/>                    
-                            <DropDown onChange={changeJoin}>
+                            <Input _onChange={editSchedule} type="text" padding="0px 0px 0px 20px" placeholder="스터디 기간"  width="70%" _value={props.schedule}/>                    
+                            <DropDown onChange={changeJoin} value={props.joinLater}>
                                 <option selected>중도 참여 가능</option>
                                 <option>O</option>
                                 <option>X</option>
                             </DropDown>
                         </Grid>
                     
-                        <Input _ref={explain} margin="10px 0px" placeholder="내용을 입력해주세요." padding="20px" multiLine/>
+                        <Input _onChange={editExplain} margin="10px 0px" placeholder="내용을 입력해주세요." padding="20px" multiLine _value={props.explain}/>
                         <Grid margin="20px 0px" is_flex>
-                            <Button margin="0 auto" width="200px" text="모집하기" _onClick={() => {createStudy()}}/>
+                            <Button margin="0 auto" width="200px" text="수정하기" _onClick={() => {editStudy()}}/>
                             <Button margin="0 auto" width="200px" text="닫기" _onClick={Close}/>
                         </Grid>
                     </Grid>
@@ -160,32 +191,9 @@ const DropDown = styled.select`
     padding-left: 10px;
 `;
 
-export default StudyModal;
+export default EditModal;
 
 
 
 
     
-    // const editName = (e) => {
-    //     setName(e.target.value);
-    // };
-
-    // const editStart = (e) => {
-    //     setStart(e.target.value);
-    // };
-
-    // const editEnd = (e) => {
-    //     setEnd(e.target.value);
-    // };
-
-    // const editSize = (e) => {
-    //     setSize(e.target.value);
-    // };
-
-    // const editSchedule = (e) => {
-    //     setSchedule(e.target.value);
-    // };
-
-    // const editExplain = (e) => {
-    //     setExplain(e.target.value);
-    // };

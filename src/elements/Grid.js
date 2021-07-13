@@ -34,14 +34,14 @@ const Grid = (props) => {
 Grid.defaultProps = {
     children: null,
     is_flex: false,
-    width: false,
-    height: false,
+    width: '',
+    height: '',
     padding: "0px",
     margin: "0px",
-    bg: false,
+    bg: '',
     space: false,
     align: false,
-    wrap: false,
+    wrap: 0 ,
     scrollWrap: false,
 };
 

@@ -27,8 +27,8 @@ Text.defaultProps = {
     weight: "normal",
     color: "#000",
     margin: "0",
-    overflow: false,
-}
+    overflow: 0,
+};
 
 const ElText = styled.p`
     font-size: ${(props) => props.size};

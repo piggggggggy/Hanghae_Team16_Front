@@ -22,6 +22,7 @@ const Input = (props) => {
               rows={5}
               placeholder={placeholder}
               ref={_ref}
+              value={_value}
             ></ElTextarea>
           </Grid>
         );

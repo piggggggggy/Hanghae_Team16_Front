@@ -9,22 +9,23 @@ import { actionCreators as userAction } from "../redux/modules/user";
 
 const MyPage = (props) => {
 
-	const dispatch = useDispatch();
-
-	const myModal = useSelector(state => state.user.myModal);
-
-	const OpenMyModal = () => {
-        dispatch(userAction.ModalCheck());
+	
+	const [myModal, setMyModal] = React.useState(false);
+ 
+	const myModal_Open = () => {
+        setMyModal(true);
     };
-
-	if (myModal) {
+    
+    const myodal_Close = () => {
+        setMyModal(false);
+    }
 		return (
 			<React.Fragment>
 				<Grid>
-					<MyPageModal></MyPageModal>
+					<MyPageModal Open={myModal} Close={myodal_Close}></MyPageModal>
 					<Grid display="flex" space="space-between" height="150px" padding="0 30px" align="center">
-						<Text size="48px" weight="bold">My Page</Text>
-						<Button text="내 정보" _onClick={OpenMyModal}></Button>
+						<Text size="40px" weight="bold">My Page</Text>
+						<Button text="내 정보" _onClick={myModal_Open}></Button>
 					</Grid>
 					<Grid>
 						<MyStudy/>
@@ -36,25 +37,7 @@ const MyPage = (props) => {
 				</Grid>
 			</React.Fragment>
 		);
-	}
-
- 	return (
-		<React.Fragment>
-			<Grid>
-				<Grid display="flex" space="space-between" height="150px" padding="0 30px" align="center">
-					<Text size="48px" weight="bold">My Page</Text>
-					<Button text="내 정보" _onClick={OpenMyModal}></Button>
-				</Grid>
-				<Grid>
-					<MyStudy/>
-					<hr></hr>
-					<MyQna/>
-					<hr></hr>
-					<MyComment/>
-				</Grid>
-			</Grid>
-		</React.Fragment>
-	)  
+	
 };
 
 

@@ -22,6 +22,7 @@ const initialState = {
     },
     is_login: false,
     user_token: "",
+    userId: "",
 };
   
 
@@ -35,14 +36,14 @@ const SignUpDB = (email, password, nickname, group) => {
             console.log(response);
             console.log(response.result);
             console.log(response.data.result);
-            dispatch(
-                setUser({
-                    email: email,
-                    nickname: nickname,
-                    group: group,
-                    password: password,
-                })
-            );
+            // dispatch(
+            //     setUser({
+            //         email: email,
+            //         nickname: nickname,
+            //         group: group,
+            //         password: password,
+            //     })
+            // );
             history.push("/");
         })
         .catch(function (error) {
@@ -62,7 +63,8 @@ const LoginDB = (email, password) => {
                 dispatch(
                     setUser({
                         email: email,
-                        password: password
+                        password: password,
+                        userId: response.data.userId,
                     })
                 );
                 console.log(response);
@@ -75,8 +77,7 @@ const LoginDB = (email, password) => {
                     })
                 );
                
-
-               localStorage.setItem('logInEmail', email);
+               localStorage.setItem('userId', response.data.userId);
                
                
 
@@ -106,6 +107,7 @@ const logOutDB = () => {
     return function (dispatch, getState, {history}) {
         dispatch(logOut());
         document.cookie = "USER_TOKEN" + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
+        localStorage.removeItem("userId");
         history.push("/");
     }
 }
@@ -113,11 +115,13 @@ const logOutDB = () => {
 const loginCheckDB = () => {
     return function (dispatch, getState, { history }) {
         const is_Token = document.cookie.match("USER_TOKEN") ? true : false;
+        const is_UserId = localStorage.getItem("userId");
         console.log(is_Token);
         if(is_Token) {
             dispatch(
                 setUser({
                     is_login: true,
+                    userId: is_UserId,
                 })
             );
         } else {

@@ -23,8 +23,6 @@ const StudyList = (props) => {
     },[]);
 
 
-    console.log(study_list);
-
 
     return (
         <React.Fragment>

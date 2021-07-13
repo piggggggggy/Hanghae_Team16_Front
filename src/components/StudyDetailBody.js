@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { Text, Grid, Button } from "../elements";
 import SType from "../shared/StudyType";
-import StudyModal from "./StudyModal";
 import EditModal from "./EditModal";
 
 import {history} from "../redux/configStore";
@@ -12,50 +11,53 @@ import { actionCreator as studyActions } from "../redux/modules/study";
 
 const StudyDetailBody = (props) => {
     const dispatch = useDispatch();
-    const studyId = props.id;
+    const _studyId = props.id;
+    console.log(_studyId)
+    const _study = useSelector((state) => state.study.study);
     
 
     // detail load
     React.useEffect(() => {
-        dispatch(studyActions.detailStudyDB(studyId));
-    }, []);
+        
+        dispatch(studyActions.detailStudyDB(_studyId));
+    }, [_studyId]);
 
-    const study_list = useSelector((state) => state.study.list);
-    const index = study_list.findIndex((s) => s.studyId === studyId);
-    const study = study_list[index];
-    console.log(study)
+        
 
 
-
-    // 인원현황
-    const is_full = study.joinNum+1 === study.size;
-
-    
-    
     // 모달 작업
-    const [Modal, setModal] = React.useState(false);
- 	const ModalOpen = () => {
-        setModal(true);
+    const [_Modal, _setModal] = React.useState(false);
+
+    const _ModalOpen = () => {
+        _setModal(true)
     };  
-    const ModalClose = () => {
-        setModal(false);
+    const _ModalClose = () => {
+        _setModal(false)
+    };
+
+    if (!_study) { 
+        return <div>로딩중..</div>; 
     }
 
-
-
+    // 인원현황
+    const is_full = _study.joinNum+1 === _study.size;
 
     // 삭제
     const deleteStudy = () => {
-        dispatch(studyActions.deleteStudyDB(studyId));
+        dispatch(studyActions.deleteStudyDB(_studyId));
         history.replace('/study');
     };
 
 
 
+
+    
+
+
     return (
         <React.Fragment>
             <DetailContainer>
-                <EditModal Open={Modal} Close={ModalClose} {...study}/>
+                <EditModal Open={_Modal} Close={_ModalClose} {..._study}/>
                 <Grid width="100%" is_flex>
                     {/* <Grid width="15%" is_flex>
                         <Text>팀장 : {props.userId}</Text>
@@ -69,34 +71,34 @@ const StudyDetailBody = (props) => {
                         
                     </Grid>
                     <Grid  is_flex>
-                        <Button backgroundcolor="gray" text="수정" _onClick={ModalOpen} margin="0px 25px 0px 0px"/>
+                        <Button backgroundcolor="gray" text="수정" _onClick={_ModalOpen} margin="0px 25px 0px 0px"/>
                         <Button backgroundcolor="gray" text="삭제" _onClick={deleteStudy}/>
                     </Grid>
                 </Grid>
                 
                 <Grid margin="10px 0px">
-                    <Text weight="600" size="32px">{study.name}</Text>
+                    <Text weight="600" size="32px">{_study.name}</Text>
                 </Grid>
 
                 <Grid margin="10px 0px">
-                    <Text size="20px">스터디 기간 : {study.schedule}</Text>
+                    <Text size="20px">스터디 기간 : {_study.schedule}</Text>
                 </Grid>
 
                 
                 <Grid is_flex  margin="10px 0px">
                     <Grid>
                         <RowBox>
-                            <Text size="20px">현재인원 : {study.joinNum+1} / {study.size}</Text>
+                            <Text size="20px">현재인원 : {_study.joinNum+1} / {_study.size}</Text>
                             <Button backgroundcolor="gray" text="인원보기"/>
                         </RowBox>
                         <Grid>
-                            <Text size="20px">스터디 방식 : {SType(study.studyType)}</Text>
+                            <Text size="20px">스터디 방식 : {SType(_study.studyType)}</Text>
                         </Grid>
                     </Grid>
                 </Grid>
                 
                 <Grid width="100%" height="300px" margin="auto" padding="30px" bg="#ffffff">
-                    <Text size="18px">{study.explain}</Text>
+                    <Text size="18px">{_study.explain}</Text>
                 </Grid>
                 <Grid display="flex" space="flex-end" align="center" margin="20px 0px">
                     <Button backgroundcolor="gray" text="신청하기" margin="0px 25px"/>

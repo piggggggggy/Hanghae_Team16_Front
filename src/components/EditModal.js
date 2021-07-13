@@ -11,15 +11,15 @@ const EditModal = (props) => {
     const userId = useSelector((state) => state.user.user.userId);
     const {Open, Close} = props;
 
-    const [name, setName] = React.useState('');
-    const [startDate, setStart] = React.useState('');
-    const [endJoinDate, setEnd] = React.useState('');
-    const [schedule, setSchedule] = React.useState('');
-    const [size, setSize] = React.useState('');
-    const [explain, setExplain] = React.useState('');
-    const [joinLater, setJoin] = React.useState('');
-    const [studyType, setType] = React.useState('');
-    const [level, setLevel] = React.useState('');
+    const [name, setName] = React.useState(props.name);
+    const [startDate, setStart] = React.useState(props.startDate);
+    const [endJoinDate, setEnd] = React.useState(props.endJoinDate);
+    const [schedule, setSchedule] = React.useState(props.schedule);
+    const [size, setSize] = React.useState(props.size);
+    const [explain, setExplain] = React.useState(props.explain);
+    const [joinLater, setJoin] = React.useState(props.joinLater);
+    const [studyType, setType] = React.useState(props.studyType);
+    const [level, setLevel] = React.useState(props.level);
 
 
 
@@ -120,13 +120,13 @@ const EditModal = (props) => {
                         <Text margin="10px 0px" size="24px" weight="bold">수정하기</Text>
 
                         <Grid margin="10px 0px" is_flex>
-                            <Input _onChange={editName} padding="0px 0px 0px 20px" placeholder="스터디 이름" width="70%" maxlength={32} _value={props.name}/>
-                            <Input _onChange={editSize} padding="0px 0px 0px 20px" placeholder="모집 인원" width="25%" _value={props.size}/>
+                            <Input _onChange={editName} padding="0px 0px 0px 20px" placeholder="스터디 이름" width="70%" maxlength={32} _value={name}/>
+                            <Input _onChange={editSize} padding="0px 0px 0px 20px" placeholder="모집 인원" width="25%" _value={size}/>
                         </Grid>
 
                         <Grid margin="10px 0px" is_flex>
-                            <Input _onChange={editStart} type="date" padding="0px 0px 0px 20px" placeholder="스터디 시작일"  width="70%" _value={props.startDate}/>
-                            <DropDown onChange={changeLevel} value={props.level}>
+                            <Input _onChange={editStart} type="date" padding="0px 0px 0px 20px" placeholder="스터디 시작일"  width="70%" _value={startDate}/>
+                            <DropDown onChange={changeLevel} value={level}>
                                 <option selected>스터디 난이도</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -137,8 +137,8 @@ const EditModal = (props) => {
                         </Grid>
 
                         <Grid margin="10px 0px" is_flex>
-                            <Input _onChange={editEnd} type="date" padding="0px 0px 0px 20px" placeholder="스터디 마감일"  width="70%" _value={props.endJoinDate}/>
-                            <DropDown onChange={changeType} value={props.studyType}>
+                            <Input _onChange={editEnd} type="date" padding="0px 0px 0px 20px" placeholder="스터디 마감일"  width="70%" _value={endJoinDate}/>
+                            <DropDown onChange={changeType} value={studyType}>
                                 <option selected>스터디 방식</option>
                                 <option value="0">감시형</option>
                                 <option value="1">토이</option>
@@ -149,15 +149,15 @@ const EditModal = (props) => {
                         </Grid>
 
                         <Grid margin="10px 0px" is_flex>
-                            <Input _onChange={editSchedule} type="text" padding="0px 0px 0px 20px" placeholder="스터디 기간"  width="70%" _value={props.schedule}/>                    
-                            <DropDown onChange={changeJoin} value={props.joinLater}>
+                            <Input _onChange={editSchedule} type="text" padding="0px 0px 0px 20px" placeholder="스터디 기간"  width="70%" _value={schedule}/>                    
+                            <DropDown onChange={changeJoin} value={joinLater}>
                                 <option selected>중도 참여 가능</option>
                                 <option>O</option>
                                 <option>X</option>
                             </DropDown>
                         </Grid>
                     
-                        <Input _onChange={editExplain} margin="10px 0px" placeholder="내용을 입력해주세요." padding="20px" multiLine _value={props.explain}/>
+                        <Input _onChange={editExplain} margin="10px 0px" placeholder="내용을 입력해주세요." padding="20px" multiLine _value={explain}/>
                         <Grid margin="20px 0px" is_flex>
                             <Button margin="0 auto" width="200px" text="수정하기" _onClick={() => {editStudy()}}/>
                             <Button margin="0 auto" width="200px" text="닫기" _onClick={Close}/>

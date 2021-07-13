@@ -20,95 +20,31 @@ const loadStudy = createAction(LOAD_STUDY, (study_list) => ({study_list}));
 const createStudy = createAction(CREATE_STUDY, (study) => ({study}));
 const editStudy = createAction(EDIT_STUDY, (study_id, study) => ({study_id, study}));
 const deleteStudy = createAction(DELETE_STUDY, (study_id) => ({study_id}));
-const detailStudy = createAction(DETAIL_STUDY, (study_id, study) => ({study_id, study}))
+const detailStudy = createAction(DETAIL_STUDY, (study) => ({study}))
 // const applyStudy = createAction(APPLY_STUDY, (study) => ({study}));
 
 
 // initialState
 const initialState = {
-    list: [
-    // {
-    // _id: "abc",
-    // studyId: 1,
-    // name: "스터디 구해용1",
-    // schedule: "2021-07-30 ~ 2021-10-23",
-    // startDate: "2021-07-21",
-    // endJoinDate: "2021-07-30",
-    // writeDate: "2021-07-20 오후 18:31:22",
-    // size: 5,
-    // explain: "초보도 가능합니다.",
-    // joinLater: false,
-    // userId: 5,
-    // level: 2,
-    // studyType: 1,
-    // joinNum: 0,
-    // },
-    // {
-    // _id: "abc",
-    // studyId: 2,
-    // name: "스터디 구해용2",
-    // schedule: "2021-07-30 ~ 2021-10-23",
-    // startDate: "2021-07-21",
-    // endJoinDate: "2021-07-30",
-    // writeDate: "2021-07-20 오후 18:31:22",
-    // size: 5,
-    // explain: "초보도 가능합니다.",
-    // joinLater: false,
-    // userId: 5,
-    // level: 2,
-    // studyType: 1,
-    // joinNum: 4,
-    // },
-    // {
-    // _id: "abc",
-    // studyId: 3,
-    // name: "스터디 구해용3",
-    // schedule: "2021-07-30 ~ 2021-10-23",
-    // startDate: "2021-07-21",
-    // endJoinDate: "2021-07-30",
-    // writeDate: "2021-07-20 오후 18:31:22",
-    // size: 5,
-    // explain: "초보도 가능합니다.",
-    // joinLater: false,
-    // userId: 5,
-    // level: 2,
-    // studyType: 1,
-    // joinNum: 0,
-    // },
-    // {
-    // _id: "abc",
-    // studyId: 4,
-    // name: "스터디 구해용4",
-    // schedule: "2021-07-30 ~ 2021-10-23",
-    // startDate: "2021-07-21",
-    // endJoinDate: "2021-07-30",
-    // writeDate: "2021-07-20 오후 18:31:22",
-    // size: 5,
-    // explain: "초보도 가능합니다.",
-    // joinLater: false,
-    // userId: 5,
-    // level: 2,
-    // studyType: 1,
-    // joinNum: 0,
-    // }
-    ]
+    list: [],
+    study: null
 };
 
 const initialStudy = {
-    // _id: "abc",
-    // studyId: 1,
-    // name: "스터디 구해용",
-    // schedule: "2021-07-30 ~ 2021-10-23",
-    // startDate: "2021-07-21",
-    // endJoinDate: "2021-07-30",
-    // writeDate: "2021-07-20 오후 18:31:22",
-    // size: 5,
-    // explain: "초보도 가능합니다.",
-    // joinLater: false,
-    // userId: 5,
-    // level: 2,
-    // studyType: 1,
-    // joinNum: 0,
+    _id: "abc",
+    studyId: 1,
+    name: "스터디 구해용",
+    schedule: "2021-07-30 ~ 2021-10-23",
+    startDate: "2021-07-21",
+    endJoinDate: "2021-07-30",
+    writeDate: "2021-07-20 오후 18:31:22",
+    size: 5,
+    explain: "초보도 가능합니다.",
+    joinLater: false,
+    userId: 5,
+    level: 2,
+    studyType: 1,
+    joinNum: 0,
 };
 
 // 함수
@@ -116,7 +52,7 @@ const initialStudy = {
 const loadStudyDB = () => {
     return function (dispatch, getState, {history}){
         
-        instance.get("http://54.180.139.140/api/study").then((res) =>{
+        instance.get("/api/study").then((res) =>{
             // console.log(res)
             // console.log(res.data.studys);
             let study_list = res.data.studys;
@@ -129,16 +65,16 @@ const loadStudyDB = () => {
 };
 
 // detail
-const detailStudyDB = (studyId='') => {
+const detailStudyDB = (study_id='') => {
     return function (dispatch, getState, {history}){
 
-        instance.get(`http://54.180.139.140/api/study/${studyId}`).then((res) => {
+        instance.get(`/api/study/${study_id}`).then((res) => {
             console.log(res); 
 
-            let study = {...res.data.detail};
+            let study = res.data.detail;
             console.log(study);
 
-            dispatch(detailStudy(study));
+            dispatch(detailStudy(...study));
         }).catch(err => {
             console.log("load : 에러 났다!!", err);
         });
@@ -155,7 +91,7 @@ const createStudyDB = (contents={}) => {
         console.log(date)
         contents["writeDate"] = date;
 
-        instance.post("http://54.180.139.140/api/study", contents).then((res) => {
+        instance.post("/api/study", contents).then((res) => {
             console.log(res);
             dispatch(createStudy(contents));
         }).catch(err => {
@@ -177,7 +113,7 @@ const editStudyDB = (studyId=null, study={}) => {
             return; 
         }
         
-        instance.put(`http://54.180.139.140/api/study/${studyId}`, study).then((res) =>{
+        instance.put(`/api/study/${studyId}`, study).then((res) =>{
             console.log(res)
             dispatch(editStudy(studyId, {...study}))
         }).catch(err => {
@@ -230,7 +166,7 @@ export default handleActions({
             //  서버에 delete 요청에 코멘트도 지워달라고 요청하기
     [DELETE_STUDY]: (state, action) => produce(state, (draft) => {
         const del_list = draft.list.filter((s, idx) => {
-            if (idx !== action.payload.study){
+            if (s.studyId !== action.payload.study_id){
                 return s;
             }
         });
@@ -238,8 +174,8 @@ export default handleActions({
     }),
 
     [DETAIL_STUDY]: (state, action) => produce(state, (draft) => {
-        let idx = draft.list.findIndex((s) => s.studyId === action.payload.study_id);
-        draft.list[idx] = action.payload.study ///?????????????????????????????????????
+        // let idx = draft.list.findIndex((s) => s.studyId === action.payload.study_id);
+        draft.study = action.payload.study ///?????????????????????????????????????
     }),
 
 }, initialState);

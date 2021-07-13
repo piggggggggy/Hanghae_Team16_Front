@@ -44,13 +44,7 @@ const StudyModal = (props) => {
     const changeLevel = (e) => {
         let lv = parseInt(e.target.value);
         setLevel(lv);
-    };
-
-    // const changeExplain = (e) => {
-    //     setExplain(e.target.value);
-    // }
-
-    
+    };    
     
     // CREATE
     const createStudy = () => {    

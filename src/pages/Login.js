@@ -57,7 +57,7 @@ const Login = (props) => {
 
             <Grid display="flex" margin="100px auto" width="70%">
                 <Button text="로그인" width="30%" margin="0 auto" _onClick={logIn}></Button>
-                <Button text="회원가입" width="30%" margin="0 auto"></Button>
+                <Button text="회원가입" width="30%" margin="0 auto" _onClick={()=>{history.push("/signup")}}></Button>
             </Grid>
 
             

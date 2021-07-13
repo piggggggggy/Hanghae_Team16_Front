@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
+import { history } from "../redux/configStore";
 
 const Header = (props) => {
 
@@ -24,8 +25,9 @@ const Header = (props) => {
             <HeaderBg>
             <Container maxWidth="lg">
                 <HeaderGrid>
-                <div>로고</div>
+                <div onClick={()=> {history.push('/')}}>로고</div>
                 <BtnBox>
+                    <Button size="large" onClick={() => {history.push("/mypage")}}>마이페이지</Button>
                     <Button size="large" onClick={logOutBtn}>로그아웃</Button>
                 </BtnBox>
                 </HeaderGrid>
@@ -42,10 +44,10 @@ const Header = (props) => {
             <HeaderBg>
             <Container maxWidth="lg">
                 <HeaderGrid>
-                <div>로고</div>
+                <div onClick={()=> {history.push('/')}}>로고</div>
                 <BtnBox>
-                    <Button size="large">로그인</Button>
-                    <Button size="large">회원가입</Button>
+                    <Button size="large" onClick={() => {history.push("/login")}}>로그인</Button>
+                    <Button size="large" onClick={() => {history.push("/signup")}}>회원가입</Button>
                 </BtnBox>
                 </HeaderGrid>
                 

@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { BrowserRouter, Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configStore";
-
 import Main from "../pages/Main";
 import MyPage from "../pages/MyPage";
 import Qna from "../pages/Qna";
@@ -12,9 +11,26 @@ import StudyDetail from "../pages/StudyDetail";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import './App.css';
+import { useDispatch } from "react-redux";
+import { actionCreators as userActions } from "../redux/modules/user";
+import instance from "./instance";
 
 
 function App() {
+
+  const dispatch = useDispatch();
+
+  const is_Token = document.cookie.match("USER_TOKEN") ? true : false;
+ 
+  React.useEffect(() => {
+    if (is_Token) {
+      dispatch(userActions.loginCheckDB());
+      console.log(is_Token);
+    }
+    
+  }, []);
+
+
   return (
     <React.Fragment>
       <ConnectedRouter history={history}>

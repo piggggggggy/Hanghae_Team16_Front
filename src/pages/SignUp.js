@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { emailCheck, passwordCheck } from "../shared/common";
-
+import { history } from "../redux/configStore";
 
 const SignUp = (props) => {
     
@@ -58,6 +58,10 @@ const SignUp = (props) => {
             return;
         }
 
+        if(group === "" || group === 0) {
+            window.alert("항해 기수를 선택해주세요.");
+            return;
+        }
         dispatch(userActions.SignUpDB(email, password, nickname, group));
     };
 
@@ -94,10 +98,11 @@ const SignUp = (props) => {
                 <Grid width="70%">
                 
                 <DropBox onChange={onGroup}>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">없음</option>
+                    <option value="0" selected>항해 기수</option>
+                    <option value="1">1기</option>
+                    <option value="2">2기</option>
+                    <option value="3">3기</option>
+                    <option value="4">참여 예정</option>
                 </DropBox>
                 
                 </Grid>
@@ -125,7 +130,7 @@ const SignUp = (props) => {
 
             <Grid display="flex" margin="100px auto" width="70%">
                 <Button text="회원가입" width="30%" margin="0 auto" _onClick={signup}></Button>
-                <Button text="취소" width="30%" margin="0 auto"></Button>
+                <Button text="취소" width="30%" margin="0 auto" _onClick={()=>{history.goBack()}}></Button>
             </Grid>
             
             

@@ -7,11 +7,15 @@ const LOG_OUT = "LOG_OUT";
 const GET_USER = "GET_USER";
 const SET_USER = "SET_USER";
 const GET_TOKEN = "GET_TOKEN";
+const OPEN_MODAL = "OPEN_MODAL";
+const CLOSE_MODAL = "CLOSE_MODAL"
 
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const getToken = createAction(GET_TOKEN, (user_token) => ({ user_token }));
+const openModal = createAction(OPEN_MODAL, (myModal) => ({ myModal }));
+const closeModal = createAction(CLOSE_MODAL, (myModal) => ({ myModal }));
 
 const initialState = {
     user: {
@@ -23,7 +27,19 @@ const initialState = {
     is_login: false,
     user_token: "",
     userId: "",
+    myModal: false,
 };
+
+const ModalCheck = () => {
+    return function (dispatch, getState, { history }) {
+        const myModal = getState().user.myModal;
+        if(myModal) {
+            return (dispatch(closeModal()));
+        } else {
+            return (dispatch(openModal()));
+        }
+    }
+}
   
 
 
@@ -152,6 +168,16 @@ export default handleActions(
 
         [GET_USER]: (state, action  ) => 
         produce(state, (draft) => {}),
+
+        [OPEN_MODAL]: (state, action) =>
+        produce(state, (draft) => {
+            draft.myModal = true;
+        }),
+
+        [CLOSE_MODAL]: (state, action) =>
+        produce(state, (draft) => {
+            draft.myModal = false;
+        }),
         
 
     },
@@ -167,7 +193,9 @@ const actionCreators = {
    logOutDB,
    loginCheckDB,
    getToken,
-   
+   ModalCheck,
+   openModal,
+   closeModal,
   };
   
   export { actionCreators };

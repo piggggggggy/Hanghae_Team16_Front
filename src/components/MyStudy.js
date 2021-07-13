@@ -1,5 +1,7 @@
 import React from "react";
 import { Text, Grid, Button } from "../elements";
+import { history } from "../redux/configStore";
+import styled from "styled-components";
 
 const MyStudy = (props) => {
 
@@ -53,13 +55,14 @@ const MyStudy = (props) => {
             is_full: false,
         },
     ];
+    
 
     return (
         <React.Fragment>
             <Grid>
-                <Grid is_flex>
+                <Grid is_flex margin="20px 0">
                     <Text size="24px" weight="bold">My Study</Text>
-                    <Button text="더보기"/>
+                    <Button _onClick={()=>{history.push("/study")}} text="더보기"/>
                 </Grid>
                 <Grid is_flex>
                     <Button color="black" backgroundcolor="none" text="◁"/>

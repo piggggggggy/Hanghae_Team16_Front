@@ -7,15 +7,14 @@ const LOG_OUT = "LOG_OUT";
 const GET_USER = "GET_USER";
 const SET_USER = "SET_USER";
 const GET_TOKEN = "GET_TOKEN";
-const OPEN_MODAL = "OPEN_MODAL";
-const CLOSE_MODAL = "CLOSE_MODAL"
+
+
 
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const getToken = createAction(GET_TOKEN, (user_token) => ({ user_token }));
-const openModal = createAction(OPEN_MODAL, (myModal) => ({ myModal }));
-const closeModal = createAction(CLOSE_MODAL, (myModal) => ({ myModal }));
+
 
 const initialState = {
     user: {
@@ -30,16 +29,7 @@ const initialState = {
     myModal: false,
 };
 
-const ModalCheck = () => {
-    return function (dispatch, getState, { history }) {
-        const myModal = getState().user.myModal;
-        if(myModal) {
-            return (dispatch(closeModal()));
-        } else {
-            return (dispatch(openModal()));
-        }
-    }
-}
+
   
 
 
@@ -49,17 +39,6 @@ const SignUpDB = (email, password, nickname, group) => {
         axios.post('http://54.180.139.140/api/register',
             {email: email, nickname: nickname, group: group, password: password},
         ).then(function (response) {
-            console.log(response);
-            console.log(response.result);
-            console.log(response.data.result);
-            // dispatch(
-            //     setUser({
-            //         email: email,
-            //         nickname: nickname,
-            //         group: group,
-            //         password: password,
-            //     })
-            // );
             history.push("/");
         })
         .catch(function (error) {
@@ -146,6 +125,27 @@ const loginCheckDB = () => {
     }
 }
 
+const editInfoDB = (my_Email_Edit, my_Pwd_Edit, my_Nick_Edit) => {
+    return function (dispatch, getState, {history}) {
+
+        
+        const userId = getState().user.user.userId;
+
+        instance.put(`/api/myinfo/${userId}`,
+        {email: my_Email_Edit, password: my_Pwd_Edit, nickname: my_Nick_Edit}
+        ).then(function (response) {
+            console.log(response);
+            if (response.data.result === "success"){
+                window.alert("정보 수정이 완료되었습니다.");
+                history.goBack();
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    }
+}
+
 
 export default handleActions(
     {
@@ -168,18 +168,7 @@ export default handleActions(
 
         [GET_USER]: (state, action  ) => 
         produce(state, (draft) => {}),
-
-        [OPEN_MODAL]: (state, action) =>
-        produce(state, (draft) => {
-            draft.myModal = true;
-        }),
-
-        [CLOSE_MODAL]: (state, action) =>
-        produce(state, (draft) => {
-            draft.myModal = false;
-        }),
         
-
     },
     initialState
 );
@@ -193,9 +182,7 @@ const actionCreators = {
    logOutDB,
    loginCheckDB,
    getToken,
-   ModalCheck,
-   openModal,
-   closeModal,
+   editInfoDB,
   };
   
   export { actionCreators };

@@ -76,28 +76,38 @@ const StudyDetailBody = (props) => {
                     </Grid>
                 </Grid>
                 
-                <Grid margin="10px 0px">
+                <Grid padding="10px 3%">
                     <Text weight="600" size="32px">{_study.name}</Text>
                 </Grid>
 
-                <Grid margin="10px 0px">
-                    <Text size="20px">스터디 기간 : {_study.schedule}</Text>
-                </Grid>
 
-                
-                <Grid is_flex  margin="10px 0px">
+                <Grid padding="0px 3%">
                     <Grid>
-                        <RowBox>
-                            <Text size="20px">현재인원 : {_study.joinNum+1} / {_study.size}</Text>
-                            <Button backgroundcolor="gray" text="인원보기"/>
-                        </RowBox>
+                        <Text size="18px">모집 기간 : {_study.startDate} ~ {_study.endJoinDate}</Text>
+                    </Grid>
+                    
+                    <Grid margin="10px 0px">
+                        <Text size="18px">스터디 기간 : {_study.schedule}</Text>
+                    </Grid>
+
+                    
+
+                    <Grid is_flex>
                         <Grid>
-                            <Text size="20px">스터디 방식 : {SType(_study.studyType)}</Text>
+                            <Text margin="0px 0px 10px 0px" size="18px">스터디 방식 : {SType(_study.studyType)}</Text>
+                            <Text margin="10px 0px" size="18px">난이도 : {_study.level}</Text>
+                            <Text margin="10px 0px" size="18px">중도참여여부 : {_study.joinLater? "가능" : "불가능"}</Text>
+                        </Grid>
+                        <Grid display="flex" direction="column" align="center">
+                            <Text size="18px">현재인원 : {_study.joinNum+1} / {_study.size}</Text>
+                            <Button margin="20px 0px" backgroundcolor="gray" text="인원보기"/>
                         </Grid>
                     </Grid>
+
                 </Grid>
                 
-                <Grid width="100%" height="300px" margin="auto" padding="30px" bg="#ffffff">
+                
+                <Grid width="100%" height="300px" margin="10px auto" padding="30px" bg="#ffffff">
                     <Text size="18px">{_study.explain}</Text>
                 </Grid>
                 <Grid display="flex" space="flex-end" align="center" margin="20px 0px">
@@ -136,7 +146,7 @@ const DetailContainer = styled.div`
     box-sizing: border-box;
     background-color: lightgray;
     margin: 0px auto;
-    padding: 30px 5%;
+    padding: 30px 5% 10px 5%;
 
 
 `;

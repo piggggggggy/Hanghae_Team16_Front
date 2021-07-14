@@ -60,10 +60,10 @@ const loadCmtDB = (studyId='') => {
 const createCmtDB = (comment={}) => {
     return function (dispatch, getState, {history}){
         
-        const date = moment().format("YYYY-MM-DD-hh-mm-ss"); 
-                // 작성시간 포멧 의논하기 서버랑!!!!
-        console.log(date)
-        comment["writeDate"] = date;
+        // const date = moment().format("YYYY-MM-DD-hh-mm-ss"); 
+        //         // 작성시간 포멧 의논하기 서버랑!!!!
+        // console.log(date)
+        // comment["writeDate"] = date;
 
         instance.post("/api/study-comment", comment).then((res) => {
             console.log(res);
@@ -106,8 +106,9 @@ export default handleActions({
     }),
 
     [CREATE_CMT]: (state, action) => produce(state, (draft) => {
-        draft.comments.unshift(action.payload.comment);
+        draft.comments.push(action.payload.comment);
     }),
+
 
     // [EDIT_CMT]: (state, action) => produce(state, (draft) => {
     //     let idx = draft.list.findIndex((s) => s.studyId === action.payload.study_id);

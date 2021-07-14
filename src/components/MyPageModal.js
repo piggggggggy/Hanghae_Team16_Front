@@ -47,7 +47,14 @@ const MyPageModal = (props) => {
         })
     }
 
-   
+   const groupCheck = (data) => {
+       if (data === 4) {
+           data = "승선 예정"
+       }
+
+       return(data);
+
+   }
 
     const editNick = (e) => {
         setMy_Nick_Edit(e.target.value);
@@ -86,6 +93,13 @@ const MyPageModal = (props) => {
     React.useEffect(() => {
         getMyInfo();
     });
+
+    const checkGroup = () => {
+        let group = my_Group;
+
+        console.log(group);
+        return (group === 4) ? "승선 예정" : group;
+    }
 
     if (my_Modi) {
         return (
@@ -156,7 +170,7 @@ const MyPageModal = (props) => {
         
                     <Grid is_flex  padding="3% 0">
                     <Text size="20px">항해 기수 : </Text>
-                    <Text size="20px">{my_Group}</Text>
+                    <Text size="20px">{checkGroup()}</Text>
                     </Grid>
                     
                     <Grid is_flex space="space-around" padding="6% 0 0 0">

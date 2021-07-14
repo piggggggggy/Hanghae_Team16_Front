@@ -37,6 +37,7 @@ const StudyList = (props) => {
         
     };
 
+
     
     return (
         <React.Fragment>

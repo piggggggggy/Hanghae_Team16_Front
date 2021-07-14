@@ -9,7 +9,7 @@ import { actionCreators as userAction } from "../redux/modules/user";
 
 const MyPage = (props) => {
 
-	
+
 	const [myModal, setMyModal] = React.useState(false);
  
 	const myModal_Open = () => {
@@ -19,6 +19,9 @@ const MyPage = (props) => {
     const myodal_Close = () => {
         setMyModal(false);
     }
+
+	
+
 		return (
 			<React.Fragment>
 				<Grid>
@@ -28,9 +31,7 @@ const MyPage = (props) => {
 						<Button text="내 정보" _onClick={myModal_Open}></Button>
 					</Grid>
 					<Grid>
-						<MyStudy/>
-						<hr></hr>
-						<MyQna/>
+						<MyStudy></MyStudy>
 						<hr></hr>
 						<MyComment/>
 					</Grid>

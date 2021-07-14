@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, Grid, Button } from "../elements";
-
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as userAction } from "../redux/modules/user";
 const MyComment = (props) => {
 
     const study_list = [
@@ -54,12 +55,24 @@ const MyComment = (props) => {
         },
     ];
 
+    const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        dispatch(userAction.getMyComment());
+        
+    },[]);
+
+    const commentList = useSelector(state => (state.user.comment_list));
+
+	console.log(commentList);
+
+
 
     return (
         <React.Fragment>
             <Grid>
                 <Grid is_flex>
-                    <Text size="24px" weight="bold">My Commnet</Text>
+                    <Text size="24px" weight="bold">My Comment</Text>
                     <Button text="더보기"/>
                 </Grid>
                 

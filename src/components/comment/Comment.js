@@ -4,24 +4,34 @@ import styled from "styled-components";
 import { Grid, Button, Text, Input } from "../../elements";
 import moment from "moment";
 import { styles } from "ansi-colors";
-
+import { actionCreator as cmtActions } from "../../redux/modules/comment";
+import { history } from "../../redux/configStore";
 
 
 const Comment = (props) => {
+    const dispatch = useDispatch();
+    const studyCommentId = props.studyCommentId;
 
+    // const time = props.checkTime.format("YYYY.MM.DD  hh:mm");
+    // const now = moment();
+    // console.log(time);
+    // console.log(now);
 
-    const time = props.checkTime.format("YYYY.MM.DD  hh:mm");
-    const now = moment();
-    console.log(time);
-    console.log(now);
+    const deleteCmt = () => {
+        dispatch(cmtActions.deleteCmtDB(studyCommentId));
+    };
+
 
     return (
         <React.Fragment>
             <Grid>
                 <CommentContainer>
-                    <Grid display="flex" align="center">
-                        <Text weight="600" margin="0px 25px 0px 0px">{props.userId}</Text>
-                        <Text color="#6d6d6d">{time}</Text>
+                    <Grid is_flex>
+                        <Grid display="flex" align="center">
+                            <Text weight="600" margin="0px 25px 0px 0px">{props.userId}</Text>
+                            <Text color="#6d6d6d">{props.date}</Text>
+                        </Grid>
+                        <Button _onClick={()=>{deleteCmt()}} text="X"/>
                     </Grid>
                     <Grid>
                         <Text>{props.content}</Text>

@@ -2,6 +2,7 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import instance from "../../shared/instance";
 import moment from "moment";
+import { history } from "../configStore";
 
 
 
@@ -13,14 +14,14 @@ const DELETE_CMT = "comment/DELETE_CMT";
 
 
 // action creator
-const loadCmt = createAction(LOAD_CMT, (comment_id) => ({comment_id}));
+const loadCmt = createAction(LOAD_CMT, (comments) => ({comments}));
 const createCmt = createAction(CREATE_CMT, (comment) => ({comment}));
 // const editComment = createAction(EDIT_CMT, (comment) => ({comment}));
-const deleteCmt = createAction(DELETE_CMT, (comment_id) => ({comment_id}));
+const deleteCmt = createAction(DELETE_CMT, (studyCommentId) => ({studyCommentId}));
 
 //initialState
 const initialState = {
-    comments: [],
+    comments: null,
 }
 
 
@@ -39,12 +40,13 @@ const initialComment = {
 const loadCmtDB = (studyId='') => {
     return function (dispatch, getState, {history}){
         
-        instance.get(`/api/study-comment/${studyId}`).then((res) =>{
+        instance.get(`/api/study-all-comment/${studyId}`).then((res) =>{
             console.log(res)
             // console.log(res.data.studys);
 
-            return;
-            let comment_list = res.data.comment;
+            let comment_list = res.data.comments;
+            console.log(comment_list)
+            // return;
             dispatch(loadCmt(comment_list));
         }).catch(err => {
             console.log("load : 에러 났다!!", err);
@@ -77,13 +79,13 @@ const createCmtDB = (comment={}) => {
 // delete
 const deleteCmtDB = (studyCommentId='') => {
     return function (dispatch, getState, {history}) {
-        let cmtIdx = getState().comment.comments.findIndex(s => s.studyCommentId === studyCommentId);
-        let comment = getState().comment.comments[cmtIdx];
+        // let cmtIdx = getState().comment.comments.findIndex(s => s.studyCommentId === studyCommentId);
+        // let comment = getState().comment.comments[cmtIdx];
 
-        if(!comment.studyCommentId){
-            console.log("스터디가 없어요.")
-            return;
-        }; // 에러 미연에 방지 (혹시나 있을 에러)
+        // if(!comment.studyCommentId){
+        //     console.log("스터디가 없어요.")
+        //     return;
+        // }; // 에러 미연에 방지 (혹시나 있을 에러)
 
         instance.delete(`/api/study-comment/${studyCommentId}`).then((res) => {
             console.log(res);
@@ -102,7 +104,7 @@ const deleteCmtDB = (studyCommentId='') => {
 export default handleActions({
 
     [LOAD_CMT]: (state, action) => produce(state, (draft) => {
-        draft.comment = action.payload.comment;
+        draft.comments = action.payload.comments;
     }),
 
     [CREATE_CMT]: (state, action) => produce(state, (draft) => {
@@ -117,7 +119,7 @@ export default handleActions({
 
     [DELETE_CMT]: (state, action) => produce(state, (draft) => {
         const del_list = draft.comments.filter((c, idx) => {
-            if (idx !== action.payload.studyCommentId){
+            if (c.studyCommentId !== action.payload.studyCommentId){
                 return c;
             }
         });

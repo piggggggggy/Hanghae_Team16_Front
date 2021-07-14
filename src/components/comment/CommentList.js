@@ -15,32 +15,36 @@ const CommentList = (props) => {
     const studyId = props.id;
 
     const commentList = useSelector((state) => state.comment.comments);
-
     const userId = useSelector((state) => state.user.user.userId);
-    // console.log(commentList);
+    
+
+    React.useEffect(() => {
+
+        dispatch(cmtActions.loadCmtDB(studyId));
+        // if(commentList.length === 0){
+        //     dispatch(cmtActions.loadCmtDB());
+        // }
+        console.log(commentList);
+    },[studyId]);
+
 
     const [content, setContent] = React.useState('');
     const changeContent = (e) => {
         setContent(e.target.value);
     };
 
-    // React.useEffect(() => {
 
-    //     console.log(commentList);
-    //     // dispatch(studyActions.loadStudyDB());
-    //     if(commentList.length === 0){
-    //         dispatch(cmtActions.loadCmtDB());
-    //     }
-    // },[]);
-
+    if (commentList === null){
+        return (<div> 기다려... </div>)
+    }
 
     const createCmt = () => {
         let comment = {
             studyId: studyId,
             content: content,
             userId: userId,
-            date: moment().format("YYYY-MM-DD-hh-mm-ss"),
-            checkTime: moment(),
+            date: moment().format("YYYY.MM.DD hh:mm:ss"),
+            // checkTime: moment(),
         };
         console.log(comment)
         dispatch(cmtActions.createCmtDB(comment));
@@ -50,7 +54,7 @@ const CommentList = (props) => {
     return (
         <React.Fragment>
             <CommentContainer>
-                <CommentHeader><Text>{`Commnets ${commentList === null ? 0 : commentList.length} 개`}</Text></CommentHeader>
+                <CommentHeader><Text>{`Commnets ${commentList.length} 개`}</Text></CommentHeader>
 
                 <Grid>
                     {commentList === null ? '' : commentList.map((c, idx) => {

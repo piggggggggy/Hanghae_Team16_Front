@@ -3,39 +3,43 @@ import { Text, Grid, Button } from "../elements";
 import { history } from "../redux/configStore";
 import styled from "styled-components";
 import { actionCreators as userAction } from "../redux/modules/user";
-import instance from "../shared/instance";
 import { useSelector, useDispatch } from "react-redux";
+import MyStudyCard from "./MyStudyCard";
 
-const MyStudy = (props) => {
+
+const MyStudy = () => {
 
     const dispatch = useDispatch();
 
-    const myStudyList = useSelector(state => (state.user.list));
-    
     React.useEffect(() => {
-        console.log("덛");
         dispatch(userAction.getMyStudy());
         
-        
-    }, []);
-    
-    
-    console.log(myStudyList);
+    },[]);
+
+    const studyList = useSelector(state => (state.user.study_list));
+
+	console.log(studyList);
+
 
     return (
         <React.Fragment>
-            <Grid>
+            <Grid margin="6% 0">
                 <Grid is_flex margin="20px 0">
                     <Text size="24px" weight="bold">My Study</Text>
                     <Button _onClick={()=>{history.push("/study")}} text="더보기"/>
                 </Grid>
                 <Grid is_flex>
-                    <Button color="black" backgroundcolor="none" text="◁"/>
-                    <Grid scrollWrap>
-                        
+                    {/* <Button color="black" backgroundcolor="none" text="◁"/> */}
+                    <Container>
+                        {studyList.map((c, idx) => {
+                            return (
+                                
+                                <MyStudyCard key={idx} {...c}></MyStudyCard>
+                            );
+                        })}
                       
-                    </Grid>
-                    <Button color="black" backgroundcolor="none" text="▶"/>
+                    </Container>
+                    {/* <Button color="black" backgroundcolor="none" text="▶"/> */}
                 </Grid>
                 
             </Grid>
@@ -43,4 +47,11 @@ const MyStudy = (props) => {
     )
 }
 
+
+const Container = styled.div`
+    width: 100vw;
+    overflow-x: scroll;
+    white-space:nowrap;
+    padding: 30px 0;
+`;
 export default MyStudy;

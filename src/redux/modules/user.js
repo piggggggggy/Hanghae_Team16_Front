@@ -8,6 +8,7 @@ const GET_USER = "GET_USER";
 const SET_USER = "SET_USER";
 const GET_TOKEN = "GET_TOKEN";
 const LOAD_MYSTUDY = "LOAD_MYSTUDY";
+const LOAD_MYCOMMENT = "LOAD_MYCOMMENT";
 
 
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
@@ -15,6 +16,7 @@ const setUser = createAction(SET_USER, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const getToken = createAction(GET_TOKEN, (user_token) => ({ user_token }));
 const loadMyStudy = createAction(LOAD_MYSTUDY, (my_study) => ({my_study}));
+const loadMyComment = createAction(LOAD_MYCOMMENT, (my_commnet) => ({my_commnet}));
 
 const initialState = {
     user: {
@@ -24,9 +26,8 @@ const initialState = {
         password: "비밀번호",
     },
     is_login: false,
-    user_token: "",
-    userId: "",
-    list: [],
+    study_list: [],
+    comment_list: [],
 };
 
 
@@ -148,7 +149,7 @@ const editInfoDB = (my_Pwd_Edit, my_Nick_Edit) => {
 
 const getMyStudy = () => {
     return function (dispatch, getState, {history}) {
-        const userId = getState().user.user.userId;
+        const userId = localStorage.getItem("userId");
 
         instance.get(`/api/mystudy/${userId}`).then((response) => {
             console.log(response);
@@ -162,7 +163,20 @@ const getMyStudy = () => {
             console.log(error);
         })
         }
-    
+}
+
+const getMyComment = () => {
+    return function (dispatch, getState, {history}) {
+        const userId = localStorage.getItem("userId");
+
+        instance.get(`/api/mystudy/${userId}`).then((response) => {
+            console.log(response);
+            
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        }
 }
 
 
@@ -190,7 +204,12 @@ export default handleActions(
 
         [LOAD_MYSTUDY]: (state, action) => 
         produce(state, (draft) => {
-            draft.list = action.payload.my_study;
+            draft.study_list = action.payload.my_study;
+        }),
+
+        [LOAD_MYCOMMENT]: (state, action) => 
+        produce(state, (draft) => {
+            draft.comment_list = action.payload.my_commnet;
         })
         
         
@@ -210,6 +229,8 @@ const actionCreators = {
    editInfoDB,
    getMyStudy,
    loadMyStudy,
+   loadMyComment,
+   getMyComment,
   };
   
   export { actionCreators };

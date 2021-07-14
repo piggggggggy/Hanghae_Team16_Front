@@ -86,7 +86,8 @@ const MyPageModal = (props) => {
             return;
         }
 
-        dispatch(userAction.editInfoDB(my_Email_Edit, my_Pwd_Edit, my_Nick_Edit));
+        console.log(my_Pwd_Edit, my_Nick_Edit);
+        dispatch(userAction.editInfoDB(my_Pwd_Edit, my_Nick_Edit));
     }
     
 

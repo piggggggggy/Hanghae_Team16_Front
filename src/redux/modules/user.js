@@ -125,14 +125,14 @@ const loginCheckDB = () => {
     }
 }
 
-const editInfoDB = (my_Email_Edit, my_Pwd_Edit, my_Nick_Edit) => {
+const editInfoDB = (my_Pwd_Edit, my_Nick_Edit) => {
     return function (dispatch, getState, {history}) {
 
         
         const userId = getState().user.user.userId;
 
         instance.put(`/api/myinfo/${userId}`,
-        {email: my_Email_Edit, password: my_Pwd_Edit, nickname: my_Nick_Edit}
+        {password: my_Pwd_Edit, nickname: my_Nick_Edit}
         ).then(function (response) {
             console.log(response);
             if (response.data.result === "success"){
@@ -144,6 +144,20 @@ const editInfoDB = (my_Email_Edit, my_Pwd_Edit, my_Nick_Edit) => {
             console.log(error);
         })
     }
+}
+
+const getMyStudy = () => {
+    return function (dispatch, getState, {history}) {
+        const userId = getState().user.user.userId;
+
+        instance.get(`/api/mystudy/${userId}`).then((response) => {
+            console.log(response);
+        })
+        .catch(error => {
+            console.log(error);
+        })
+        }
+    
 }
 
 
@@ -183,6 +197,7 @@ const actionCreators = {
    loginCheckDB,
    getToken,
    editInfoDB,
+   getMyStudy,
   };
   
   export { actionCreators };

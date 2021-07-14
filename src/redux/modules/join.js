@@ -35,5 +35,9 @@ export default handleActions({
 
     [JOIN_STUDY]: (state, action) => produce(state, (draft) => {
 
-    })
-})
+    }),
+
+    [WITHDRAW_STUDY]: (state, action) => produce(state, (draft) => {
+
+    }),
+},initialState);

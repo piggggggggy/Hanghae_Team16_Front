@@ -24,7 +24,6 @@ const StudyModal = (props) => {
     const [studyType, setType] = React.useState('');
     const [level, setLevel] = React.useState('');
 
-
     // joinLater 값 boolean으로 바꿔주기
     const changeJoin = (e) => {
         if(e.target.value === 'O'){
@@ -32,6 +31,7 @@ const StudyModal = (props) => {
         }else{
             setJoin(false);
         }
+        // setJoin(e.target.value);
     };
 
     // studyType int형으로 바꿔주기
@@ -54,7 +54,7 @@ const StudyModal = (props) => {
             startDate: startDate.current.value,
             endJoinDate: endJoinDate.current.value,
             schedule: schedule.current.value,
-            size: parseInt(size),
+            size: parseInt(size.current.value),
             level: level,
             explain: explain.current.value,
             studyType: studyType,
@@ -90,7 +90,7 @@ const StudyModal = (props) => {
                         <Grid margin="10px 0px" is_flex>
                             <Input _ref={startDate} type="date" padding="0px 0px 0px 20px" placeholder="스터디 시작일"  width="70%"/>
                             <DropDown onChange={changeLevel}>
-                                <option selected>스터디 난이도</option>
+                                <option >스터디 난이도</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -102,7 +102,7 @@ const StudyModal = (props) => {
                         <Grid margin="10px 0px" is_flex>
                             <Input _ref={endJoinDate} type="date" padding="0px 0px 0px 20px" placeholder="스터디 마감일"  width="70%"/>
                             <DropDown onChange={changeType}>
-                                <option selected>스터디 방식</option>
+                                <option >스터디 방식</option>
                                 <option value="0">감시형</option>
                                 <option value="1">토이</option>
                                 <option value="2">개인</option>
@@ -114,7 +114,7 @@ const StudyModal = (props) => {
                         <Grid margin="10px 0px" is_flex>
                             <Input _ref={schedule} type="text" padding="0px 0px 0px 20px" placeholder="스터디 기간"  width="70%"/>                    
                             <DropDown onChange={changeJoin}>
-                                <option selected>중도 참여 가능</option>
+                                <option >중도 참여 가능</option>
                                 <option>O</option>
                                 <option>X</option>
                             </DropDown>

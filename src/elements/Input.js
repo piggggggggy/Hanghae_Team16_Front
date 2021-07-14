@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid } from ".";
 const Input = (props) => {
-    const {width, height, margin, padding, placeholder, type, multiLine, _onChange, name, _ref, maxlength, _value} = props;
+    const {width, height, margin, padding, placeholder, type, multiLine, _onChange, name, _ref, maxlength, _value, rows} = props;
 
     const styles = {
         width: width,
@@ -19,10 +19,11 @@ const Input = (props) => {
           <Grid>
             <ElTextarea
               {...styles}
-              rows={5}
+              rows={rows}
               placeholder={placeholder}
               ref={_ref}
               value={_value}
+              onChange={_onChange}
             ></ElTextarea>
           </Grid>
         );
@@ -44,6 +45,7 @@ Input.defaultProps = {
     placeholder: "텍스트를 입력해주세요.",
     type: "text",
     _onChange: () => {},
+    rows: 5,
 }
 
 const ElInput = styled.input`

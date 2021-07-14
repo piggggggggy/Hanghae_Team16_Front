@@ -30,6 +30,7 @@ const EditModal = (props) => {
         }else{
             setJoin(false);
         }
+        // setJoin(e.target.value);
     };
 
     // studyType int형으로 바꿔주기
@@ -68,26 +69,9 @@ const EditModal = (props) => {
         setExplain(e.target.value);
     };
 
-    
-    
-    // 부모 컴포넌트로부터 받은 props 갑 중 studyIdx 값으로 
-    const study_lst = useSelector((state) => state.study.list);
-    // const study_idx = study_lst.findIndex((s) => s.studyId === _study_id)
-    // const _study = study_lst[study_idx];
-    // console.log(_study_id);
-    // console.log(study_idx);
-    // console.log(study_lst);
-    // console.log(_study);
-    // console.log(_study.explain);
-
-
-
-    
-
-
 
     const editStudy = () => {
-        const study_data = {
+        const new_study = {
             name: name,
             startDate: startDate,
             endJoinDate: endJoinDate,
@@ -98,13 +82,13 @@ const EditModal = (props) => {
             studyType: studyType,
             joinLater: joinLater,
             joinNum: 0,
-            userId: userId
+            userId: parseInt(userId),
+            _id: props._id,
+            writeDate: props.writeDate,
         }
-
-        const new_study = {...props, ...study_data};
         console.log(new_study);
 
-        dispatch(studyActions.editStudyDB(props.studyId, {new_study: new_study}));
+        dispatch(studyActions.editStudyDB(props.studyId, new_study));
         Close();
     };
 
@@ -126,8 +110,8 @@ const EditModal = (props) => {
 
                         <Grid margin="10px 0px" is_flex>
                             <Input _onChange={editStart} type="date" padding="0px 0px 0px 20px" placeholder="스터디 시작일"  width="70%" _value={startDate}/>
-                            <DropDown onChange={changeLevel} value={level}>
-                                <option selected>스터디 난이도</option>
+                            <DropDown onChange={changeLevel} value={parseInt(level)}>
+                                <option >스터디 난이도</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -138,8 +122,8 @@ const EditModal = (props) => {
 
                         <Grid margin="10px 0px" is_flex>
                             <Input _onChange={editEnd} type="date" padding="0px 0px 0px 20px" placeholder="스터디 마감일"  width="70%" _value={endJoinDate}/>
-                            <DropDown onChange={changeType} value={studyType}>
-                                <option selected>스터디 방식</option>
+                            <DropDown onChange={changeType} value={parseInt(studyType)}>
+                                <option >스터디 방식</option>
                                 <option value="0">감시형</option>
                                 <option value="1">토이</option>
                                 <option value="2">개인</option>
@@ -150,10 +134,10 @@ const EditModal = (props) => {
 
                         <Grid margin="10px 0px" is_flex>
                             <Input _onChange={editSchedule} type="text" padding="0px 0px 0px 20px" placeholder="스터디 기간"  width="70%" _value={schedule}/>                    
-                            <DropDown onChange={changeJoin} value={joinLater}>
-                                <option selected>중도 참여 가능</option>
-                                <option>O</option>
-                                <option>X</option>
+                            <DropDown onChange={changeJoin} value={joinLater? "O": "X"}>
+                                <option >중도 참여 가능</option>
+                                <option value="O">O</option>
+                                <option value="X">X</option>
                             </DropDown>
                         </Grid>
                     

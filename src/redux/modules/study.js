@@ -88,8 +88,9 @@ const createStudyDB = (contents={}) => {
         
         const date = moment().format("YYYY-MM-DD-hh-mm-ss"); 
                 // 작성시간 포멧 의논하기 서버랑!!!!
-        console.log(date)
-        contents["writeDate"] = date;
+        
+        contents["date"] = date;
+        console.log(contents);
 
         instance.post("/api/study", contents).then((res) => {
             console.log(res);
@@ -104,18 +105,19 @@ const createStudyDB = (contents={}) => {
 const editStudyDB = (studyId=null, study={}) => {
     return function (dispatch, getState, {history}){
 
-        let studyIdx = getState().study.list.findIndex(s => s.studyId === studyId);
-        let _study = getState().post.list[studyIdx];
-        console.log(_study);
+        // let studyIdx = getState().study.list.findIndex(s => s.studyId === studyId);
+        // let _study = getState().post.list[studyIdx];
+        // console.log(_study);
 
-        if(!_study.studyId){
-            console.log('게시물 정보가 없어요 힝')
-            return; 
-        }
+        // if(!_study.studyId){
+        //     console.log('게시물 정보가 없어요 힝')
+        //     return; 
+        // }
         
         instance.put(`/api/study/${studyId}`, study).then((res) =>{
-            console.log(res)
-            dispatch(editStudy(studyId, {...study}))
+            console.log(res);
+            dispatch(editStudy(studyId, study));
+            dispatch(detailStudy(study));
         }).catch(err => {
             console.log("edit : 에너났읍니다.", err);
         });
@@ -124,7 +126,7 @@ const editStudyDB = (studyId=null, study={}) => {
 
 
 // delete
-export const deleteStudyDB = (studyId='') => {
+const deleteStudyDB = (studyId='') => {
     return function (dispatch, getState, {history}) {
         let studyIdx = getState().study.list.findIndex(s => s.studyId === studyId);
         let _study = getState().study.list[studyIdx];

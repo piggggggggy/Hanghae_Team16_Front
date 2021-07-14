@@ -8,36 +8,91 @@ import moment from "moment";
 // action
 const LOAD_CMT = "comment/LOAD_CMT";
 const CREATE_CMT = "comment/CREATE_CMT";
-const EDIT_CMT = "comment/EDIT_CMT";
+// const EDIT_CMT = "comment/EDIT_CMT";
 const DELETE_CMT = "comment/DELETE_CMT";
 
 
 // action creator
-const loadComment = createAction(LOAD_CMT, (comment) => ({comment}));
-const createComment = createAction(CREATE_CMT, (comment) => ({comment}));
-const editComment = createAction(EDIT_CMT, (comment) => ({comment}));
-const deleteComment = createAction(DELETE_CMT, (comment) => ({comment}));
+const loadCmt = createAction(LOAD_CMT, (comment_id) => ({comment_id}));
+const createCmt = createAction(CREATE_CMT, (comment) => ({comment}));
+// const editComment = createAction(EDIT_CMT, (comment) => ({comment}));
+const deleteCmt = createAction(DELETE_CMT, (comment_id) => ({comment_id}));
 
 //initialState
-// "comments": [
-//     {
-//     "_id": "...",
-//     "studyCommentId": 2,
-//     "studyId": 1,
-//     "content": "",
-//     "userId": "5",
-//     "date": "2021-07-10 오후 05:39:53",
-//     }
-//     ]
+const initialState = {
+    comments: null,
+}
 
-const initialState = [{
+
+const initialComment = {
     _id: "...",
     studyCommentId: 2,
     studyId: 1,
     content: "",
     userId: "5",
     date: "2021-07-10 오후 05:39:53"
-}]
+}
+
+
+// thunk 함수
+
+const loadCmtDB = (studyId='') => {
+    return function (dispatch, getState, {history}){
+        
+        instance.get(`/api/study-comment/${studyId}`).then((res) =>{
+            console.log(res)
+            // console.log(res.data.studys);
+
+            return;
+            let comment_list = res.data.comment;
+            dispatch(loadCmt(comment_list));
+        }).catch(err => {
+            console.log("load : 에러 났다!!", err);
+            // err를 출력해서 정확한 내역 파악. 에너메세지에 이름을 붙여주어 어디서 에러가 났는지 확인!!
+        });
+    };
+};
+
+
+
+
+// create
+const createCmtDB = (comment={}) => {
+    return function (dispatch, getState, {history}){
+        
+        const date = moment().format("YYYY-MM-DD-hh-mm-ss"); 
+                // 작성시간 포멧 의논하기 서버랑!!!!
+        console.log(date)
+        comment["writeDate"] = date;
+
+        instance.post("/api/study-comment", comment).then((res) => {
+            console.log(res);
+            dispatch(createCmt(comment));
+        }).catch(err => {  
+            console.log("create : 에러 났다!!!!", err);
+        });
+    };
+};
+
+// delete
+const deleteCmtDB = (studyCommentId='') => {
+    return function (dispatch, getState, {history}) {
+        let cmtIdx = getState().comment.comments.findIndex(s => s.studyCommentId === studyCommentId);
+        let comment = getState().comment.comments[cmtIdx];
+
+        if(!comment.studyCommentId){
+            console.log("스터디가 없어요.")
+            return;
+        }; // 에러 미연에 방지 (혹시나 있을 에러)
+
+        instance.delete(`/api/study-comment/${studyCommentId}`).then((res) => {
+            console.log(res);
+            dispatch(deleteCmt(studyCommentId));
+        }).catch(err => {
+            console.log("delete : 에러 났다!!", err);
+        });
+    };
+};
 
 
 
@@ -51,35 +106,35 @@ export default handleActions({
     }),
 
     [CREATE_CMT]: (state, action) => produce(state, (draft) => {
-        draft.list.unshift(action.payload.study);
+        draft.comments.unshift(action.payload.comment);
     }),
 
-    [EDIT_CMT]: (state, action) => produce(state, (draft) => {
-        let idx = draft.list.findIndex((s) => s.studyId === action.payload.study_id);
-        draft.list[idx] = {...draft.list[idx], ...action.payload.study};
-    }),
+    // [EDIT_CMT]: (state, action) => produce(state, (draft) => {
+    //     let idx = draft.list.findIndex((s) => s.studyId === action.payload.study_id);
+    //     draft.list[idx] = {...draft.list[idx], ...action.payload.study};
+    // }),
 
             //  코멘트 데이터 구조를 어떻게 짤지 생각하기!!! study 데이터와 같이 갈 것인가 따로 갈 것인가!
             //  서버에 delete 요청에 코멘트도 지워달라고 요청하기
     [DELETE_CMT]: (state, action) => produce(state, (draft) => {
-        const del_list = draft.list.filter((s, idx) => {
-            if (idx !== action.payload.study){
-                return s;
+        const del_list = draft.comments.filter((c, idx) => {
+            if (idx !== action.payload.studyCommentId){
+                return c;
             }
         });
-        return { list: del_list};
+        return { comments: del_list};
     }),
 
 }, initialState);
 
 
-export const actionCreators = {
-    // loadStudy,
-    // createStudy,
-    // editStudy,
-    // deleteStudy,
-    // loadStudyDB,
-    // createStudyDB,
-    // editStudyDB,
-    // deleteStudyDB,
+export const actionCreator = {
+    loadCmt,
+    createCmt,
+    deleteCmt,
+
+    loadCmtDB,
+    createCmtDB,
+    deleteCmtDB
+
 };

@@ -2,6 +2,9 @@ import React from "react";
 import StudyDetailBody from "../components/StudyDetailBody";
 import { Grid, Text } from "../elements";
 import { useSelector } from "react-redux";
+import CommentList from "../components/comment/CommentList";
+
+
 
 const StudyDetail = (props) => {
 
@@ -18,6 +21,8 @@ const StudyDetail = (props) => {
                 	<Text size="48px" weight="800">Study</Text>
             	</Grid>
                 <StudyDetailBody id={idx}/>
+
+				<CommentList id={idx}/>
 			</Grid>
 		</React.Fragment>
 	)  

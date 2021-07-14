@@ -31,6 +31,7 @@ const MyPage = (props) => {
 						<Button text="내 정보" _onClick={myModal_Open}></Button>
 					</Grid>
 					<Grid>
+						<hr></hr>
 						<MyStudy></MyStudy>
 						<hr></hr>
 						<MyComment/>

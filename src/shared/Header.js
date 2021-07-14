@@ -61,7 +61,7 @@ const Header = (props) => {
 const HeaderBg = styled.div`
     width: 100%;
     height: 100px;
-    background: #b3b9e6;
+    background: #fff;
 `;
 
 const HeaderGrid = styled.div`

@@ -7,14 +7,14 @@ const LOG_OUT = "LOG_OUT";
 const GET_USER = "GET_USER";
 const SET_USER = "SET_USER";
 const GET_TOKEN = "GET_TOKEN";
-
+const LOAD_MYSTUDY = "LOAD_MYSTUDY";
 
 
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const getToken = createAction(GET_TOKEN, (user_token) => ({ user_token }));
-
+const loadMyStudy = createAction(LOAD_MYSTUDY, (my_study) => ({my_study}));
 
 const initialState = {
     user: {
@@ -26,7 +26,7 @@ const initialState = {
     is_login: false,
     user_token: "",
     userId: "",
-    myModal: false,
+    list: [],
 };
 
 
@@ -152,8 +152,13 @@ const getMyStudy = () => {
 
         instance.get(`/api/mystudy/${userId}`).then((response) => {
             console.log(response);
+            const myStudyList = response.data.studyInfo;
+
+            dispatch(
+                loadMyStudy(myStudyList)
+            )
         })
-        .catch(error => {
+        .catch(function (error) {
             console.log(error);
         })
         }
@@ -182,6 +187,12 @@ export default handleActions(
 
         [GET_USER]: (state, action  ) => 
         produce(state, (draft) => {}),
+
+        [LOAD_MYSTUDY]: (state, action) => 
+        produce(state, (draft) => {
+            draft.list = action.payload.my_study;
+        })
+        
         
     },
     initialState
@@ -198,6 +209,7 @@ const actionCreators = {
    getToken,
    editInfoDB,
    getMyStudy,
+   loadMyStudy,
   };
   
   export { actionCreators };

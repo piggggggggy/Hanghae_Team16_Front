@@ -20,7 +20,6 @@ const MyPageModal = (props) => {
     const [my_Nick, setMy_Nick] = React.useState("");
     const [my_Group, setMy_Group] = React.useState("");
 
-    const [my_Email_Edit, setMy_Email_Edit] = React.useState("");
     const [my_Nick_Edit, setMy_Nick_Edit] = React.useState("");
     const [my_Pwd_Edit, setMy_Pwd_Edit] = React.useState("");
     const [my_PwdCheck_Edit, setMy_PwdCheck_Edit] = React.useState("");
@@ -49,9 +48,6 @@ const MyPageModal = (props) => {
     }
 
    
-    const editEmail = (e) => {
-        setMy_Email_Edit(e.target.value);
-    };
 
     const editNick = (e) => {
         setMy_Nick_Edit(e.target.value);
@@ -66,15 +62,11 @@ const MyPageModal = (props) => {
     };
 
     const editMyInfo = () => {
-        if(my_Email_Edit === "" || my_Pwd_Edit === "" || my_PwdCheck_Edit === "" || my_Nick_Edit === "") {
+        if(my_Pwd_Edit === "" || my_PwdCheck_Edit === "" || my_Nick_Edit === "") {
             window.alert("아이디, 비밀번호, 닉네임을 모두 입력해주세요.");
             return;
         }
     
-        if(!emailCheck(my_Email_Edit)) {
-            window.alert("이메일 형식이 맞지 않습니다.");
-            return;
-        }
 
         if(!passwordCheck(my_Pwd_Edit)) {
             window.alert("비밀번호 형식이 맞지 않습니다.");
@@ -102,19 +94,19 @@ const MyPageModal = (props) => {
                     <ModalBox>
     
                         <Grid display="flex" direction="column" width="60%" margin="6% auto">
-
+                        <Text margin="30px" weight="bold" size="24px" align="center">닉네임, 비밀번호 변경</Text>
                         <Grid is_flex  padding="4% 0">
-                        <Text size="20px">아이디 : </Text>
-                        <Input padding="10px" placeholder="아이디를 입력해주세요." width="60%"_onChange={editEmail}></Input>
+                        <Text size="18px">아이디 : </Text>
+                        <Text size="18px">{my_Email}</Text>
                         </Grid>
 
                         <Grid is_flex padding="4% 0">
-                        <Text size="20px">닉네임 : </Text>
+                        <Text size="18px">닉네임 : </Text>
                         <Input padding="10px" placeholder={my_Nick} width="60%" _onChange={editNick}></Input>
                         </Grid>
             
                         <Grid is_flex  padding="4% 0">
-                        <Text size="20px">비밀번호 : </Text>
+                        <Text size="18px">비밀번호 : </Text>
 
                         <Grid display="flex" direction="column" width="60%">
                         <Input  type="password" padding="10px" placeholder="비밀번호를 입력해주세요." width="100%" _onChange={editPwd}></Input>
@@ -124,7 +116,7 @@ const MyPageModal = (props) => {
                         </Grid>
             
                         <Grid is_flex  padding="4% 0">
-                        <Text size="20px">비밀번호 확인 : </Text>
+                        <Text size="18px">비밀번호 확인 : </Text>
                         <Input  type="password" padding="10px" placeholder="비밀번호를 다시 입력해주세요." width="60%" _onChange={editPwdCheck}></Input>
                         </Grid>
                         

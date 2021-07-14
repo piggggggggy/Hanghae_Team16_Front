@@ -5,7 +5,7 @@ import { actionCreators as userActions } from "../redux/modules/user";
 import { history } from "../redux/configStore";
 import { actionCreators } from "../redux/modules/study";
 import { useSelector } from "react-redux";
-
+import { emailCheck, passwordCheck } from "../shared/common";
 
 
 const Login = (props) => {
@@ -26,7 +26,6 @@ const Login = (props) => {
 
     const logIn = () => {
         dispatch(userActions.LoginDB(email, password));
-
     };
 
 

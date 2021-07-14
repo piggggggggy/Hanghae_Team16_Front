@@ -9,14 +9,15 @@ const SET_USER = "SET_USER";
 const GET_TOKEN = "GET_TOKEN";
 const LOAD_MYSTUDY = "LOAD_MYSTUDY";
 const LOAD_MYCOMMENT = "LOAD_MYCOMMENT";
-
+const LOAD_MAINSTUDY = "LOAD_MAINSTUDY";
 
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const getToken = createAction(GET_TOKEN, (user_token) => ({ user_token }));
-const loadMyStudy = createAction(LOAD_MYSTUDY, (my_study) => ({my_study}));
-const loadMyComment = createAction(LOAD_MYCOMMENT, (my_comment) => ({my_comment}));
+const loadMyStudy = createAction(LOAD_MYSTUDY, (my_study) => ({ my_study }));
+const loadMyComment = createAction(LOAD_MYCOMMENT, (my_comment) => ({ my_comment }));
+const loadMainStudy = createAction(LOAD_MAINSTUDY, (main_study) => ({ main_study }));
 
 const initialState = {
     user: {
@@ -28,6 +29,7 @@ const initialState = {
     is_login: false,
     study_list: [],
     comment_list: [],
+    main_study_list: [],
 };
 
 
@@ -40,6 +42,26 @@ const SignUpDB = (email, password, nickname, group) => {
         axios.post('http://54.180.139.140/api/register',
             {email: email, nickname: nickname, group: group, password: password},
         ).then(function (response) {
+
+            console.log(response.data.result);
+            if(response.data.result === "nicknameExist" ) {
+               
+                window.alert("이미 존재하는 닉네임입니다.")
+                return;
+            }
+
+            if(response.data.result === "emailExist" ) {
+               
+                window.alert("이미 존재하는 이메일입니다.")
+                return;
+            }
+
+            if(response.data.result === "existError" ) {
+               
+                window.alert("이메일 주소 @ 앞 부분은 비밀번호에 포함시킬 수 없습니다.")
+                return;
+            }
+
             history.push("/");
         })
         .catch(function (error) {
@@ -53,7 +75,7 @@ const LoginDB = (email, password) => {
         axios.post('http://54.180.139.140/api/login',
             {email: email, password: password},
         ).then(function (response) {
-            console.log(response.data.result);
+            
             if (response.data.result === "success") {
                 
                 dispatch(
@@ -63,9 +85,8 @@ const LoginDB = (email, password) => {
                         userId: response.data.userId,
                     })
                 );
-                console.log(response);
+
                 const USER_TOKEN = response.data.token;
-                console.log(USER_TOKEN);
                
                 dispatch(
                     getToken({
@@ -79,19 +100,18 @@ const LoginDB = (email, password) => {
 
                 let date = new Date(Date.now() + 86400e3);
                 date = date.toUTCString();
-                // const email_Id = email.split('@')[0];
-                document.cookie = "USER_TOKEN" + "=" + USER_TOKEN + "; " + "expires=" + date;
-                console.log(document.cookie);
-                // instance.defaults.headers.common["Authorization"] = USER_TOKEN;
-                axios.defaults.headers.Authorization = "Bearer " + USER_TOKEN;
-                console.log("header: ", axios.defaults.headers.Authorization);
 
+                document.cookie = "USER_TOKEN" + "=" + USER_TOKEN + "; " + "expires=" + date;
+
+
+                axios.defaults.headers.Authorization = "Bearer " + USER_TOKEN;
 
                 history.push('/');
-            } else {
-                window.alert("로그인에 실패하였습니다.");
-                console.log(response);
-            }
+                
+            } 
+            
+            console.log("response");
+
         }).catch((error) => {
             console.log(error);
         });
@@ -171,7 +191,7 @@ const getMyComment = () => {
 
         instance.get(`/api/mycomment/${userId}`).then((response) => {
             console.log(response);
-            const myCommentList = response.data.myComment
+            const myCommentList = response.data.myComment;
             dispatch(
                 loadMyComment(myCommentList)
             )
@@ -182,6 +202,20 @@ const getMyComment = () => {
             console.log(error);
         })
         }
+}
+
+const getMainStudy = () => {
+    return function (dispatch, getState, {history}) {
+        instance.get("api/recent-study").then((response) => {
+            const mainStudyList = response.data.studys;
+            dispatch(
+                loadMainStudy(mainStudyList)
+            )
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    }
 }
 
 
@@ -215,7 +249,12 @@ export default handleActions(
         [LOAD_MYCOMMENT]: (state, action) => 
         produce(state, (draft) => {
             draft.comment_list = action.payload.my_comment;
-        })
+        }),
+
+        [LOAD_MAINSTUDY]: (state, action) => 
+        produce(state, (draft) => {
+            draft.main_study_list = action.payload.main_study;
+        }),
         
         
     },
@@ -236,6 +275,8 @@ const actionCreators = {
    loadMyStudy,
    loadMyComment,
    getMyComment,
+   loadMainStudy,
+   getMainStudy,
   };
   
   export { actionCreators };

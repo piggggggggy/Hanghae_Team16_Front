@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const ATag = (props) => {
     
-    const {size, weight, color, margin, align, overflow, text, _onClick} = props;
+    const {size, weight, color, margin, align, overflow, text, _onClick, width} = props;
 
     const styles = {
         size: size,
@@ -12,6 +12,7 @@ const ATag = (props) => {
         margin: margin,
         align: align,
         overflow: overflow,
+        width: width,
     }
 
 
@@ -38,6 +39,7 @@ const ElText = styled.a`
     margin: ${(props) => props.margin};
     text-align: ${(props) => props.align};
     ${(props) => (props.overflow? 'text-overflow: ellipsis;': '')};
+    width: ${(props) => props.width};
     cursor: pointer;
     &:hover{
         text-decoration: underline;

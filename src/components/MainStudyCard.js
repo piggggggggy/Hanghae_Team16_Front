@@ -5,6 +5,11 @@ import styled from "styled-components";
 
 const MainStudyCard = (props) => {
 
+    const studyType = props.studyType;
+
+    const studyCont = props.name;
+
+    const studyEnd = props.endJoinDate;
 
 
     return (
@@ -12,13 +17,13 @@ const MainStudyCard = (props) => {
             <hr/>
             <Grid display="flex" align="center" space="space-between" height="40px">
                 <Grid width="15%">
-                    <Text>{SType(props.studyType)}</Text>
+                    <Text>{SType(studyType)}</Text>
                 </Grid>
                 <Grid width="45%">
-                    <OverBox>{props.name}</OverBox>
+                    <OverBox>{studyCont}</OverBox>
                 </Grid>
                 <Grid width="28%">
-                    <Text>{props.endJoinDate} 마감!</Text>
+                    <Text>{studyEnd} 마감!</Text>
                 </Grid>
             </Grid>
         </React.Fragment>

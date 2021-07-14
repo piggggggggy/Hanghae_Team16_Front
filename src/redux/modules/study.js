@@ -128,13 +128,13 @@ const editStudyDB = (studyId=null, study={}) => {
 // delete
 const deleteStudyDB = (studyId='') => {
     return function (dispatch, getState, {history}) {
-        let studyIdx = getState().study.list.findIndex(s => s.studyId === studyId);
-        let _study = getState().study.list[studyIdx];
+        // let studyIdx = getState().study.list.findIndex(s => s.studyId === studyId);
+        // let _study = getState().study.list[studyIdx];
 
-        if(!_study.studyId){
-            console.log("스터디가 없어요.")
-            return;
-        }; // 에러 미연에 방지 (혹시나 있을 에러)
+        // if(!_study.studyId){
+        //     console.log("스터디가 없어요.")
+        //     return;
+        // }; // 에러 미연에 방지 (혹시나 있을 에러)
 
         instance.delete(`/api/study/${studyId}`).then((res) => {
             console.log(res);

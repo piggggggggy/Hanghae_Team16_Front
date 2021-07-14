@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreator as studyActions } from "../redux/modules/study";
+import moment from "moment";
 
 import styled from "styled-components";
 import { Grid, Button } from "../elements";
@@ -23,19 +24,41 @@ const StudyList = (props) => {
     },[]);
 
 
+    const [showToggle, setShow] = React.useState(false);
 
+    const showAll = () => {
+
+        dispatch(studyActions.loadStudyDB());
+        setShow(false);
+    };
+
+    const showNotDead = (c) => {
+        setShow(true);
+        
+    };
+
+
+    
     return (
         <React.Fragment>
             <Container>
-                <Grid width="80%" margin="20px auto" is_flex>
-                    <Button backgroundcolor="gray" width="45%" height="30px" text="전체보기"/>
-                    <Button backgroundcolor="gray" width="45%" height="30px" text="진행 중인 스터디"/>
+                <Grid width="80%" margin="30px auto 10px auto" is_flex>
+                    <Button backgroundcolor="gray" width="45%" height="30px" text="전체보기" _onClick={()=>{showAll()}}/>
+                    <Button backgroundcolor="gray" width="45%" height="30px" text="진행 중인 스터디" _onClick={()=>{showNotDead()}}/>
                 </Grid>
                 <ListBox>
-                    {study_list.map((c,idx) => {
-                        return(
-                            <StudyCard key={idx} {...c}/>
-                        )
+                    {showToggle ? 
+                    study_list.map((c,idx) => {
+                        let is_full = c.joinNum+1 === c.size;
+                        let is_dead = c.endJoinDate < moment().format("YYYY-MM-DD");
+                        if(is_full || is_dead){
+                            return null;    
+                        }else{
+                            return(<StudyCard key={idx} {...c}/>);
+                        }
+                    })
+                    : study_list.map((c,idx) => {
+                        return(<StudyCard key={idx} {...c}/>)
                     })}
                 </ListBox>
             </Container>
@@ -49,7 +72,7 @@ const Container = styled.div`
 `;
 const ListBox = styled.div`
     max-width: 600px;
-    max-height: 1000px;
+    max-height: 700px;
     overflow-y: auto;
     &::-webkit-scrollbar {
         display: none; /* Chrome, Safari, Opera*/

@@ -4,16 +4,18 @@ import { Text, Button, Grid } from "../elements";
 import { useSelector, useDispatch } from "react-redux";
 import SType from "../shared/StudyType";
 import { history } from "../redux/configStore";
+import moment from "moment";
 
 const StudyCard = (props) => {
     // const {history} = props;
     const study_id = props.studyId
 
     const is_full = props.joinNum + 1 === props.size
+    const is_dead = props.endJoinDate < moment().format("YYYY-MM-DD");
     
     return (
         <React.Fragment>
-            <Card style={{backgroundColor: is_full ?  "gray" : "lightgray" }}>
+            <Card style={{backgroundColor: is_full || is_dead?  "#424242" : "lightgray" }}>
                 <OverText></OverText>
                 <Grid is_flex padding="10px" width="90%" margin="auto">
                     <Text>LEVEL : {props.level}</Text>
@@ -21,7 +23,7 @@ const StudyCard = (props) => {
                 </Grid>
                 <Grid padding="0px 40px">
                     <Text weight="800" size="24px">{props.name}</Text>
-                    <Text>{props.startDate} 시작</Text>
+                    {/* <Text>{props.startDate} 시작</Text> */}
                     <Text>{props.explain}</Text>
                     <Text>인원 : {props.joinNum + 1} / {props.size}</Text>
                     <Text>스터디 방식 : {SType(props.studyType)}</Text>

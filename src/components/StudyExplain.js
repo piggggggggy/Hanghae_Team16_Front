@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Text, Grid, Button } from "../elements";
 import { useState } from "react-redux";
 import StudyModal from "./StudyModal";
+import { history } from "../redux/configStore";
 
 const StudyExplain = (props) => {
 
@@ -52,7 +53,7 @@ const StudyExplain = (props) => {
                 </Grid>
                 <Grid width="80%" margin="auto" is_flex>
                     <Button backgroundcolor="gray" width="45%" text="모집하기" _onClick={()=>{ModalOpen()}}/>
-                    <Button backgroundcolor="gray" width="45%" text="내 스터디"/>
+                    <Button backgroundcolor="gray" width="45%" text="내 스터디" _onClick={()=>{history.push('/mypage')}}/>
                 </Grid>
             </ExplainBox>
         </React.Fragment>

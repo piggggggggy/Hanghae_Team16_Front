@@ -9,14 +9,14 @@ import { history } from "../configStore";
 // action
 const LOAD_CMT = "comment/LOAD_CMT";
 const CREATE_CMT = "comment/CREATE_CMT";
-// const EDIT_CMT = "comment/EDIT_CMT";
+
 const DELETE_CMT = "comment/DELETE_CMT";
 
 
 // action creator
 const loadCmt = createAction(LOAD_CMT, (comments) => ({comments}));
 const createCmt = createAction(CREATE_CMT, (comment) => ({comment}));
-// const editComment = createAction(EDIT_CMT, (comment) => ({comment}));
+
 const deleteCmt = createAction(DELETE_CMT, (studyCommentId) => ({studyCommentId}));
 
 //initialState

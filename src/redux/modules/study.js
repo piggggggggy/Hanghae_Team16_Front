@@ -14,20 +14,27 @@ const DELETE_STUDY = "study/DELETE_STUDY";
 const DETAIL_STUDY = "study/DETAIL_STUDY";
 // const APPLY_STUDY = "study/APPY_STUDY";
 
+const JOIN_STUDY = "join/JOIN_STUDY";
+const WITHDRAW_STUDY = "join/WITHDRAW_STUDY";
+
 
 // action creator
 const loadStudy = createAction(LOAD_STUDY, (study_list) => ({study_list}));
 const createStudy = createAction(CREATE_STUDY, (study) => ({study}));
 const editStudy = createAction(EDIT_STUDY, (study_id, study) => ({study_id, study}));
 const deleteStudy = createAction(DELETE_STUDY, (study_id) => ({study_id}));
-const detailStudy = createAction(DETAIL_STUDY, (study) => ({study}))
+const detailStudy = createAction(DETAIL_STUDY, (study, members) => ({study, members}))
 // const applyStudy = createAction(APPLY_STUDY, (study) => ({study}));
+
+const joinStudy = createAction(JOIN_STUDY, (join) => ({join}));
+const withdrawStudy = createAction(WITHDRAW_STUDY, (join) => ({join}));
 
 
 // initialState
 const initialState = {
     list: [],
-    study: null
+    study: null,
+    join: [],
 };
 
 const initialStudy = {
@@ -53,7 +60,7 @@ const loadStudyDB = () => {
     return function (dispatch, getState, {history}){
         
         instance.get("/api/study").then((res) =>{
-            // console.log(res)
+            console.log(res)
             // console.log(res.data.studys);
             let study_list = res.data.studys;
             dispatch(loadStudy(study_list));
@@ -71,10 +78,11 @@ const detailStudyDB = (study_id='') => {
         instance.get(`/api/study/${study_id}`).then((res) => {
             console.log(res); 
 
-            let study = res.data.detail;
+            let study = res.data;
+            // let members = res.data.members
             console.log(study);
 
-            dispatch(detailStudy(...study));
+            dispatch(detailStudy(study));
         }).catch(err => {
             console.log("load : 에러 났다!!", err);
         });
@@ -145,6 +153,39 @@ const deleteStudyDB = (studyId='') => {
     };
 };
 
+// join
+const joinDB = (studyId='', userInfo={}) => {
+    return function (dispatch, getState, {history}){
+
+        instance.post(`/api/join-study/${studyId}`,userInfo).then((res) => {
+            console.log(res.data);
+            let users = res.data;
+ 
+            dispatch(joinStudy(users));
+        }).catch(err => {
+            console.log("join : 에.러", err);
+        });
+    };
+};
+
+
+
+// withdraw
+const withdrawDB = (studyId='', userInfo={}) => {
+    return function (dispatch, getState, {history}){
+
+        instance.delete(`/api/join-study/${studyId}`,userInfo).then((res) => {
+            console.log(res);
+
+            return;
+            dispatch(withdrawStudy(studyId));
+        }).catch(err => {
+            console.log("withdraw : 에.러", err);
+        });
+    };
+};
+
+
 
 
 
@@ -178,17 +219,41 @@ export default handleActions({
     [DETAIL_STUDY]: (state, action) => produce(state, (draft) => {
         // let idx = draft.list.findIndex((s) => s.studyId === action.payload.study_id);
         draft.study = action.payload.study ///?????????????????????????????????????
+        // draft.join = action.payload.join
+    }),
+
+    [JOIN_STUDY]: (state, action) => produce(state, (draft) => {
+        draft.join = action.payload.join
+    }),
+
+    [WITHDRAW_STUDY]: (state, action) => produce(state, (draft) => {
+        const del_list = draft.join.studyMemberInfo.filter((s, idx) => {
+            if (s.userId !== action.payload.join.userId){
+                return s;
+            }
+        });
+        const currentMemberCnt = draft.join.currentMemberCnt + 1
+        return { 
+            currentMemberCnt: currentMemberCnt,
+            studyMemberInfo: del_list,
+        };
     }),
 
 }, initialState);
 
 
 export const actionCreator = {
+    joinStudy,
+    withdrawStudy,
+    
     loadStudy,
     createStudy,
     editStudy,
     deleteStudy,
     detailStudy,
+
+    joinDB,
+    withdrawDB,
 
     loadStudyDB,
     createStudyDB,

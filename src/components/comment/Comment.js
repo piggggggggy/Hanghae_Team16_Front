@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Grid, Button, Text, Input } from "../../elements";
 import moment from "moment";
@@ -10,16 +10,28 @@ import { history } from "../../redux/configStore";
 
 const Comment = (props) => {
     const dispatch = useDispatch();
+    const userId = useSelector((state) => state.user.user.userId);
     const studyCommentId = props.studyCommentId;
+    console.log(props.userId)
 
     // const time = props.checkTime.format("YYYY.MM.DD  hh:mm");
     // const now = moment();
     // console.log(time);
     // console.log(now);
 
+    
+    // console.log("userId :"+userId);
+    // console.log("study :"+props.userId);
+
     const deleteCmt = () => {
-        dispatch(cmtActions.deleteCmtDB(studyCommentId));
+        if (userId == props.userId){
+            dispatch(cmtActions.deleteCmtDB(studyCommentId))
+        }else{
+            window.alert("귀하의 댓글이 아닙니다.")
+        }
+        
     };
+    console.log(props)
 
 
     return (
@@ -28,7 +40,7 @@ const Comment = (props) => {
                 <CommentContainer>
                     <Grid is_flex>
                         <Grid display="flex" align="center">
-                            <Text weight="600" margin="0px 25px 0px 0px">{props.userId}</Text>
+                            <Text weight="600" margin="0px 25px 0px 0px">{props.nickname}</Text>
                             <Text color="#6d6d6d">{props.date}</Text>
                         </Grid>
                         <Button _onClick={()=>{deleteCmt()}} text="X"/>

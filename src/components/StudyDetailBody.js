@@ -5,7 +5,7 @@ import SType from "../shared/StudyType";
 import EditModal from "./EditModal";
 
 import {history} from "../redux/configStore";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, useStore } from "react-redux";
 import { actionCreator as studyActions } from "../redux/modules/study";
 
 
@@ -13,14 +13,19 @@ const StudyDetailBody = (props) => {
     const dispatch = useDispatch();
     const _studyId = props.id;
     console.log(_studyId)
-    const _study = useSelector((state) => state.study.study);
-    
+    const study = useSelector((state) => state.study.study);
+    const join_list = useSelector((state) => state.study.join.studyMemberInfo)
+    const userId = useSelector((state) => state.user.user.userId);
+    const [is_join, setJoin] = React.useState(false);
+
+ 
 
     // detail load
     React.useEffect(() => {
         
         dispatch(studyActions.detailStudyDB(_studyId));
     }, [_studyId]);
+
 
         
 
@@ -29,27 +34,81 @@ const StudyDetailBody = (props) => {
     const [_Modal, _setModal] = React.useState(false);
 
     const _ModalOpen = () => {
-        _setModal(true)
+        if(userId == _study.userId){
+            _setModal(true)
+        }else{
+            window.alert("작성자만 수정할 수 있어요!")
+        }
+        
     };  
     const _ModalClose = () => {
         _setModal(false)
     };
 
-    if (!_study) { 
+    
+
+    if (!study) { 
         return <div>로딩중..</div>; 
     }
+
+    const _study = study.detail[0];
+    const members = study.members;
+    console.log(members[0].name)
 
     // 인원현황
     const is_full = _study.joinNum+1 === _study.size;
 
+
+    console.log("userId :"+userId);
+    // console.log("study :"+_study.userId);
     // 삭제
     const deleteStudy = () => {
-        dispatch(studyActions.deleteStudyDB(_studyId));
-        history.replace('/study');
+        if(userId == _study.userId){
+            dispatch(studyActions.deleteStudyDB(_studyId));
+            history.replace('/study');
+        }else{
+            window.alert("작성자만 지울 수 있어요!")
+        }
+        
     };
 
 
+    let already_join = false;
+    // for(let i = 0; i < join_list.length; ++i) {
+    //     let check = join_list[i];
+    //     if (check.userId === userId){
+    //         already_join = true;
+    //         break;
+    //     };
+    // };
 
+
+    const joinStudy = () => {
+
+        let leader = userId === _study.userId ? true : false;
+        let userInfo = {
+            userId: userId,
+            leader: leader,
+        };
+
+        if (!leader){
+            dispatch(studyActions.joinDB(_studyId, userInfo));
+            setJoin(true);
+        }else{
+            window.alert("본인이 모집하는 스터디 입니다! 정신 차리세요.")
+        };  
+    };
+
+    const withdrawStudy = () => {
+
+        let userInfo = {
+            userId: userId,
+        }
+        dispatch(studyActions.withdrawDB(_studyId, userInfo));
+        setJoin(false);
+    };
+
+    
 
     
 
@@ -72,7 +131,7 @@ const StudyDetailBody = (props) => {
                     </Grid>
                     <Grid  is_flex>
                         <Button backgroundcolor="gray" text="수정" _onClick={_ModalOpen} margin="0px 25px 0px 0px"/>
-                        <Button backgroundcolor="gray" text="삭제" _onClick={deleteStudy}/>
+                        <Button backgroundcolor="gray" text="삭제" _onClick={()=>{deleteStudy()}}/>
                     </Grid>
                 </Grid>
                 
@@ -100,7 +159,24 @@ const StudyDetailBody = (props) => {
                         </Grid>
                         <Grid display="flex" direction="column" align="center">
                             <Text size="18px">현재인원 : {_study.joinNum+1} / {_study.size}</Text>
-                            <Button margin="20px 0px" backgroundcolor="gray" text="인원보기"/>
+                            
+                            <MemberBtn>
+                                <Text color="white">{"인원 보기"}</Text>
+                                <MemberBox>
+                                    {members.map((m, idx) => {
+                                        return(
+                                            <Text 
+                                            color={userId == m.id? "green" : "black"}
+                                            margin="5px 0px" 
+                                            size="20px" 
+                                            weight="600" 
+                                            key={idx}>
+                                                {userId == m.id? `${m.name}(팀장)`: m.name}
+                                            </Text>
+                                        )
+                                    })}
+                                </MemberBox>
+                            </MemberBtn>
                         </Grid>
                     </Grid>
 
@@ -111,7 +187,9 @@ const StudyDetailBody = (props) => {
                     <Text size="18px">{_study.explain}</Text>
                 </Grid>
                 <Grid display="flex" space="flex-end" align="center" margin="20px 0px">
-                    <Button backgroundcolor="gray" text="신청하기" margin="0px 25px"/>
+                    {is_join || already_join?  
+                    <Button backgroundcolor="red" text="신청취소" margin="0px 25px" _onClick={()=>{withdrawStudy()}}/>
+                    : <Button backgroundcolor="green" text="신청하기" margin="0px 25px" _onClick={()=>{joinStudy()}}/>}
                     <Button backgroundcolor="gray" text="목록으로" _onClick={()=>{history.replace('/study')}}/>
                 </Grid>
             </DetailContainer>
@@ -149,6 +227,43 @@ const DetailContainer = styled.div`
     padding: 30px 5% 10px 5%;
 
 
+`;
+
+const MemberBox = styled.div`
+    width: 200px;
+    min-height: 300px;
+    display: none;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    background-color: #f1f1f1;
+    position: fixed;
+    /* z-index: 10; */
+    top: 20%;
+    left: 48%;
+`;
+
+const MemberBtn = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 40px;
+    background-color: gray;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    margin: 20px 0px;
+
+    &:hover {
+        div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+`;
+const Grid_ = styled.div`
+    /* position: relative; */
 `;
 
 

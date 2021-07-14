@@ -27,7 +27,7 @@ const Header = (props) => {
                 <HeaderGrid>
                 <div onClick={()=> {history.push('/')}}>로고</div>
                 <BtnBox>
-                    <Button size="large" onClick={() => {history.push("/mypage")}}>마이페이지</Button>
+                    <Button size="large" onClick={() => {history.replace("/mypage")}}>마이페이지</Button>
                     <Button size="large" onClick={logOutBtn}>로그아웃</Button>
                 </BtnBox>
                 </HeaderGrid>

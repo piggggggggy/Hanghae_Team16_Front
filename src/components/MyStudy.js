@@ -2,6 +2,9 @@ import React from "react";
 import { Text, Grid, Button } from "../elements";
 import { history } from "../redux/configStore";
 import styled from "styled-components";
+import { actionCreators as userAction } from "../redux/modules/user";
+import instance from "../shared/instance";
+import { useSelector } from "react-redux";
 
 const MyStudy = (props) => {
 
@@ -55,7 +58,39 @@ const MyStudy = (props) => {
             is_full: false,
         },
     ];
+
+    const [study_Lv, setStudy_Lv] = React.useState("");
+    const [study_End, setStudy_End] = React.useState("");
+    const [study_Name, setStudy_Name] = React.useState("");
+    const [study_Size, setStudy_Size] = React.useState("");
+    const [study_Start, setStudy_Start] = React.useState("");
+
     
+    const userId = useSelector(state => (state.user.user.userId));
+
+
+    const MyStudyIn = () => {
+       
+
+        instance.get(`/api/mystudy/${userId}`).then((response) => {
+            console.log(response);
+            setStudy_Lv(response.data.studyInfo.lever);
+            setStudy_End(response.data.studyInfo.endJoinDate);
+            setStudy_Name(response.data.studyInfo.name);
+            setStudy_Size(response.data.studyInfo.size);
+            setStudy_Start(response.data.studyInfo.startDate);
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
+
+    React.useEffect(() => {
+        MyStudyIn();
+        
+    });
+    
+    console.log(study_Lv,study_End,study_Name,study_Size,study_Start);
 
     return (
         <React.Fragment>

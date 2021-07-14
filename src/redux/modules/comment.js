@@ -20,7 +20,7 @@ const deleteCmt = createAction(DELETE_CMT, (comment_id) => ({comment_id}));
 
 //initialState
 const initialState = {
-    comments: null,
+    comments: [],
 }
 
 
@@ -102,7 +102,7 @@ const deleteCmtDB = (studyCommentId='') => {
 export default handleActions({
 
     [LOAD_CMT]: (state, action) => produce(state, (draft) => {
-        draft.list = action.payload.study_list;
+        draft.comment = action.payload.comment;
     }),
 
     [CREATE_CMT]: (state, action) => produce(state, (draft) => {
@@ -114,8 +114,6 @@ export default handleActions({
     //     draft.list[idx] = {...draft.list[idx], ...action.payload.study};
     // }),
 
-            //  코멘트 데이터 구조를 어떻게 짤지 생각하기!!! study 데이터와 같이 갈 것인가 따로 갈 것인가!
-            //  서버에 delete 요청에 코멘트도 지워달라고 요청하기
     [DELETE_CMT]: (state, action) => produce(state, (draft) => {
         const del_list = draft.comments.filter((c, idx) => {
             if (idx !== action.payload.studyCommentId){

@@ -12,7 +12,7 @@ const CommentList = (props) => {
 
     const dispatch = useDispatch();
     const studyId = props.id;
-    
+
     const commentList = useSelector((state) => state.comment.comments);
     const userId = useSelector((state) => state.user.user.userId);
     console.log(commentList);
@@ -24,8 +24,9 @@ const CommentList = (props) => {
 
 
 
-    const createCmt = () => {
 
+
+    const createCmt = () => {
         let comment = {
             studyId: studyId,
             content: content,

@@ -14,9 +14,9 @@ const StudyDetailBody = (props) => {
     const _studyId = props.id;
     console.log(_studyId)
     const study = useSelector((state) => state.study.study);
-    const join_list = useSelector((state) => state.study.join.studyMemberInfo)
-    const userId = useSelector((state) => state.user.user.userId);
+    const userId = localStorage.getItem("userId");
     const [is_join, setJoin] = React.useState(false);
+    // const [already_join, setAJoin] = React.useState(false);
 
  
 
@@ -24,13 +24,13 @@ const StudyDetailBody = (props) => {
     React.useEffect(() => {
         
         dispatch(studyActions.detailStudyDB(_studyId));
-    }, [_studyId]);
+    }, []);
 
 
         
 
 
-    // 모달 작업
+    // 모달 작업----------------------------------
     const [_Modal, _setModal] = React.useState(false);
 
     const _ModalOpen = () => {
@@ -39,12 +39,11 @@ const StudyDetailBody = (props) => {
         }else{
             window.alert("작성자만 수정할 수 있어요!")
         }
-        
     };  
     const _ModalClose = () => {
         _setModal(false)
     };
-
+    //--------------------------------------------
     
 
     if (!study) { 
@@ -59,7 +58,7 @@ const StudyDetailBody = (props) => {
     const is_full = _study.joinNum+1 === _study.size;
 
 
-    console.log("userId :"+userId);
+    // console.log("userId :"+userId);
     // console.log("study :"+_study.userId);
     // 삭제
     const deleteStudy = () => {
@@ -73,25 +72,25 @@ const StudyDetailBody = (props) => {
     };
 
 
-    let already_join = false;
-    // for(let i = 0; i < join_list.length; ++i) {
-    //     let check = join_list[i];
-    //     if (check.userId === userId){
-    //         already_join = true;
-    //         break;
-    //     };
-    // };
 
+    let already_join = false
+    for(let i = 0; i < members.length; ++i) {
+        let check = members[i];
+        if (check.id == userId){
+            already_join = true;
+            break;
+        };
+    };
 
     const joinStudy = () => {
 
-        let leader = userId === _study.userId ? true : false;
+        let leader = userId == _study.userId ? true : false;
         let userInfo = {
             userId: userId,
             leader: leader,
         };
 
-        if (!leader){
+        if (!leader && !is_join){
             dispatch(studyActions.joinDB(_studyId, userInfo));
             setJoin(true);
         }else{
@@ -109,7 +108,20 @@ const StudyDetailBody = (props) => {
     };
 
     
+    const joinButton = () => {
+        if (userId == _study.userId){
+            return(
+                <></>
+            );
+        }else{
+            return (
+                already_join || is_join ?  
+                <Button backgroundcolor="red" text="신청취소" margin="0px 25px" _onClick={()=>{withdrawStudy()}}/>
+                : <Button backgroundcolor="green" text="신청하기" margin="0px 25px" _onClick={()=>{joinStudy()}}/>
+            )
+        }
 
+    }
     
 
 
@@ -166,12 +178,12 @@ const StudyDetailBody = (props) => {
                                     {members.map((m, idx) => {
                                         return(
                                             <Text 
-                                            color={userId == m.id? "green" : "black"}
+                                            color={_study.userId == m.id? "green" : "black"}
                                             margin="5px 0px" 
                                             size="20px" 
                                             weight="600" 
                                             key={idx}>
-                                                {userId == m.id? `${m.name}(팀장)`: m.name}
+                                                {_study.userId == m.id? `${m.name}(팀장)`: m.name}
                                             </Text>
                                         )
                                     })}
@@ -187,9 +199,7 @@ const StudyDetailBody = (props) => {
                     <Text size="18px">{_study.explain}</Text>
                 </Grid>
                 <Grid display="flex" space="flex-end" align="center" margin="20px 0px">
-                    {is_join || already_join?  
-                    <Button backgroundcolor="red" text="신청취소" margin="0px 25px" _onClick={()=>{withdrawStudy()}}/>
-                    : <Button backgroundcolor="green" text="신청하기" margin="0px 25px" _onClick={()=>{joinStudy()}}/>}
+                    {is_full? <></> : joinButton()}
                     <Button backgroundcolor="gray" text="목록으로" _onClick={()=>{history.replace('/study')}}/>
                 </Grid>
             </DetailContainer>

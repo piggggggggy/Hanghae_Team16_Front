@@ -43,7 +43,9 @@ const Comment = (props) => {
                             <Text weight="600" margin="0px 25px 0px 0px">{props.nickname}</Text>
                             <Text color="#6d6d6d">{props.date}</Text>
                         </Grid>
-                        <Button _onClick={()=>{deleteCmt()}} text="X"/>
+                        <NotButtonButton onClick={()=>{deleteCmt()}}>
+                            <Text size="16px">{"X"}</Text>
+                        </NotButtonButton>
                     </Grid>
                     <Grid>
                         <Text>{props.content}</Text>
@@ -62,6 +64,14 @@ const CommentContainer = styled.div`
     justify-content: space-around;
     min-height: 70px;
     padding: 0px 3%;
+`;
+const NotButtonButton = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding-top: 20px;
 `;
 
 

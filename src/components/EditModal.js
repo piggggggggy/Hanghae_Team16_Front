@@ -4,6 +4,7 @@ import { Grid, Text, Input, DropBox, Button } from "../elements";
 import { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreator as studyActions } from "../redux/modules/study";
+import moment from "moment";
 
 
 const EditModal = (props) => {
@@ -71,6 +72,7 @@ const EditModal = (props) => {
 
 
     const editStudy = () => {
+        let now = moment().format("YYYY-MM-DD");
         const new_study = {
             name: name,
             startDate: startDate,
@@ -86,10 +88,15 @@ const EditModal = (props) => {
             _id: props._id,
             writeDate: props.writeDate,
         }
-        console.log(new_study);
 
-        dispatch(studyActions.editStudyDB(props.studyId, new_study));
-        Close();
+        if (new_study.name && new_study.startDate > now && new_study.endJoinDate > now && new_study.schedule 
+            && new_study.size > 0 && new_study.level && new_study.explain && new_study.studyType && joinLater != null && new_study.userId){
+                dispatch(studyActions.editStudyDB(props.studyId, new_study));
+                Close();
+        }else{
+            window.alert("입력값을 확인해주세요.")
+        };
+        
     };
 
 
@@ -135,7 +142,7 @@ const EditModal = (props) => {
                         <Grid margin="10px 0px" is_flex>
                             <Input _onChange={editSchedule} type="text" padding="0px 0px 0px 20px" placeholder="스터디 기간"  width="70%" _value={schedule}/>                    
                             <DropDown onChange={changeJoin} value={joinLater? "O": "X"}>
-                                <option >중도 참여 가능</option>
+                                <option >중도 참여</option>
                                 <option value="O">O</option>
                                 <option value="X">X</option>
                             </DropDown>

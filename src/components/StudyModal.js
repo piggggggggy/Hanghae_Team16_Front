@@ -4,6 +4,7 @@ import { Grid, Text, Input, DropBox, Button } from "../elements";
 import { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreator as studyActions } from "../redux/modules/study";
+import moment from "moment";
 
 
 const StudyModal = (props) => {
@@ -45,10 +46,13 @@ const StudyModal = (props) => {
         let lv = parseInt(e.target.value);
         setLevel(lv);
     };    
+
+    console.log(joinLater);
     
     // CREATE
     const createStudy = () => {    
     
+        let now = moment().format("YYYY-MM-DD")
         let study = {
             name: name.current.value,
             startDate: startDate.current.value,
@@ -63,10 +67,14 @@ const StudyModal = (props) => {
             userId: userId,
         }
         console.log(study);
-
-        dispatch(studyActions.createStudyDB(study));
-        Close();
-    }
+        if (study.name && study.startDate > now && study.endJoinDate > now && study.schedule 
+            && study.size > 0 && level && study.explain && studyType && joinLater != null && study.userId){
+                dispatch(studyActions.createStudyDB(study));
+                Close();
+        }else{
+            window.alert("입력값을 확인해주세요.")
+        };
+    };
 
 
 
@@ -114,9 +122,9 @@ const StudyModal = (props) => {
                         <Grid margin="10px 0px" is_flex>
                             <Input _ref={schedule} type="text" padding="0px 0px 0px 20px" placeholder="스터디 기간"  width="70%"/>                    
                             <DropDown onChange={changeJoin}>
-                                <option >중도 참여 가능</option>
-                                <option>O</option>
-                                <option>X</option>
+                                <option >중도 참여</option>
+                                <option value="O">O</option>
+                                <option value="X">X</option>
                             </DropDown>
                         </Grid>
                     

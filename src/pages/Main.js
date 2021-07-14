@@ -23,17 +23,23 @@ const Main = (props) => {
 
 			<Container>
 				<Grid is_flex padding="10px">
-                    <Text size="24px" weight="bold">최근 등록된 스터디</Text>
-                    <Button _onClick={() => {history.push('/study')}} text="더보기"/>
+                    <Text size="24px" weight="bold" color="#014078">최근 스터디</Text>
+                    <Button weight="bold" borderradius="20px" backgroundcolor="#035AA6" _onClick={() => {history.push('/study')}} text="더보기"/>
                 </Grid>
 				<Grid>
 				{recentStudy.map((_, idx) => {
 					return (
 							
 							<Grid is_flex margin="30px 20px">
-							<Text>{SType(_.level)}</Text>
-							<ATag align="left" text={_.name}  _onClick={()=>{history.push(`/study/${_.studyId}`)}}></ATag>
-							<Text>{_.endJoinDate} &nbsp;  마감!</Text>
+							<Grid width="33%">
+								<Text>{SType(_.level)}</Text>
+							</Grid>
+							<Grid width="33%">
+							<ATag align="center" text={_.name}  _onClick={()=>{history.push(`/study/${_.studyId}`)}}></ATag>
+							</Grid>
+							<Grid width="33%">
+							<Text align="right">{_.endJoinDate} &nbsp;  마감!</Text>
+							</Grid>
 							</Grid>
 							
 					)

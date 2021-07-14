@@ -23,7 +23,6 @@ const MyComment = (props) => {
             <Grid padding="40px 0 100px 0">
                 <Grid is_flex margin="10px 0">
                     <Text size="24px" weight="bold">My Comment</Text>
-                    <Button text="더보기"/>
                 </Grid>
                 
                 <Container>
@@ -47,7 +46,7 @@ const MyComment = (props) => {
 }
 
 const Container = styled.div`
-    width: 70%;
+    width: 80%;
     height: 200px;
     overflow-y: scroll;
     white-space:nowrap;

@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Button = (props) => {
 
-    const {width, height, backgroundcolor, border, borderradius, _onClick, text, color, size, is_float, margin} = props;
+    const {width, height, backgroundcolor, border, borderradius, _onClick, text, color, size, is_float, margin, weight} = props;
 
     const styles = {
         width: width,
@@ -15,6 +15,7 @@ const Button = (props) => {
         color: color,
         size: size,
         margin: margin,
+        weight: weight,
     };
     if(is_float){
         return(
@@ -57,6 +58,12 @@ const DfButton = styled.button`
     font-size: ${(props) => props.size};
     cursor: pointer;
     margin: ${(props) => props.margin};
+    font-weight: ${(props) => props.weight};
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: .2s ease-in-out 0s;
+    &:hover{
+        filter: hue-rotate(40deg);
+    }
 `;
 
 const FloatBtn = styled.button`

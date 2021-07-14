@@ -16,7 +16,7 @@ const setUser = createAction(SET_USER, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const getToken = createAction(GET_TOKEN, (user_token) => ({ user_token }));
 const loadMyStudy = createAction(LOAD_MYSTUDY, (my_study) => ({my_study}));
-const loadMyComment = createAction(LOAD_MYCOMMENT, (my_commnet) => ({my_commnet}));
+const loadMyComment = createAction(LOAD_MYCOMMENT, (my_comment) => ({my_comment}));
 
 const initialState = {
     user: {
@@ -169,8 +169,13 @@ const getMyComment = () => {
     return function (dispatch, getState, {history}) {
         const userId = localStorage.getItem("userId");
 
-        instance.get(`/api/mystudy/${userId}`).then((response) => {
+        instance.get(`/api/mycomment/${userId}`).then((response) => {
             console.log(response);
+            const myCommentList = response.data.myComment
+            dispatch(
+                loadMyComment(myCommentList)
+            )
+            
             
         })
         .catch(function (error) {
@@ -209,7 +214,7 @@ export default handleActions(
 
         [LOAD_MYCOMMENT]: (state, action) => 
         produce(state, (draft) => {
-            draft.comment_list = action.payload.my_commnet;
+            draft.comment_list = action.payload.my_comment;
         })
         
         

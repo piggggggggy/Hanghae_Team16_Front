@@ -1,59 +1,11 @@
 import React from "react";
-import { Text, Grid, Button } from "../elements";
+import { Text, Grid, Button, ATag } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as userAction } from "../redux/modules/user";
-const MyComment = (props) => {
+import { history } from "../redux/configStore";
+import styled from "styled-components";
 
-    const study_list = [
-        {
-            studyTitle: "스터디 제목",
-            studyIndex: 11,
-            studyStart: "2021-07-10",
-            studyDeadline: "2021-07-20",
-            studySize: 5,
-            joinNum: 2,
-            studyExplain: "리린이들 모집합니다.",
-            category: "front-end",
-            level: 3,
-            is_full: false,
-        },
-        {
-            studyTitle: "스터디 제목",
-            studyIndex: 11,
-            studyStart: "2021-07-10",
-            studyDeadline: "2021-07-20",
-            studySize: 5,
-            joinNum: 2,
-            studyExplain: "리린이들 모집합니다.",
-            category: "front-end",
-            level: 3,
-            is_full: false,
-        },
-        {
-            studyTitle: "스터디 제목",
-            studyIndex: 11,
-            studyStart: "2021-07-10",
-            studyDeadline: "2021-07-20",
-            studySize: 5,
-            joinNum: 2,
-            studyExplain: "리린이들 모집합니다.",
-            category: "front-end",
-            level: 3,
-            is_full: false,
-        },
-        {
-            studyTitle: "스터디 제목",
-            studyIndex: 11,
-            studyStart: "2021-07-10",
-            studyDeadline: "2021-07-20",
-            studySize: 5,
-            joinNum: 2,
-            studyExplain: "리린이들 모집합니다.",
-            category: "front-end",
-            level: 3,
-            is_full: false,
-        },
-    ];
+const MyComment = (props) => {
 
     const dispatch = useDispatch();
 
@@ -64,32 +16,45 @@ const MyComment = (props) => {
 
     const commentList = useSelector(state => (state.user.comment_list));
 
-	console.log(commentList);
-
-
+ 
 
     return (
         <React.Fragment>
-            <Grid>
-                <Grid is_flex>
+            <Grid padding="40px 0 100px 0">
+                <Grid is_flex margin="10px 0">
                     <Text size="24px" weight="bold">My Comment</Text>
                     <Button text="더보기"/>
                 </Grid>
                 
-                <Grid>
-                    {study_list.map((c, idx) => {
+                <Container>
+                    {commentList.map((c, idx) => {
                         return(
-                            <Grid is_flex padding="10px 200px">
-                                <Text>{c.studyTitle}</Text>
-                                <Text>{c.studyStart} 시작!</Text>
+                            <Grid key={idx} is_flex padding=" 30px 60px">
+                                <Grid margin="20px 0">
+                                    <ATag text={c.content} _onClick={()=>{history.push(`/study/${c.studyId}`)}}></ATag>
+                                </Grid>
+                                <Grid>
+                                    <Text>{c.date}</Text>
+                                </Grid>
                             </Grid>
                         )
                         
                     })}
-                </Grid>
+                </Container>
             </Grid>
         </React.Fragment>
     )
 }
+
+const Container = styled.div`
+    width: 70%;
+    height: 200px;
+    overflow-y: scroll;
+    white-space:nowrap;
+    display: flex;
+    flex-direction: column;
+    margin: 60px auto;
+    background: #e6e6e6;
+`;
 
 export default MyComment;

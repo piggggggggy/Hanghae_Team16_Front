@@ -27,7 +27,7 @@ const Header = (props) => {
             <HeaderBg>
 
                 <HeaderGrid>
-                <div onClick={()=> {history.push('/')}}><Text color="white" size="50px" weight="700">등대99</Text></div>
+                <div onClick={()=> {history.push('/')}}><Text cursor="pointer" color="white" size="50px" weight="700">등대99</Text></div>
                 <BtnBox>
                     <IconButton onClick={() => {history.replace("/")}}><HomeSharpIcon style={{ color: "white" }} fontSize="large"/></IconButton>
                     <IconButton onClick={() => {history.replace("/mypage")}}><PersonIcon style={{ color: "white" }} fontSize="large"/></IconButton>

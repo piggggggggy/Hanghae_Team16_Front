@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as userAction } from "../redux/modules/user";
 import instance from "../shared/instance";
 import { emailCheck, passwordCheck } from "../shared/common";
+import { getCookie } from "../shared/instance";
 
 const MyPageModal = (props) => {
 
@@ -37,7 +38,10 @@ const MyPageModal = (props) => {
     }
 
     const getMyInfo = () => {
-        instance.get(`/api/briefInfo/${userId}`).then((response) => {
+
+        const USER_TOKEN = getCookie("USER_TOKEN");
+
+        instance.get(`/api/briefInfo/${userId}`, {headers: {Authorization: "Bearer " + USER_TOKEN}}).then((response) => {
             setMy_Email(response.data.email);
             setMy_Nick(response.data.nickname);
             setMy_Group(response.data.group);

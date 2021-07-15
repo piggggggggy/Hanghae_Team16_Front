@@ -224,7 +224,8 @@ const getMyComment = () => {
 
 const getMainStudy = () => {
     return function (dispatch, getState, {history}) {
-        instance.get("api/recent-study").then((response) => {
+        const USER_TOKEN = getCookie("USER_TOKEN");
+        instance.get("api/recent-study",{headers: {Authorization: "Bearer " + USER_TOKEN}}).then((response) => {
             const mainStudyList = response.data.studys;
             dispatch(
                 loadMainStudy(mainStudyList)

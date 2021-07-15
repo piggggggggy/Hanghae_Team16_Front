@@ -47,14 +47,6 @@ const MyPageModal = (props) => {
         })
     }
 
-   const groupCheck = (data) => {
-       if (data === 4) {
-           data = "승선 예정"
-       }
-
-       return(data);
-
-   }
 
     const editNick = (e) => {
         setMy_Nick_Edit(e.target.value);
@@ -111,7 +103,7 @@ const MyPageModal = (props) => {
                         <Text margin="30px" weight="bold" size="24px" align="center">닉네임, 비밀번호 변경</Text>
                         <Grid is_flex  padding="4% 0">
                         <Text size="18px">아이디 : </Text>
-                        <Text size="18px">{my_Email}</Text>
+                        <Text weight="bold" size="18px">{my_Email}</Text>
                         </Grid>
 
                         <Grid is_flex padding="4% 0">
@@ -135,8 +127,8 @@ const MyPageModal = (props) => {
                         </Grid>
                         
                         <Grid is_flex space="space-around" padding="50px 0 0 0">
-                            <Button text="수정" width="30%" _onClick={editMyInfo}></Button>
-                            <Button _onClick={closeModifyInfo} text="닫기" width="30%"></Button>
+                            <Button height="45px" weight="bold" backgroundcolor="#0f8adb" borderradius="20px" text="수정" width="30%" _onClick={editMyInfo}></Button>
+                            <Button height="45px" weight="bold" backgroundcolor="#0f8adb" borderradius="20px" _onClick={closeModifyInfo} text="닫기" width="30%"></Button>
                         </Grid>
                         
                             </Grid>
@@ -160,22 +152,22 @@ const MyPageModal = (props) => {
                     <Grid display="flex" direction="column" width="50%" margin="0 auto" height="40%" padding="20px 0 0 0">
                     <Grid is_flex padding="3% 0">
                     <Text size="20px">아이디 : </Text>
-                    <Text size="20px">{my_Email}</Text>
+                    <Text weight="bold" size="20px">{my_Email}</Text>
                     </Grid>
         
                     <Grid is_flex  padding="3% 0">
                     <Text size="20px">닉네임 : </Text>
-                    <Text size="20px">{my_Nick}</Text>
+                    <Text weight="bold" size="20px">{my_Nick}</Text>
                     </Grid>
         
                     <Grid is_flex  padding="3% 0">
                     <Text size="20px">항해 기수 : </Text>
-                    <Text size="20px">{checkGroup()}</Text>
+                    <Text weight="bold" size="20px">{checkGroup()}</Text>
                     </Grid>
                     
                     <Grid is_flex space="space-around" padding="6% 0 0 0">
-                        <Button text="수정" _onClick={openModifyInfo} width="30%"></Button>
-                        <Button _onClick={Close} text="닫기" width="30%"></Button>
+                        <Button weight="bold" backgroundcolor="#0f8adb" borderradius="20px" text="수정" _onClick={openModifyInfo} width="30%"></Button>
+                        <Button weight="bold" backgroundcolor="#0f8adb" borderradius="20px" _onClick={Close} text="닫기" width="30%"></Button>
                     </Grid>
                     
                         </Grid>

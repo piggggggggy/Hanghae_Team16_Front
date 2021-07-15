@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Grid = (props) => {
 
-    const {is_flex, width, margin, padding, bg, children, height, space, align, wrap, scrollWrap, textalign, display, float, direction, hidden} = props;
+    const {is_flex, width, margin, padding, bg, children, height, space, align, wrap, scrollWrap, textalign, display, float, direction, hidden, border, radius, shadow } = props;
     const styles = {
 		is_flex: is_flex,
 		width: width,
@@ -21,6 +21,9 @@ const Grid = (props) => {
         float: float,
         direction: direction,
         hidden: hidden,
+        border: border,
+        radius: radius,
+        shadow: shadow,
 	};
 
     return (
@@ -44,6 +47,7 @@ Grid.defaultProps = {
     align: false,
     wrap: 0 ,
     scrollWrap: false,
+    shadow: false,
 };
 
 const GridBox = styled.div`
@@ -64,6 +68,9 @@ const GridBox = styled.div`
     float: ${(props) => props.float};
     flex-direction: ${(props) => props.direction};
     ${(props) => (props.hidden? 'overflow: hidden;': '')};
+    border: ${(props) => props.border};
+    border-radius: ${(props) => props.radius};
+    ${(props) => (props.shadow? 'box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px': '')};
 `;
 
 

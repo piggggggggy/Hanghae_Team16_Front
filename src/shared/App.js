@@ -14,7 +14,7 @@ import './App.css';
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
 import instance from "./instance";
-
+import { Helmet } from "react-helmet";
 
 function App() {
 
@@ -36,9 +36,14 @@ function App() {
   return (
     <React.Fragment>
       <ConnectedRouter history={history}>
-
+          <Helmet>
+          <title>LightHouse99</title>
+          <meta property="og:title" content="LightHouse99: 등대99" />
+          <meta property="og:description" content="항해를 준비하는 이들을 위한 스터디 매칭 서비스" />
+          <meta property="og:image" content="./thumb.jpg" />
+          </Helmet>
         {/* <Header></Header> */}
-        <Coontainer>
+          <Coontainer>
           <Route path='/' exact component={Main}/>
           <Route path='/mypage' exact component={MyPage}/>
           <Route path='/qna' exact component={Qna}/>

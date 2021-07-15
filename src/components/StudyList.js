@@ -43,8 +43,8 @@ const StudyList = (props) => {
         <React.Fragment>
             <Container>
                 <Grid width="80%" margin="30px auto 10px auto" is_flex>
-                    <Button backgroundcolor="#eeeeee" color="black" width="45%" height="30px" text="전체보기" _onClick={()=>{showAll()}}/>
-                    <Button backgroundcolor="#eeeeee" color="black" width="45%" height="30px" text="진행 중인 스터디" _onClick={()=>{showNotDead()}}/>
+                    <Button backgroundcolor="#c0dbef" color="black" width="45%" height="30px" text="전체보기" _onClick={()=>{showAll()}}/>
+                    <Button backgroundcolor="#c0dbef" color="black" width="45%" height="30px" text="진행 중인 스터디" _onClick={()=>{showNotDead()}}/>
                 </Grid>
                 <ListBox>
        

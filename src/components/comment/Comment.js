@@ -12,7 +12,7 @@ const Comment = (props) => {
     const dispatch = useDispatch();
     // const userId = useSelector((state) => state.user.user.userId);
     const userId = localStorage.getItem("userId");
-    const nickname = localStorage.getItem("nickName");
+    const nickname = localStorage.getItem("nickname");
     const studyCommentId = props.studyCommentId;
     console.log(props.userId)
 
@@ -42,7 +42,7 @@ const Comment = (props) => {
                 <CommentContainer>
                     <Grid is_flex>
                         <Grid display="flex" align="center">
-                            <Text weight="600" margin="0px 25px 0px 0px">{props.nickname}</Text>
+                            <Text weight="600" margin="0px 25px 0px 0px">{nickname}</Text>
                             <Text color="#6d6d6d">{props.date}</Text>
                         </Grid>
                         <NotButtonButton onClick={()=>{deleteCmt()}}>

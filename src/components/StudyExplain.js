@@ -62,8 +62,8 @@ const StudyExplain = (props) => {
                     
                 </Grid>
                 <Grid width="80%" margin="auto" is_flex>
-                    <Button backgroundcolor="#eeeeee" color="black" width="45%" text="모집하기" _onClick={()=>{ModalOpen()}}/>
-                    <Button backgroundcolor="#eeeeee" color="black" width="45%" text="내 스터디" _onClick={()=>{history.push('/mypage')}}/>
+                    <Button backgroundcolor="#c0dbef" color="black" width="45%" text="모집하기" _onClick={()=>{ModalOpen()}}/>
+                    <Button backgroundcolor="#c0dbef" color="black" width="45%" text="내 스터디" _onClick={()=>{history.push('/mypage')}}/>
                 </Grid>
             </ExplainBox>
         </React.Fragment>

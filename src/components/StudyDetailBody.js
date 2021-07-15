@@ -24,7 +24,7 @@ const StudyDetailBody = (props) => {
     React.useEffect(() => {
         
         dispatch(studyActions.detailStudyDB(_studyId));
-    }, []);
+    }, [dispatch,_studyId]);
 
 
         
@@ -142,8 +142,8 @@ const StudyDetailBody = (props) => {
                         
                     </Grid>
                     <Grid  is_flex>
-                        <Button backgroundcolor="gray" text="수정" _onClick={_ModalOpen} margin="0px 25px 0px 0px"/>
-                        <Button backgroundcolor="gray" text="삭제" _onClick={()=>{deleteStudy()}}/>
+                        <Button backgroundcolor="#c0dbef" color="black" text="수정" _onClick={_ModalOpen} margin="0px 25px 0px 0px"/>
+                        <Button backgroundcolor="#c0dbef" color="black" text="삭제" _onClick={()=>{deleteStudy()}}/>
                     </Grid>
                 </Grid>
                 
@@ -173,7 +173,7 @@ const StudyDetailBody = (props) => {
                             <Text size="18px">현재인원 : {_study.joinNum+1} / {_study.size}</Text>
                             
                             <MemberBtn>
-                                <Text color="white">{"인원 보기"}</Text>
+                                <Text color="black">{"인원 보기"}</Text>
                                 <MemberBox>
                                     {members.map((m, idx) => {
                                         return(
@@ -200,7 +200,7 @@ const StudyDetailBody = (props) => {
                 </Grid>
                 <Grid display="flex" space="flex-end" align="center" margin="20px 0px">
                     {is_full? <></> : joinButton()}
-                    <Button backgroundcolor="gray" text="목록으로" _onClick={()=>{history.replace('/study')}}/>
+                    <Button backgroundcolor="#c0dbef" color="black" text="목록으로" _onClick={()=>{history.replace('/study')}}/>
                 </Grid>
             </DetailContainer>
         </React.Fragment>
@@ -236,7 +236,7 @@ const MemberBtn = styled.div`
     align-items: center;
     width: 100px;
     height: 40px;
-    background-color: gray;
+    background-color: #c0dbef;
     border: none;
     border-radius: 5px;
     color: white;

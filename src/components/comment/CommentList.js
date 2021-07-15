@@ -17,8 +17,8 @@ const CommentList = (props) => {
 
     const commentList = useSelector((state) => state.comment.comments);
     const userId = localStorage.getItem("userId");
-    const [, forceUpdate] = useReducer((x) => x + 1, 0);
     
+    console.log(commentList);
 
     React.useEffect(() => {
 
@@ -27,7 +27,7 @@ const CommentList = (props) => {
         //     dispatch(cmtActions.loadCmtDB());
         // }
         console.log(commentList);
-    },[studyId]);
+    },[dispatch, commentList, studyId]);
 
 
     const [content, setContent] = React.useState('');
@@ -50,7 +50,8 @@ const CommentList = (props) => {
         };
         console.log(comment)
         dispatch(cmtActions.createCmtDB(comment));
-        forceUpdate()
+        // dispatch(cmtActions.loadCmtDB(studyId));
+        // forceUpdate()
         // component.forceUpdate()
     };
 
@@ -64,6 +65,7 @@ const CommentList = (props) => {
                     {commentList === null ? '' : commentList.map((c, idx) => {
                         return (
                             <Comment key={idx} {...c}/>
+                            // <div>{c.studyCommentId}</div>
                         );
                     })}
                 </Grid>
@@ -72,7 +74,7 @@ const CommentList = (props) => {
                     <Grid width="100%" padding="0px 0px 0px 1%"><Text size="14px">{"댓글 쓰기"}</Text></Grid>
                     <Grid display="flex" space="center" align="center" width="100%">
                         <Input multiline rows={3} padding="2%" width="90%" height="70px" placeholder="댓글을 작성해주세요!" _onChange={changeContent}/>
-                        <Button margin="0px 0px 0px 10px" backgroundcolor="gray" height="70px" width="70px" text="등록" _onClick={()=>{createCmt()}}/>
+                        <Button margin="0px 0px 0px 10px" backgroundcolor="#c0dbef" color="black" height="70px" width="70px" text="등록" _onClick={()=>{createCmt()}}/>
                     </Grid>
                 </CommentBody>
 

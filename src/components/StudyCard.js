@@ -60,7 +60,7 @@ const Card = styled.div`
     max-width: 90%;
     margin: 20px auto;
     background-color: #f4f4f4;
-    border: 15px solid #c6e1ff;
+    border: 15px solid #c0dbef;
     box-sizing: border-box;
     
     

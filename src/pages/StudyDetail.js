@@ -34,7 +34,7 @@ const StudyDetail = (props) => {
  	return (
 		<React.Fragment>
 	        <Grid>
-				<Grid padding="0 10%" margin="20px 0">
+				<Grid padding="0 15%" margin="20px 0">
                 	<Text size="48px" weight="700">Study</Text>
             	</Grid>
 				<DetailBox>

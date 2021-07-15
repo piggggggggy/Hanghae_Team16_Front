@@ -62,7 +62,7 @@ const SignUpDB = (email, password, nickname, group) => {
                 return;
             }
 
-            history.push("/");
+            history.push("/login");
         })
         .catch(function (error) {
             console.log(error);

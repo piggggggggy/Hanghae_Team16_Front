@@ -78,6 +78,7 @@ const createCmtDB = (comment={}) => {
 
 // delete
 const deleteCmtDB = (studyCommentId='') => {
+    console.log(studyCommentId);
     return function (dispatch, getState, {history}) {
         // let cmtIdx = getState().comment.comments.findIndex(s => s.studyCommentId === studyCommentId);
         // let comment = getState().comment.comments[cmtIdx];
@@ -89,6 +90,7 @@ const deleteCmtDB = (studyCommentId='') => {
 
         instance.delete(`/api/study-comment/${studyCommentId}`).then((res) => {
             console.log(res);
+            console.log(studyCommentId);
             dispatch(deleteCmt(studyCommentId));
         }).catch(err => {
             console.log("delete : 에러 났다!!", err);
@@ -123,8 +125,8 @@ export default handleActions({
                 return c;
             }
         });
-        return { comments: del_list};
-        // draft.comments = del_list;
+        // return { comments: del_list };
+        draft.comments = [...del_list];
     }),
 
 }, initialState);

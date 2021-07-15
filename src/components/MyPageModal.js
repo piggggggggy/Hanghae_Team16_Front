@@ -99,7 +99,7 @@ const MyPageModal = (props) => {
                 {Open? (
                     <ModalBox>
     
-                        <Grid display="flex" direction="column" width="60%" margin="6% auto">
+                        <Grid display="flex" direction="column" width="60%" margin="3% auto">
                         <Text margin="30px" weight="bold" size="24px" align="center">닉네임, 비밀번호 변경</Text>
                         <Grid is_flex  padding="4% 0">
                         <Text size="18px">아이디 : </Text>
@@ -150,18 +150,18 @@ const MyPageModal = (props) => {
                     </Grid>
 
                     <Grid display="flex" direction="column" width="50%" margin="0 auto" height="40%" padding="20px 0 0 0">
-                    <Grid is_flex padding="3% 0">
-                    <Text size="20px">아이디 : </Text>
+                    <Grid is_flex padding="5% 0 3%">
+                    <Text size="18px">아이디 : </Text>
                     <Text weight="bold" size="20px">{my_Email}</Text>
                     </Grid>
         
                     <Grid is_flex  padding="3% 0">
-                    <Text size="20px">닉네임 : </Text>
+                    <Text size="18px">닉네임 : </Text>
                     <Text weight="bold" size="20px">{my_Nick}</Text>
                     </Grid>
         
                     <Grid is_flex  padding="3% 0">
-                    <Text size="20px">항해 기수 : </Text>
+                    <Text size="18px">항해 기수 : </Text>
                     <Text weight="bold" size="20px">{checkGroup()}</Text>
                     </Grid>
                     
@@ -201,6 +201,7 @@ const ModalBG = styled.div`
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    border-radius: 0 0 40px 40px;
 `;
 
 export default MyPageModal;

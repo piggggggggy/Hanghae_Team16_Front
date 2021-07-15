@@ -36,11 +36,13 @@ function App() {
   return (
     <React.Fragment>
       <ConnectedRouter history={history}>
-          <Helmet>
+      <Helmet>
           <title>LightHouse99</title>
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="http://lighthouse99.club/" />
           <meta property="og:title" content="LightHouse99: 등대99" />
           <meta property="og:description" content="항해를 준비하는 이들을 위한 스터디 매칭 서비스" />
-          <meta property="og:image" content="./thumb.jpg" />
+          <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/lighthouse-8c323.appspot.com/o/thumb.jpg?alt=media&token=00bf5092-7678-49c8-b1c7-731579a68d23" />
           </Helmet>
         {/* <Header></Header> */}
           <Coontainer>

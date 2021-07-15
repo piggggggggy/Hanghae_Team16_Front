@@ -4,7 +4,6 @@ import StudyList from "../components/StudyList";
 import StudyExplain from "../components/StudyExplain";
 import StudyModal from "../components/StudyModal";
 import { Grid, Button } from "../elements";
-import ModalBg from "../components/ModalBg";
 
 const Study = (props) => {
 

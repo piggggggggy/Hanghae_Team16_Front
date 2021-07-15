@@ -4,6 +4,7 @@ import { Grid, Text, Input, DropBox, Button } from "../elements";
 import { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreator as studyActions } from "../redux/modules/study";
+import { useReducer } from "react";
 import moment from "moment";
 
 
@@ -11,6 +12,7 @@ const StudyModal = (props) => {
     const dispatch = useDispatch();
     // const userId = useSelector((state) => state.user.user.userId)
     const userId = localStorage.getItem("userId");
+    const [, forceUpdate] = useReducer((x) => x + 1, 0);
     const {Open, Close} = props;
 
     const name = useRef();
@@ -73,7 +75,9 @@ const StudyModal = (props) => {
         if (name.current.value && startDate.current.value && endJoinDate.current.value && schedule.current.value 
             && parseInt(size.current.value) > 0 && level && explain.current.value && studyType && userId){
                 dispatch(studyActions.createStudyDB(study));
+                
                 Close();
+                forceUpdate();
         }else{
             window.alert("입력값을 확인해주세요.")
         };

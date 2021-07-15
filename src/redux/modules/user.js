@@ -62,7 +62,6 @@ const SignUpDB = (email, password, nickname, group) => {
                 return;
             }
 
-            window.alert("회원가입 완료! 로그인해 주세요.");
             history.push("/");
         })
         .catch(function (error) {
@@ -110,11 +109,6 @@ const LoginDB = (email, password) => {
                 history.push('/');
                 
             } 
-
-            if (response.data.result === "notExist") {
-                window.alert("잘못된 로그인 정보입니다.");
-                return;
-            }
             
             console.log("response");
 
@@ -164,7 +158,7 @@ const editInfoDB = (my_Pwd_Edit, my_Nick_Edit) => {
             console.log(response);
             if (response.data.result === "success"){
                 window.alert("정보 수정이 완료되었습니다.");
-                history.push("/");
+                history.goBack();
             }
         })
         .catch(function (error) {

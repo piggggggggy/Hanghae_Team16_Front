@@ -16,7 +16,7 @@ const Comment = (props) => {
     console.log(props.userId)
 
     // const time = props.checkTime.format("YYYY.MM.DD  hh:mm");
-    // const now = moment();
+    // const now = moment().format("YYYY.MM.DD hh:mm");
     // console.log(time);
     // console.log(now);
 

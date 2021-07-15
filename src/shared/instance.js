@@ -4,7 +4,7 @@ const instance = axios.create({
     baseURL: "http://54.180.139.140/"
 });
 
-function getCookie(cName) {
+export function getCookie(cName) {
     cName = cName + '=';
     var cookieData = document.cookie;
     var start = cookieData.indexOf(cName);

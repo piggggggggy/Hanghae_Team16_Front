@@ -84,6 +84,7 @@ const LoginDB = (email, password) => {
                         email: email,
                         password: password,
                         userId: response.data.userId,
+                        nickname: response.data.nickname,
                     })
                 );
 
@@ -96,6 +97,7 @@ const LoginDB = (email, password) => {
                 );
                
                localStorage.setItem('userId', response.data.userId);
+               localStorage.setItem('nickname', response.data.nickname);
                
                
 
@@ -116,7 +118,7 @@ const LoginDB = (email, password) => {
                 return;
             }
             
-            console.log("response");
+
 
         }).catch((error) => {
             console.log(error);
@@ -130,6 +132,7 @@ const logOutDB = () => {
         dispatch(logOut());
         document.cookie = "USER_TOKEN" + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
         localStorage.removeItem("userId");
+        localStorage.removeItem("nickname");
         history.push("/");
     }
 }

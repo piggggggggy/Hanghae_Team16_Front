@@ -25,11 +25,11 @@ const MyStudy = () => {
         <React.Fragment>
             <Grid margin="6% 0">
                 <Grid is_flex margin="20px 0">
-                    <Text size="24px" weight="bold">My Study</Text>
-                    <Button _onClick={()=>{history.push("/study")}} text="더보기"/>
+                    <Text color="#000333" size="24px" weight="bold">My Study</Text>
+                    <Button backgroundcolor="#0f66fc" _onClick={()=>{history.push("/study")}} text="더보기"/>
                 </Grid>
                 <Grid is_flex>
-                    {/* <Button color="black" backgroundcolor="none" text="◁"/> */}
+ 
                     <Container>
                         {studyList.map((c, idx) => {
                             return (
@@ -39,7 +39,7 @@ const MyStudy = () => {
                         })}
                       
                     </Container>
-                    {/* <Button color="black" backgroundcolor="none" text="▶"/> */}
+
                 </Grid>
                 
             </Grid>

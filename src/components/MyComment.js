@@ -22,7 +22,7 @@ const MyComment = (props) => {
         <React.Fragment>
             <Grid padding="40px 0 100px 0">
                 <Grid is_flex margin="10px 0">
-                    <Text size="24px" weight="bold">My Comment</Text>
+                    <Text color="#000333" size="24px" weight="bold">My Comment</Text>
                 </Grid>
                 
                 <Container>
@@ -53,7 +53,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     margin: 60px auto;
-    background: #e6e6e6;
+    background: #fafafa;
 `;
 
 export default MyComment;

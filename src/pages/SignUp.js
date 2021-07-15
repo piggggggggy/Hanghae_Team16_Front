@@ -78,7 +78,7 @@ const SignUp = (props) => {
                     </Grid>
 
                     <Grid width="70%">
-                    <Input placeholder="아이디를 입력해주세요." padding="10px 20px" width="100%" height="40px" _onChange={onId}></Input>
+                    <Input placeholder="이메일을 입력해주세요." padding="10px 20px" width="100%" height="40px" _onChange={onId}></Input>
                     </Grid>
                 </Grid>
 

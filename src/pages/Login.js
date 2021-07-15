@@ -37,14 +37,18 @@ const Login = (props) => {
 		<React.Fragment>
 
             <Grid>
-                {/* <LogImage/> */}
-                <Text align="center" size="40px" weight="bold" margin="50px 0 170px 0">Log In</Text>
+                <Text color="#161872" align="center" size="40px" weight="bold" margin="50px 0 0 0">Log In</Text>
+            </Grid>
+            
+            <Grid display="flex">
+                <LogImageBox>
+                </LogImageBox>
             </Grid>
 			
             <LoginBox>
                 <Grid display="flex"align="center" width="70%" margin="50px auto">
                     <Grid width="30%">
-                    <Text>아이디</Text>
+                    <Text size="17px">아이디</Text>
                     </Grid>
                     <Grid width="70%">
                     <Input name="id" type="text" placeholder="아이디를 입력해주세요." padding="10px 20px" width="100%" height="40px" _onChange={onId}></Input>
@@ -53,16 +57,16 @@ const Login = (props) => {
 
                 <Grid display="flex"align="center" width="70%" margin="50px auto">
                     <Grid width="30%">
-                    <Text>비밀번호</Text>
+                    <Text size="17px">비밀번호</Text>
                     </Grid>
                     <Grid width="70%">
                     <Input name="password" type="password" placeholder="비밀번호를 입력해주세요." padding="10px 20px" width="100%" height="40px" _onChange={onPwd}></Input>
                     </Grid>
                 </Grid>
 
-                <Grid display="flex" margin="100px auto" width="70%">
-                    <Button text="로그인" width="30%" margin="0 auto" _onClick={logIn}></Button>
-                    <Button text="회원가입" width="30%" margin="0 auto" _onClick={()=>{history.push("/signup")}}></Button>
+                <Grid display="flex" margin="80px auto 0" width="70%">
+                    <Button backgroundcolor="#839cf5" text="로그인" width="35%" margin="0 auto" _onClick={logIn}></Button>
+                    <Button backgroundcolor="#839cf5" text="회원가입" width="35%" margin="0 auto" _onClick={()=>{history.push("/signup")}}></Button>
                 </Grid>
 
             </LoginBox>
@@ -75,18 +79,18 @@ const Login = (props) => {
 
 const LoginBox = styled.div`
     width: 50%;
-    height: 400px;
+    height: 350px;
     margin: auto;
     border: 2px solid #eeeeee;
     border-radius: 10px;
 `;
 
-const LogImage = styled.div`
-    width: 300px;
-    height: 100px;
-    background-image: url("https://media.vlpt.us/images/pyt4105/post/5b5f5d2e-a3d3-40ea-a362-8136c49530b8/%EB%A1%9C%EA%B3%A0%20%ED%95%98%EB%8A%98%EC%83%89.png");
-    background-size: cover;
 
+const LogImageBox = styled.div`
+    width: 100%;
+    height: 300px;
+    background: url("https://firebasestorage.googleapis.com/v0/b/lighthouse-8c323.appspot.com/o/sadfasdfasdfasdf.png?alt=media&token=2dc13346-b389-4326-8dbc-1e5309486642") no-repeat center;
+    padding: 20px;
 `;
 
 

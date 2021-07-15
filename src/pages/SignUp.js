@@ -69,12 +69,12 @@ const SignUp = (props) => {
 
  	return (
 		<React.Fragment>
-			<Text align="center" size="40px" weight="bold" margin="50px 0 70px 0">Sign Up</Text>
+			<Text color="#161872" align="center" size="40px" weight="bold" margin="50px 0 70px 0">Sign Up</Text>
 
             <SignupBox>
                 <Grid display="flex"align="center" width="70%" margin="50px auto">
                     <Grid width="30%">
-                    <Text>아이디</Text>
+                    <Text size="17px">아이디</Text>
                     </Grid>
 
                     <Grid width="70%">
@@ -84,7 +84,7 @@ const SignUp = (props) => {
 
                 <Grid display="flex"align="center" width="70%" margin="50px auto">
                     <Grid width="30%">
-                    <Text>닉네임</Text>
+                    <Text size="17px">닉네임</Text>
                     </Grid>
 
                     <Grid width="70%">
@@ -94,7 +94,7 @@ const SignUp = (props) => {
 
                 <Grid display="flex"align="center" width="70%" margin="50px auto">
                     <Grid width="30%">
-                    <Text>항해 기수</Text>
+                    <Text size="17px">항해 기수</Text>
                     </Grid>
                     <Grid width="70%">
                     
@@ -111,7 +111,7 @@ const SignUp = (props) => {
 
                 <Grid display="flex"align="center" width="70%" margin="50px auto">
                     <Grid width="30%">
-                    <Text>비밀번호</Text>
+                    <Text size="17px">비밀번호</Text>
                     </Grid>
                     <Grid width="70%" display="flex" direction="column">
                     <Input type="password" placeholder="비밀번호를 입력해주세요." padding="10px 20px" width="100%" height="40px"  _onChange={onPwd}></Input>
@@ -121,7 +121,7 @@ const SignUp = (props) => {
 
                 <Grid display="flex"align="center" width="70%" margin="50px auto">
                     <Grid width="30%">
-                    <Text>비밀번호 확인</Text>
+                    <Text size="17px">비밀번호 확인</Text>
                     </Grid>
                     <Grid width="70%">
                     <Input type="password" placeholder="비밀번호를 한 번 더 입력해주세요." padding="10px 20px" width="100%" height="40px"  _onChange={onPwdCheck}></Input>
@@ -130,8 +130,8 @@ const SignUp = (props) => {
 
 
                 <Grid display="flex" margin="50px auto" width="70%">
-                    <Button text="회원가입" width="30%" margin="0 auto" _onClick={signup}></Button>
-                    <Button text="취소" width="30%" margin="0 auto" _onClick={()=>{history.goBack()}}></Button>
+                    <Button backgroundcolor="#839cf5" text="회원가입" width="40%" margin="0 auto" _onClick={signup}></Button>
+                    <Button backgroundcolor="#839cf5" text="취소" width="40%" margin="0 auto" _onClick={()=>{history.goBack()}}></Button>
                 </Grid>
             </SignupBox>
             

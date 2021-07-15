@@ -32,13 +32,13 @@ const Main = (props) => {
 							
 							<Grid is_flex margin="30px 20px">
 							<Grid width="33%">
-								<Text>{SType(_.level)}</Text>
+								<Text color="#113859" size="17px">{SType(_.level)}</Text>
 							</Grid>
 							<Grid width="33%">
-							<ATag align="center" text={_.name}  _onClick={()=>{history.push(`/study/${_.studyId}`)}}></ATag>
+							<ATag size="18px" align="center" text={_.name}  _onClick={()=>{history.push(`/study/${_.studyId}`)}}></ATag>
 							</Grid>
 							<Grid width="33%">
-							<Text align="right">{_.endJoinDate} &nbsp;  마감!</Text>
+							<Text size="17px" align="right">{_.endJoinDate} &nbsp;  마감!</Text>
 							</Grid>
 							</Grid>
 							

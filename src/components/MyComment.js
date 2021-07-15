@@ -30,10 +30,10 @@ const MyComment = (props) => {
                         return(
                             <Grid key={idx} is_flex padding=" 30px 60px">
                                 <Grid margin="20px 0">
-                                    <ATag text={c.content} _onClick={()=>{history.push(`/study/${c.studyId}`)}}></ATag>
+                                    <ATag size="18px" text={c.content} _onClick={()=>{history.push(`/study/${c.studyId}`)}}></ATag>
                                 </Grid>
                                 <Grid>
-                                    <Text>{c.date}</Text>
+                                    <Text size="17px">{c.date}</Text>
                                 </Grid>
                             </Grid>
                         )

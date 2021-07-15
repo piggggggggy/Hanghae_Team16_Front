@@ -20,31 +20,38 @@ const MyStudy = () => {
 
 	console.log(studyList);
 
-
-    return (
-        <React.Fragment>
-            <Grid margin="6% 0">
-                <Grid is_flex margin="20px 0">
-                    <Text color="#000333" size="24px" weight="bold">My Study</Text>
-                    <Button backgroundcolor="#c0dbef" color="black" _onClick={()=>{history.push("/study")}} text="더보기"/>
+    if(!studyList){
+        return(
+            <div>로딩중</div>
+        )
+    }else{
+        return (
+            <React.Fragment>
+                <Grid margin="6% 0">
+                    <Grid is_flex margin="20px 0">
+                        <Text color="#000333" size="24px" weight="bold">My Study</Text>
+                        <Button backgroundcolor="#c0dbef" color="black" _onClick={()=>{history.push("/study")}} text="더보기"/>
+                    </Grid>
+                    <Grid is_flex>
+     
+                        <Container>
+                            {studyList.map((c, idx) => {
+                                return (
+                                    
+                                    <MyStudyCard key={idx} {...c}></MyStudyCard>
+                                );
+                            })}
+                          
+                        </Container>
+    
+                    </Grid>
+                    
                 </Grid>
-                <Grid is_flex>
- 
-                    <Container>
-                        {studyList.map((c, idx) => {
-                            return (
-                                
-                                <MyStudyCard key={idx} {...c}></MyStudyCard>
-                            );
-                        })}
-                      
-                    </Container>
+            </React.Fragment>
+        )
+    };
 
-                </Grid>
-                
-            </Grid>
-        </React.Fragment>
-    )
+    
 }
 
 

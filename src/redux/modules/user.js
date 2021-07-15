@@ -2,6 +2,7 @@ import axios from "axios";
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import instance from "../../shared/instance";
+import { getCookie } from "../../shared/instance";
 
 const LOG_OUT = "LOG_OUT";
 const GET_USER = "GET_USER";
@@ -108,7 +109,7 @@ const LoginDB = (email, password) => {
                 document.cookie = "USER_TOKEN" + "=" + USER_TOKEN + "; " + "expires=" + date;
 
 
-                axios.defaults.headers.Authorization = "Bearer " + USER_TOKEN;
+                axios.defaults.headers.common["Authorization"] = "Bearer " + USER_TOKEN;
                 
                 window.alert("공부하러 가볼까요??")
                 history.push('/');
@@ -182,7 +183,9 @@ const getMyStudy = () => {
     return function (dispatch, getState, {history}) {
         const userId = localStorage.getItem("userId");
 
-        instance.get(`/api/mystudy/${userId}`).then((response) => {
+        const USER_TOKEN = getCookie("USER_TOKEN");
+        
+        instance.get(`/api/mystudy/${userId}`, {headers: {Authorization: "Bearer " + USER_TOKEN}}).then((response) => {
             console.log(response);
             const myStudyList = response.data.studyInfo;
 
@@ -200,7 +203,10 @@ const getMyComment = () => {
     return function (dispatch, getState, {history}) {
         const userId = localStorage.getItem("userId");
 
-        instance.get(`/api/mycomment/${userId}`).then((response) => {
+        const USER_TOKEN = getCookie("USER_TOKEN");
+
+
+        instance.get(`/api/mycomment/${userId}`,{headers: {Authorization: "Bearer " + USER_TOKEN}}).then((response) => {
             console.log(response);
             const myCommentList = response.data.myComment;
             dispatch(
@@ -211,6 +217,7 @@ const getMyComment = () => {
         })
         .catch(function (error) {
             console.log(error);
+            window.alert(error);
         })
         }
 }

@@ -20,11 +20,6 @@ const MyStudy = () => {
 
 	console.log(studyList);
 
-    if(!studyList){
-        return(
-            <div>로딩중</div>
-        )
-    }else{
         return (
             <React.Fragment>
                 <Grid margin="6% 0">
@@ -49,7 +44,7 @@ const MyStudy = () => {
                 </Grid>
             </React.Fragment>
         )
-    };
+    
 
     
 }

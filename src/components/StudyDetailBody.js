@@ -4,7 +4,7 @@ import { Text, Grid, Button } from "../elements";
 import SType from "../shared/StudyType";
 import EditModal from "./EditModal";
 
-import {history} from "../redux/configStore";
+import configStore, {history} from "../redux/configStore";
 import { useSelector, useDispatch, useStore } from "react-redux";
 import { actionCreator as studyActions } from "../redux/modules/study";
 import { red } from "@material-ui/core/colors";
@@ -14,10 +14,11 @@ const StudyDetailBody = (props) => {
     const dispatch = useDispatch();
     const _studyId = props.id;
     const study = useSelector((state) => state.study.study);
+    const join = useSelector((state) => state.study.join);
     const userId = localStorage.getItem("userId");
     const [is_join, setJoin] = React.useState(false);
     // const [already_join, setAJoin] = React.useState(false);
-
+    
  
 
     // detail load
@@ -123,6 +124,8 @@ const StudyDetailBody = (props) => {
 
     }
     
+    console.log(members.length)
+    console.log(join.length)
 
 
     return (
@@ -170,11 +173,12 @@ const StudyDetailBody = (props) => {
                             <Text margin="10px 0px" size="18px">중도참여여부 : {_study.joinLater? "가능" : "불가능"}</Text>
                         </Grid>
                         <Grid display="flex" direction="column" align="center">
-                            <Text size="18px">현재인원 : {_study.joinNum+1} / {_study.size}</Text>
+                            <Text size="18px">현재인원 : {join.length === 0 ? members.length : join.currentMemberCnt+1} / {_study.size}</Text>
                             
                             <MemberBtn>
                                 <Text color="black">{"인원 보기"}</Text>
                                 <MemberBox>
+                                    
                                     {members.map((m, idx) => {
                                         return(
                                             <Text 

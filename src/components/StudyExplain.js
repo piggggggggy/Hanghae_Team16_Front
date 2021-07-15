@@ -4,19 +4,33 @@ import { Text, Grid, Button } from "../elements";
 import { useState } from "react-redux";
 import StudyModal from "./StudyModal";
 import { history } from "../redux/configStore";
+import { useSelector } from "react-redux";
 
 const StudyExplain = (props) => {
 
-
+    const is_login = useSelector((state) => state.user.is_login);
  
 	const [Modal, setModal] = React.useState(false);
  
 	const ModalOpen = () => {
-        setModal(true);
+        if(is_login){
+            setModal(true);
+        }else{
+            window.alert("로그인 해주세요!!!")
+        }
+        
     };
     
     const ModalClose = () => {
         setModal(false);
+    }
+
+    const GoInfo = () => {
+        if(is_login){
+            history.push('/mypage');
+        }else{
+            window.alert("로그인 해주세요!!!")
+        }
     }
 
     
@@ -63,7 +77,7 @@ const StudyExplain = (props) => {
                     </Grid>
                 <Grid width="80%" margin="auto" is_flex>
                     <Button backgroundcolor="#c0dbef" color="black" width="45%" text="모집하기" _onClick={()=>{ModalOpen()}}/>
-                    <Button backgroundcolor="#c0dbef" color="black" width="45%" text="내 스터디" _onClick={()=>{history.push('/mypage')}}/>
+                    <Button backgroundcolor="#c0dbef" color="black" width="45%" text="내 스터디" _onClick={()=>{GoInfo()}}/>
                 </Grid>
             </ExplainBox>
         </React.Fragment>

@@ -103,7 +103,7 @@ const createStudyDB = (contents={}) => {
 
         instance.post("/api/study", contents).then((res) => {
             console.log(res);
-            
+            contents.studyId = res.data.studyId;
             dispatch(createStudy(contents));
         }).catch(err => {
             console.log("create : 에러 났다!!!!", err);
@@ -127,7 +127,6 @@ const editStudyDB = (studyId=null, study={}) => {
         instance.put(`/api/study/${studyId}`, study).then((res) =>{
             console.log(res);
             dispatch(editStudy(studyId, study));
-            dispatch(detailStudy(study));
         }).catch(err => {
             console.log("edit : 에너났읍니다.", err);
         });
@@ -178,8 +177,8 @@ const withdrawDB = (studyId='', userInfo={}) => {
 
         instance.delete(`/api/join-study/${studyId}`,userInfo).then((res) => {
             console.log(res);
-
-            dispatch(withdrawStudy(studyId));
+            let users = res.data
+            dispatch(withdrawStudy(users));
         }).catch(err => {
             console.log("withdraw : 에.러", err);
         });
@@ -228,16 +227,17 @@ export default handleActions({
     }),
 
     [WITHDRAW_STUDY]: (state, action) => produce(state, (draft) => {
-        const del_list = draft.join.studyMemberInfo.filter((s, idx) => {
-            if (s.userId !== action.payload.join.userId){
-                return s;
-            }
-        });
-        const currentMemberCnt = draft.join.currentMemberCnt + 1
-        return { 
-            currentMemberCnt: currentMemberCnt,
-            studyMemberInfo: del_list,
-        };
+        draft.join = action.payload.join
+        // const del_list = draft.join.studyMemberInfo.filter((s, idx) => {
+        //     if (s.userId !== action.payload.join.userId){
+        //         return s;
+        //     }
+        // });
+        // const currentMemberCnt = draft.join.currentMemberCnt + 1
+        // return { 
+        //     currentMemberCnt: currentMemberCnt,
+        //     studyMemberInfo: del_list,
+        // };
     }),
 
 }, initialState);

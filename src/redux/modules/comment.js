@@ -68,7 +68,8 @@ const createCmtDB = (comment={}) => {
         // comment["writeDate"] = date;
 
         instance.post("/api/study-comment", comment).then((res) => {
-            console.log(res);
+            console.log(res.data);
+            comment.studyCommentId = res.data.studyCommentId;
             dispatch(createCmt(comment));
         }).catch(err => {  
             console.log("create : 에러 났다!!!!", err);
@@ -78,7 +79,6 @@ const createCmtDB = (comment={}) => {
 
 // delete
 const deleteCmtDB = (studyCommentId='') => {
-    console.log(studyCommentId);
     return function (dispatch, getState, {history}) {
         // let cmtIdx = getState().comment.comments.findIndex(s => s.studyCommentId === studyCommentId);
         // let comment = getState().comment.comments[cmtIdx];

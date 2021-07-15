@@ -37,7 +37,7 @@ function App() {
     <React.Fragment>
       <ConnectedRouter history={history}>
           <Helmet>
-          <title>page one</title>
+          <title>LightHouse99</title>
           <meta property="og:title" content="LightHouse99: 등대99" />
           <meta property="og:description" content="항해를 준비하는 이들을 위한 스터디 매칭 서비스" />
           <meta property="og:image" content="./thumb.jpg" />

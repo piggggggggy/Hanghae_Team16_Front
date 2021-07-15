@@ -127,8 +127,8 @@ const MyPageModal = (props) => {
                         </Grid>
                         
                         <Grid is_flex space="space-around" padding="50px 0 0 0">
-                            <Button height="45px" weight="bold" backgroundcolor="#0f8adb" borderradius="20px" text="수정" width="30%" _onClick={editMyInfo}></Button>
-                            <Button height="45px" weight="bold" backgroundcolor="#0f8adb" borderradius="20px" _onClick={closeModifyInfo} text="닫기" width="30%"></Button>
+                            <Button height="45px" weight="bold" backgroundcolor="#c0dbef" borderradius="20px" text="수정" width="30%" _onClick={editMyInfo}></Button>
+                            <Button height="45px" weight="bold" backgroundcolor="#c0dbef" borderradius="20px" _onClick={closeModifyInfo} text="닫기" width="30%"></Button>
                         </Grid>
                         
                             </Grid>

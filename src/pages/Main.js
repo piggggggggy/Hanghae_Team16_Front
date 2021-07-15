@@ -24,7 +24,7 @@ const Main = (props) => {
 			<Container>
 				<Grid is_flex padding="10px">
                     <Text size="24px" weight="bold" color="black">최근 스터디</Text>
-                    <Button weight="bold" borderradius="20px" color="black" backgroundcolor="#c0dbef" _onClick={() => {history.push('/study')}} text="더보기"/>
+                    <Button weight="bold" borderradius="10px" color="black" backgroundcolor="#c0dbef" _onClick={() => {history.push('/study')}} text="더보기"/>
                 </Grid>
 				<Grid>
 				{recentStudy.map((_, idx) => {

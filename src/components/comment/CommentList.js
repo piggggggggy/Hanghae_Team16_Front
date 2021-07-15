@@ -120,6 +120,7 @@ const CommentBody = styled.div`
     border-radius: 5px;
     padding: 0px 2%;
     box-shadow: 1px 1px 1px gray;
+    margin-top: 10px;
 `;
 
 

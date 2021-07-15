@@ -14,7 +14,7 @@ const MyStudyCard = (props) => {
     return (
         <React.Fragment>
             <Card style={{backgroundColor: is_full ?  "#888888" : "white" }}>
-                <OverText style={{backgroundColor: is_full ?  "#555" : "#3e75e8" }}></OverText>
+                <OverText style={{backgroundColor: is_full ?  "#555" : "#c0dbef" }}></OverText>
                 <Grid is_flex padding="20px" width="90%" margin="auto">
                     <Text size="17px">LEVEL : {props.level}</Text>
                     <Text size="17px">{props.endJoinDate} &nbsp; 마감</Text>
@@ -36,7 +36,7 @@ const MyStudyCard = (props) => {
                 </Grid>
 
                 <Grid padding="20px" float="right">
-                    <Button color="#444" _onClick={()=>{history.push(`/study/${study_id}`)}} backgroundcolor="#fff" borderradius="0" text="자세히 보기"/>
+                    <DetailBtn onClick={()=>{history.push(`/study/${study_id}`)}}><Text color="black">{"자세히 보기"}</Text></DetailBtn>
                 </Grid>
                 
             </Card>
@@ -63,6 +63,23 @@ const OverText = styled.div`
     width: 100%;
     height: 35px;
     border-radius: 3px 3px 0px 0px;
+`;
+
+const DetailBtn = styled.button`
+    cursor: pointer;
+    width: 150px;
+    height: 60px;
+    background-color: #eeeeee;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        box-shadow: 2px 2px 2px gray;
+    }
+
 `;
 
 export default MyStudyCard;

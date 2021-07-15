@@ -12,6 +12,7 @@ import { actionCreator as commentActions } from "../redux/modules/comment";
 
 const StudyDetail = (props) => {
 	const dispatch = useDispatch()
+	const {history} = props;
 
 	// const study_list = useSelector((state) => state.study.list);
 	let idx = parseInt(props.match.params.id);
@@ -34,7 +35,7 @@ const StudyDetail = (props) => {
  	return (
 		<React.Fragment>
 	        <Grid>
-				<Grid padding="0 15%" margin="20px 0">
+				<Grid _onClick={()=>{history.push("/study")}} padding="0 15%" margin="20px 0">
                 	<Text size="48px" weight="700">Study</Text>
             	</Grid>
 				<DetailBox>

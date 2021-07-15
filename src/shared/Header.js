@@ -1,9 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import styled from "styled-components";
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
@@ -11,7 +8,7 @@ import { history } from "../redux/configStore";
 import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppSharpIcon from '@material-ui/icons/ExitToAppSharp';
 import HomeSharpIcon from '@material-ui/icons/HomeSharp';
-import { Text } from "../elements";
+import { Text, Image } from "../elements";
 
 
 const Header = (props) => {
@@ -28,7 +25,7 @@ const Header = (props) => {
         return (
             <React.Fragment>
             <HeaderBg>
-            <Container maxWidth="lg">
+
                 <HeaderGrid>
                 <div onClick={()=> {history.push('/')}}>로고</div>
                 <BtnBox>
@@ -40,7 +37,7 @@ const Header = (props) => {
                 </BtnBox>
                 </HeaderGrid>
                 
-            </Container>
+
             </HeaderBg>
         </React.Fragment>
         );
@@ -50,7 +47,7 @@ const Header = (props) => {
     return (
         <React.Fragment>
             <HeaderBg>
-            <Container maxWidth="lg">
+
                 <HeaderGrid>
                 <div onClick={()=> {history.push('/')}}>로고</div>
                 <BtnBox>
@@ -59,12 +56,20 @@ const Header = (props) => {
                 </BtnBox>
                 </HeaderGrid>
                 
-            </Container>
+
             </HeaderBg>
         </React.Fragment>
     );
 
 };
+const Logo = styled.div`
+    background-image: url("https://media.vlpt.us/images/pyt4105/post/e92e7a9a-39ad-4644-a0ba-75d9897da221/%EB%A1%9C%EA%B3%A0%20%ED%9D%B0%EC%83%89.png");
+    /* background-color: black; */
+    background-size: cover;
+    width: 150px;
+    height: 150px;
+    position: relative;
+`;
 
 const HeaderBg = styled.div`
     width: 100%;
@@ -75,11 +80,13 @@ const HeaderBg = styled.div`
 const HeaderGrid = styled.div`
     width: 100%;
     position: relative;
-    height: 50px;
-
+    height: 100%;
     display: flex;
     justify-content: space-between;
-    padding-top: 50px;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0px 15%;
+    /* padding-top: 50px; */
 `;
 
 const BtnBox = styled.div`

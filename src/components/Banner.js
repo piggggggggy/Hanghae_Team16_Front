@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { history } from "../redux/configStore";
 
 const Banner = (props) => {
 
     return (
         <React.Fragment>
-            <BannerImg></BannerImg>
+            <BannerImg onClick={()=>{history.push("/study")}}></BannerImg>
         </React.Fragment>
     )
 }
@@ -17,7 +18,7 @@ const BannerImg = styled.div`
     margin: 50px auto;
     background-position: center;
     background-size: cover;
-
+    cursor: pointer;
 `;
 
 

@@ -16,7 +16,7 @@ function getCookie(cName) {
     cValue = cookieData.substring(start, end);
     }
     return unescape(cValue);
-    }
+};
     
 const USER_TOKEN = getCookie("USER_TOKEN");
 

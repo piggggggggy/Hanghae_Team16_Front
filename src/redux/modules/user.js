@@ -62,6 +62,8 @@ const SignUpDB = (email, password, nickname, group) => {
                 return;
             }
 
+
+            window.alert("환영해요!")
             history.push("/login");
         })
         .catch(function (error) {
@@ -107,7 +109,8 @@ const LoginDB = (email, password) => {
 
 
                 axios.defaults.headers.Authorization = "Bearer " + USER_TOKEN;
-
+                
+                window.alert("공부하러 가볼까요??")
                 history.push('/');
                 
             } 

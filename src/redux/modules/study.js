@@ -88,6 +88,8 @@ const detailStudyDB = (study_id='') => {
     };
 };
 
+{}
+
 // create
                             // 파라미터에 기본값 주기 - es6
 const createStudyDB = (contents={}) => {
@@ -101,6 +103,7 @@ const createStudyDB = (contents={}) => {
 
         instance.post("/api/study", contents).then((res) => {
             console.log(res);
+            
             dispatch(createStudy(contents));
         }).catch(err => {
             console.log("create : 에러 났다!!!!", err);

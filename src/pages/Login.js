@@ -36,7 +36,7 @@ const Login = (props) => {
     return (
 		<React.Fragment>
 
-            <Grid>
+            <Grid display="flex" space="center">
                 <LogImage/>
                 <Text align="center" size="40px" weight="bold" margin="50px 0 170px 0">Log In</Text>
             </Grid>
@@ -82,9 +82,9 @@ const LoginBox = styled.div`
 `;
 
 const LogImage = styled.div`
-    width: 40%;
-    height: 20%;
-    background-image: url("https://media.vlpt.us/images/pyt4105/post/985384fc-2b00-4893-8e27-7042d0fa61cf/%EB%93%B1%EB%8C%8099%EB%A1%9C%EA%B3%A0.png");
+    width: 300px;
+    height: 300px;
+    background-image: url("https://media.vlpt.us/images/pyt4105/post/0fc5490c-ca67-40f6-8737-ca60f61ce433/%EB%93%B1%EB%8C%8099%20%EB%A1%9C%EA%B7%B8%EC%9D%B8.png");
     background-size: cover;
 
 `;

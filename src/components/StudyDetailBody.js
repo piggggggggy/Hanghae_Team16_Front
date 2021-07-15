@@ -24,7 +24,7 @@ const StudyDetailBody = (props) => {
     React.useEffect(() => {
         
         dispatch(studyActions.detailStudyDB(_studyId));
-    }, [dispatch, _studyId]);
+    }, []);
 
 
         

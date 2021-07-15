@@ -9,20 +9,6 @@ import ModalBg from "../components/ModalBg";
 const Study = (props) => {
 
 
-	// const [Modal, setModal] = React.useState(false);
- 
-	// const toggleModalSetting = () => {
-	// if (Modal === false) {
-	// 	setModal(true);
-	// 	return (
-	// 		<StudyModal/>
-	// 	)
-	// }
-	// if (Modal === true) {
-	// 	setModal(false);
-	// }
-	// };
-
  	return (
 		<React.Fragment>
            	<Grid display="flex" space="space-between">

@@ -27,7 +27,7 @@ const Header = (props) => {
             <HeaderBg>
 
                 <HeaderGrid>
-                <div onClick={()=> {history.push('/')}}>로고</div>
+                <div onClick={()=> {history.push('/')}}><Text color="white" size="50px" weight="700">등대99</Text></div>
                 <BtnBox>
                     <IconButton onClick={() => {history.replace("/")}}><HomeSharpIcon style={{ color: "white" }} fontSize="large"/></IconButton>
                     <IconButton onClick={() => {history.replace("/mypage")}}><PersonIcon style={{ color: "white" }} fontSize="large"/></IconButton>
@@ -49,7 +49,7 @@ const Header = (props) => {
             <HeaderBg>
 
                 <HeaderGrid>
-                <div onClick={()=> {history.push('/')}}>로고</div>
+                <div onClick={()=> {history.push('/')}}><Text color="white" size="50px" weight="700">등대99</Text></div>
                 <BtnBox>
                     <Button size="large" onClick={() => {history.push("/login")}}><TText color="white" size="18px" weight="700">{"로그인"}</TText></Button>
                     <Button size="large" onClick={() => {history.push("/signup")}}><TText color="white" size="18px" weight="700">{"회원가입"}</TText></Button>
@@ -63,7 +63,7 @@ const Header = (props) => {
 
 };
 const Logo = styled.div`
-    background-image: url("https://media.vlpt.us/images/pyt4105/post/e92e7a9a-39ad-4644-a0ba-75d9897da221/%EB%A1%9C%EA%B3%A0%20%ED%9D%B0%EC%83%89.png");
+    background-image: url("https://postfiles.pstatic.net/MjAyMTA3MTVfMjcy/MDAxNjI2MzQ3MzYwODgz.ZNUpRztcJbhW0JNgYC2kYEfJJSaSgH_m4MzvFnXZ3vEg.eGQn2uQrnM9K86JEAPaN5Kalb-d1DsL8qKBcopsbdhgg.JPEG.avp_/%EB%93%B1%EB%8C%80%EA%B5%AC%EA%B5%AC%EC%A0%9C%EC%9D%B4%ED%94%BC%EC%A7%80.jpg?type=w773");
     /* background-color: black; */
     background-size: cover;
     width: 150px;
@@ -78,14 +78,16 @@ const HeaderBg = styled.div`
 `;
 
 const HeaderGrid = styled.div`
-    width: 100%;
+    /* background-color: black; */
+    margin: auto;
+    width: 1280px;
     position: relative;
     height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    padding: 0px 15%;
+    padding: 0px 3%;
     /* padding-top: 50px; */
 `;
 

@@ -27,7 +27,7 @@ const CommentList = (props) => {
         //     dispatch(cmtActions.loadCmtDB());
         // }
         console.log(commentList);
-    },[dispatch, commentList, studyId]);
+    },[]);
 
 
     const [content, setContent] = React.useState('');

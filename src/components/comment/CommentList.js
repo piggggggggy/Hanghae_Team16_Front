@@ -82,10 +82,10 @@ const CommentList = (props) => {
 
 
 const CommentContainer = styled.div`
-    max-width: 80%;
+    max-width: 100%;
     max-height: 1000px;
     box-sizing: border-box;
-    background-color: lightgray;
+    background-color: #f4f4f4;
     margin: 0px auto;
     padding: 10px 5% 30px 5%;
 `;

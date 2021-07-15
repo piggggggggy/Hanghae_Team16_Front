@@ -15,63 +15,103 @@ const StudyCard = (props) => {
     
     return (
         <React.Fragment>
-            <Card style={{backgroundColor: is_full || is_dead?  "#424242" : "lightgray" }}>
+            {is_full || is_dead ? 
+            <Card>
                 <OverText></OverText>
-                <Grid is_flex padding="10px" width="90%" margin="auto">
+                <Grid is_flex padding="10px 5%" width="90%" margin="auto">
                     <Text>LEVEL : {props.level}</Text>
                     <Text>{props.endJoinDate} 마감</Text>
                 </Grid>
-                <Grid padding="0px 40px">
-                    <Text weight="800" size="24px">{props.name}</Text>
+                <Grid padding="0px 10%">
+                    <Text weight="800" size="24px" >{props.name}</Text>
                     {/* <Text>{props.startDate} 시작</Text> */}
                     <Text>{props.explain}</Text>
-                    <Text>인원 : {props.joinNum + 1} / {props.size}</Text>
+                    <Text margin="20px 0px 0px">인원 : {props.joinNum + 1} / {props.size}</Text>
                     <Text>스터디 방식 : {SType(props.studyType)}</Text>
                 </Grid>
-                <Button _onClick={()=>{history.push(`/study/${study_id}`)}} is_float backgroundcolor="gray" text="자세히 보기"/>
+                <DetailBtn onClick={()=>{history.push(`/study/${study_id}`)}}><Text>자세히 보기</Text></DetailBtn>
             </Card>
+            : 
+            <Card style={{backgroundColor: is_full || is_dead?  "#424242" : "#f4f4f4" }}>
+                <OverText></OverText>
+                <Grid is_flex padding="10px 5%" width="90%" margin="auto">
+                    <Text>LEVEL : {props.level}</Text>
+                    <Text>{props.endJoinDate} 마감</Text>
+                </Grid>
+                <Grid padding="0px 10%">
+                    <Text weight="800" size="24px" >{props.name}</Text>
+                    {/* <Text>{props.startDate} 시작</Text> */}
+                    <Text>{props.explain}</Text>
+                    <Text margin="20px 0px 0px">인원 : {props.joinNum + 1} / {props.size}</Text>
+                    <Text>스터디 방식 : {SType(props.studyType)}</Text>
+                </Grid>
+                <DetailBtn onClick={()=>{history.push(`/study/${study_id}`)}}><Text>자세히 보기</Text></DetailBtn>
+            </Card>
+            }
+            
         </React.Fragment>
     );
 };
 //// 가득 찼을 때  마감표시하기
 
 
-StudyCard.defaultProps = {
-    // _id: "abc",
-    // studyId: 1,
-    // name: "스터디 구해용",
-    // schedule: "2021-07-30 ~ 2021-10-23",
-    // startDate: "2021-07-21",
-    // endJoinDate: "2021-07-30",
-    // writeDate: "2021-07-20 오후 18:31:22",
-    // size: 5,
-    // explain: "초보도 가능합니다.",
-    // joinLater: false,
-    // userId: 5,
-    // level: 2,
-    // studyType: 1,
-    // joinNum: 3,
-    // __v: 0,
-};
 
 const Card = styled.div`
     max-width: 90%;
     margin: 20px auto;
-    background-color: lightgray;
+    background-color: #f4f4f4;
+    border: 15px solid #c6e1ff;
     box-sizing: border-box;
-    border-radius: 10px;
+    
+    
+    border-radius: 15px;
     box-shadow: 5px 5px 5px gray;
+
+    &:hover {
+        box-shadow: 8px 8px 8px gray;
+    }
 `;
 
 const OverText = styled.div`
+   
     position: relaative;
     top: 50%;
     left: 50%;
-    background-color: red;
+    /* background-color: red; */
     width: 30px;
     height: 30px;
 
 
+`;
+
+const DetailBtn = styled.button`
+    cursor: pointer;
+    width: 150px;
+    height: 60px;
+    background-color: #eeeeee;
+    position: relative;
+    left: 60%;
+    bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        box-shadow: 2px 2px 2px gray;
+    }
+
+`;
+
+const Cover = styled.div`
+    position:relative;
+    top: 0px;
+    left: 0px;
+    display: block;
+    background-color:rgba(0, 0, 0, 0.8);
+    z-index: 100;
+    margin: 20px auto;  
 `;
 
 export default StudyCard;

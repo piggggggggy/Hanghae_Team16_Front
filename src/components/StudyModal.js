@@ -13,12 +13,12 @@ const StudyModal = (props) => {
     const userId = localStorage.getItem("userId");
     const {Open, Close} = props;
 
-    const name = useRef(null);
-    const startDate = useRef(null);
-    const endJoinDate = useRef(null);
-    const size = useRef(null);
-    const explain = useRef(null);
-    const schedule = useRef(null);
+    const name = useRef();
+    const startDate = useRef();
+    const endJoinDate = useRef();
+    const size = useRef();
+    const explain = useRef();
+    const schedule = useRef();
 
 
     // const [explain, setExplain] = React.useState('');
@@ -70,8 +70,8 @@ const StudyModal = (props) => {
             writeDate: writeDate,
         }
         console.log(study);
-        if (study.name && study.startDate >= now && study.endJoinDate >= now && study.schedule 
-            && study.size > 0 && level && study.explain && studyType && study.userId){
+        if (name.current.value && startDate.current.value && endJoinDate.current.value && schedule.current.value 
+            && parseInt(size.current.value) > 0 && level && explain.current.value && studyType && userId){
                 dispatch(studyActions.createStudyDB(study));
                 Close();
         }else{

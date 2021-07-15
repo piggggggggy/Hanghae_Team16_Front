@@ -24,13 +24,13 @@ const StudyExplain = (props) => {
         <React.Fragment>
             <ExplainBox>
                 <StudyModal Open={Modal} Close={ModalClose}/>
-                <Grid margin="30px 0px">
+                <Grid margin="30px 0px" padding="0px 8%">
                     <Text size="48px" weight="700">Study</Text>
                 </Grid>
-                <Grid margin="100px 20px">
+                <Grid margin="100px 0px" padding="0px 8%">
                     <Text size="32px" weight="600">스터디를 모집할 수 있는 공간입니다.</Text>
                 </Grid>
-                <Grid margin="100px 20px">
+                <Grid margin="100px 0px" padding="0px 8%">
                     <Text>
                         스터디를 열심히 하자
                         스터디를 열심히 하자
@@ -52,8 +52,8 @@ const StudyExplain = (props) => {
                     </Text>
                 </Grid>
                 <Grid width="80%" margin="auto" is_flex>
-                    <Button backgroundcolor="gray" width="45%" text="모집하기" _onClick={()=>{ModalOpen()}}/>
-                    <Button backgroundcolor="gray" width="45%" text="내 스터디" _onClick={()=>{history.push('/mypage')}}/>
+                    <Button backgroundcolor="#eeeeee" color="black" width="45%" text="모집하기" _onClick={()=>{ModalOpen()}}/>
+                    <Button backgroundcolor="#eeeeee" color="black" width="45%" text="내 스터디" _onClick={()=>{history.push('/mypage')}}/>
                 </Grid>
             </ExplainBox>
         </React.Fragment>
@@ -63,7 +63,7 @@ const StudyExplain = (props) => {
 };
 
 const ExplainBox = styled.div`
-    max-width: 600px
+    max-width: 600px;
 `;
 
 export default StudyExplain;

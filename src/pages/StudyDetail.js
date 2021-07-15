@@ -1,10 +1,12 @@
 import React from "react";
+import styled from "styled-components";
 import StudyDetailBody from "../components/StudyDetailBody";
 import { Grid, Text } from "../elements";
 import { useSelector, useDispatch } from "react-redux";
 import CommentList from "../components/comment/CommentList";
 import { actionCreator as studyActions } from "../redux/modules/study";
 import { actionCreator as commentActions } from "../redux/modules/comment"; 
+
 
 
 
@@ -32,16 +34,25 @@ const StudyDetail = (props) => {
  	return (
 		<React.Fragment>
 	        <Grid>
-				<Grid padding="0 50px" margin="20px 0">
-                	<Text size="48px" weight="800">Study</Text>
+				<Grid padding="0 10%" margin="20px 0">
+                	<Text size="48px" weight="700">Study</Text>
             	</Grid>
-                <StudyDetailBody id={idx}/>
-
-				<CommentList id={idx}/>
+				<DetailBox>
+					<StudyDetailBody id={idx}/>
+					<CommentList id={idx}/>
+				</DetailBox>
 			</Grid>
 		</React.Fragment>
 	)  
 };
+
+const DetailBox = styled.div`
+	width: 70%;
+	background-color: #f4f4f4;
+	margin: auto;
+	border-radius: 20px;
+	box-shadow: 5px 5px 5px gray;
+`;
 
 // {...detail_study}
 export default StudyDetail;

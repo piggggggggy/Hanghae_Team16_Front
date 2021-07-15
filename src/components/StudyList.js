@@ -43,10 +43,11 @@ const StudyList = (props) => {
         <React.Fragment>
             <Container>
                 <Grid width="80%" margin="30px auto 10px auto" is_flex>
-                    <Button backgroundcolor="gray" width="45%" height="30px" text="전체보기" _onClick={()=>{showAll()}}/>
-                    <Button backgroundcolor="gray" width="45%" height="30px" text="진행 중인 스터디" _onClick={()=>{showNotDead()}}/>
+                    <Button backgroundcolor="#eeeeee" color="black" width="45%" height="30px" text="전체보기" _onClick={()=>{showAll()}}/>
+                    <Button backgroundcolor="#eeeeee" color="black" width="45%" height="30px" text="진행 중인 스터디" _onClick={()=>{showNotDead()}}/>
                 </Grid>
                 <ListBox>
+       
                     {showToggle ? 
                     study_list.map((c,idx) => {
                         let is_full = c.joinNum+1 === c.size;
@@ -60,6 +61,7 @@ const StudyList = (props) => {
                     : study_list.map((c,idx) => {
                         return(<StudyCard key={idx} {...c}/>)
                     })}
+
                 </ListBox>
             </Container>
         </React.Fragment>
@@ -69,15 +71,25 @@ const StudyList = (props) => {
 const Container = styled.div`
     max-width: 600px;
     width: 600px;
+    /* background: linear-gradient(to bottom,#00ff0000,black); */
 `;
 const ListBox = styled.div`
     max-width: 600px;
     max-height: 700px;
     overflow-y: auto;
+    
+    
     &::-webkit-scrollbar {
         display: none; /* Chrome, Safari, Opera*/
     }
 `; 
+// const KKK = styled.div`
+//     position: relative;
+//     width: 600px;
+//     height: 700px;
+//     z-index: 10px;
+//     background: linear-gradient(to bottom,#00ff0000,black);
+// `;
 
 
 export default StudyList;

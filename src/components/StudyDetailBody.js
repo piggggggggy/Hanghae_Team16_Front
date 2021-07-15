@@ -12,7 +12,6 @@ import { actionCreator as studyActions } from "../redux/modules/study";
 const StudyDetailBody = (props) => {
     const dispatch = useDispatch();
     const _studyId = props.id;
-    console.log(_studyId)
     const study = useSelector((state) => state.study.study);
     const userId = localStorage.getItem("userId");
     const [is_join, setJoin] = React.useState(false);
@@ -229,12 +228,14 @@ const StudyDetailBody = (props) => {
 
 
 const DetailContainer = styled.div`
-    max-width: 80%;
+    max-width: 100%;
     max-height: 1000px;
     box-sizing: border-box;
-    background-color: lightgray;
+    border-radius: 20px;
+    background-color: #f4f4f4;
     margin: 0px auto;
     padding: 30px 5% 10px 5%;
+    /* box-shadow: 5px 5px 5px gray; */
 
 
 `;

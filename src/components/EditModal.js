@@ -90,8 +90,8 @@ const EditModal = (props) => {
             writeDate: props.writeDate,
         }
 
-        if (new_study.name && new_study.startDate >= now && new_study.endJoinDate >= now && new_study.schedule 
-            && new_study.size > 0 && new_study.level && new_study.explain && new_study.studyType && new_study.userId){
+        if (name && startDate >= now && endJoinDate >= now && schedule 
+            && size > 0 && level && explain && studyType && userId){
                 dispatch(studyActions.editStudyDB(props.studyId, new_study));
                 Close();
         }else{

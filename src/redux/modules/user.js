@@ -109,6 +109,10 @@ const LoginDB = (email, password) => {
                 history.push('/');
                 
             } 
+
+            if (response.data.result === "notExist") {
+                window.alert("잘못된 로그인 정보입니다.");
+            }
             
             console.log("response");
 

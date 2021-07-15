@@ -21,7 +21,7 @@ const deleteCmt = createAction(DELETE_CMT, (studyCommentId) => ({studyCommentId}
 
 //initialState
 const initialState = {
-    comments: null,
+    comments: [],
 }
 
 
@@ -124,6 +124,7 @@ export default handleActions({
             }
         });
         return { comments: del_list};
+        // draft.comments = del_list;
     }),
 
 }, initialState);

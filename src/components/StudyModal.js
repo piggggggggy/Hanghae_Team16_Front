@@ -9,7 +9,8 @@ import moment from "moment";
 
 const StudyModal = (props) => {
     const dispatch = useDispatch();
-    const userId = useSelector((state) => state.user.user.userId)
+    // const userId = useSelector((state) => state.user.user.userId)
+    const userId = localStorage.getItem("userId");
     const {Open, Close} = props;
 
     const name = useRef(null);
@@ -53,6 +54,7 @@ const StudyModal = (props) => {
     const createStudy = () => {    
     
         let now = moment().format("YYYY-MM-DD")
+        let writeDate = moment().format("YYYY-MM-DD-hh-mm-ss"); 
         let study = {
             name: name.current.value,
             startDate: startDate.current.value,
@@ -65,10 +67,11 @@ const StudyModal = (props) => {
             joinLater: joinLater,
             joinNum: 0,
             userId: userId,
+            writeDate: writeDate,
         }
         console.log(study);
-        if (study.name && study.startDate > now && study.endJoinDate > now && study.schedule 
-            && study.size > 0 && level && study.explain && studyType && joinLater != null && study.userId){
+        if (study.name && study.startDate >= now && study.endJoinDate >= now && study.schedule 
+            && study.size > 0 && level && study.explain && studyType && study.userId){
                 dispatch(studyActions.createStudyDB(study));
                 Close();
         }else{

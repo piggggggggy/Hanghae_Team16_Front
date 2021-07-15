@@ -48,6 +48,7 @@ const CommentList = (props) => {
         };
         console.log(comment)
         dispatch(cmtActions.createCmtDB(comment));
+        // component.forceUpdate()
     };
 
 
@@ -59,7 +60,7 @@ const CommentList = (props) => {
                 <Grid>
                     {commentList === null ? '' : commentList.map((c, idx) => {
                         return (
-                            <Comment key={c.studyCommnetId} {...c}/>
+                            <Comment key={idx} {...c}/>
                         );
                     })}
                 </Grid>

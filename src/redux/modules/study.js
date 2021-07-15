@@ -20,8 +20,8 @@ const WITHDRAW_STUDY = "join/WITHDRAW_STUDY";
 
 // action creator
 const loadStudy = createAction(LOAD_STUDY, (study_list) => ({study_list}));
-const createStudy = createAction(CREATE_STUDY, (study) => ({study}));
-const editStudy = createAction(EDIT_STUDY, (study_id, study) => ({study_id, study}));
+const createStudy = createAction(CREATE_STUDY, (new_study) => ({new_study}));
+const editStudy = createAction(EDIT_STUDY, (study_id, new_study) => ({study_id, new_study}));
 const deleteStudy = createAction(DELETE_STUDY, (study_id) => ({study_id}));
 const detailStudy = createAction(DETAIL_STUDY, (study, members) => ({study, members}))
 // const applyStudy = createAction(APPLY_STUDY, (study) => ({study}));
@@ -61,7 +61,6 @@ const loadStudyDB = () => {
         
         instance.get("/api/study").then((res) =>{
             console.log(res)
-            // console.log(res.data.studys);
             let study_list = res.data.studys;
             dispatch(loadStudy(study_list));
         }).catch(err => {
@@ -94,11 +93,11 @@ const detailStudyDB = (study_id='') => {
 const createStudyDB = (contents={}) => {
     return function (dispatch, getState, {history}){
         
-        const date = moment().format("YYYY-MM-DD-hh-mm-ss"); 
-                // 작성시간 포멧 의논하기 서버랑!!!!
+        // const date = moment().format("YYYY-MM-DD-hh-mm-ss"); 
+        //         // 작성시간 포멧 의논하기 서버랑!!!!
         
-        contents["date"] = date;
-        console.log(contents);
+        // contents["date"] = date;
+        // console.log(contents);
 
         instance.post("/api/study", contents).then((res) => {
             console.log(res);
@@ -177,7 +176,6 @@ const withdrawDB = (studyId='', userInfo={}) => {
         instance.delete(`/api/join-study/${studyId}`,userInfo).then((res) => {
             console.log(res);
 
-            return;
             dispatch(withdrawStudy(studyId));
         }).catch(err => {
             console.log("withdraw : 에.러", err);
@@ -197,12 +195,12 @@ export default handleActions({
     }),
 
     [CREATE_STUDY]: (state, action) => produce(state, (draft) => {
-        draft.list.unshift(action.payload.study);
+        draft.list.unshift(action.payload.new_study);
     }),
 
     [EDIT_STUDY]: (state, action) => produce(state, (draft) => {
         let idx = draft.list.findIndex((s) => s.studyId === action.payload.study_id);
-        draft.list[idx] = {...draft.list[idx], ...action.payload.study};
+        draft.list[idx] = {...draft.list[idx], ...action.payload.new_study};
     }),
 
             //  코멘트 데이터 구조를 어떻게 짤지 생각하기!!! study 데이터와 같이 갈 것인가 따로 갈 것인가!

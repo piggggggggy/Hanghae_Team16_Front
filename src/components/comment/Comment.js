@@ -10,7 +10,8 @@ import { history } from "../../redux/configStore";
 
 const Comment = (props) => {
     const dispatch = useDispatch();
-    const userId = useSelector((state) => state.user.user.userId);
+    // const userId = useSelector((state) => state.user.user.userId);
+    const userId = localStorage.getItem("userId");
     const studyCommentId = props.studyCommentId;
     console.log(props.userId)
 

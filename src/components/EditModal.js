@@ -9,7 +9,8 @@ import moment from "moment";
 
 const EditModal = (props) => {
     const dispatch = useDispatch();
-    const userId = useSelector((state) => state.user.user.userId);
+    // const userId = useSelector((state) => state.user.user.userId);
+    const userId = localStorage.getItem("userId");
     const {Open, Close} = props;
 
     const [name, setName] = React.useState(props.name);
@@ -84,13 +85,13 @@ const EditModal = (props) => {
             studyType: studyType,
             joinLater: joinLater,
             joinNum: 0,
-            userId: parseInt(userId),
+            userId: userId,
             _id: props._id,
             writeDate: props.writeDate,
         }
 
-        if (new_study.name && new_study.startDate > now && new_study.endJoinDate > now && new_study.schedule 
-            && new_study.size > 0 && new_study.level && new_study.explain && new_study.studyType && joinLater != null && new_study.userId){
+        if (new_study.name && new_study.startDate >= now && new_study.endJoinDate >= now && new_study.schedule 
+            && new_study.size > 0 && new_study.level && new_study.explain && new_study.studyType && new_study.userId){
                 dispatch(studyActions.editStudyDB(props.studyId, new_study));
                 Close();
         }else{

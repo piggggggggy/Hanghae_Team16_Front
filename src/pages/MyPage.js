@@ -28,7 +28,7 @@ const MyPage = (props) => {
 				<Grid>
 					<MyPageModal Open={myModal} Close={myodal_Close}></MyPageModal>
 					<Grid width="80%" margin="70px auto 0 auto" shadow radius="30px" bg="#fafafa" display="flex" space="space-between" height="120px" padding="0 60px" align="center" border="1px solid #ccc">
-						<Text color="black" size="32px" weight="bold">My Page</Text>
+						<Text color="#000333" size="32px" weight="bold">My Page</Text>
 						<Button weight="bold" size="17px" width="120px" height="50px" color="black" backgroundcolor="#c0dbef" text="내 정보" _onClick={myModal_Open} borderradius="30px"></Button>
 					</Grid>
 					<Grid width="80%" margin="100px auto 0 auto">

@@ -53,6 +53,7 @@ const Card = styled.div`
     box-sizing: border-box;
     border-radius: 3px 3px 3px 30px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    white-space: normal;
 `;
 
 const OverText = styled.div`

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { actionCreators as userAction } from "../redux/modules/user";
 import { useSelector, useDispatch } from "react-redux";
 import MyStudyCard from "./MyStudyCard";
-
+import MyStudyCardNoData from "./MyStudyCardNoData";
 
 const MyStudy = () => {
 
@@ -20,6 +20,27 @@ const MyStudy = () => {
 
 	console.log(studyList);
 
+
+    if (studyList.length === 0) {
+        return (
+            <React.Fragment>
+                <Grid margin="6% 0">
+                    <Grid is_flex margin="20px 0">
+                        <Text color="#000333" size="24px" weight="bold">My Study</Text>
+                        <Button backgroundcolor="#c0dbef" color="black" _onClick={()=>{history.push("/study")}} text="더보기"/>
+                    </Grid>
+                    <Grid is_flex>
+     
+                        <Container>
+                            <MyStudyCardNoData></MyStudyCardNoData>
+                        </Container>
+    
+                    </Grid>
+                    
+                </Grid>
+            </React.Fragment>
+        );
+    }
         return (
             <React.Fragment>
                 <Grid margin="6% 0">
@@ -43,7 +64,7 @@ const MyStudy = () => {
                     
                 </Grid>
             </React.Fragment>
-        )
+        );
     
 
     

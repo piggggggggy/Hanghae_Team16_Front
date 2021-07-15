@@ -16,7 +16,28 @@ const MyComment = (props) => {
 
     const commentList = useSelector(state => (state.user.comment_list));
 
- 
+
+    if (commentList.length === 0) {
+        return (
+        <React.Fragment>
+            <Grid padding="40px 0 100px 0">
+                <Grid is_flex margin="10px 0">
+                    <Text color="#000333" size="24px" weight="bold">My Comment</Text>
+                </Grid>
+                
+                <Container>
+
+                    <Grid is_flex padding=" 30px 60px">
+                        <Grid margin="20px 0">
+                            <ATag size="18px" text={"아직 작성한 댓글이 없습니다!"}></ATag>
+                        </Grid>
+                    </Grid>
+
+                </Container>
+            </Grid>
+        </React.Fragment>
+    );
+    }
 
     return (
         <React.Fragment>

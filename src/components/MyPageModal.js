@@ -104,38 +104,38 @@ const MyPageModal = (props) => {
                     <ModalBox>
     
                         <Grid display="flex" direction="column" width="60%" margin="3% auto">
-                        <Text margin="30px" weight="bold" size="24px" align="center">닉네임, 비밀번호 변경</Text>
-                        <Grid is_flex  padding="4% 0">
-                        <Text size="18px">아이디 : </Text>
-                        <Text weight="bold" size="18px">{my_Email}</Text>
-                        </Grid>
+                            <Text margin="30px" weight="bold" size="24px" align="center">닉네임, 비밀번호 변경</Text>
+                            <Grid is_flex  padding="4% 0">
+                                <Text size="18px">아이디 : </Text>
+                                <Text weight="bold" size="18px">{my_Email}</Text>
+                            </Grid>
 
-                        <Grid is_flex padding="4% 0">
-                        <Text size="18px">닉네임 : </Text>
-                        <Input padding="10px" placeholder={my_Nick} width="60%" _onChange={editNick}></Input>
-                        </Grid>
-            
-                        <Grid is_flex  padding="4% 0">
-                        <Text size="18px">비밀번호 : </Text>
+                            <Grid is_flex padding="4% 0">
+                                <Text size="18px">닉네임 : </Text>
+                                <Input padding="10px" placeholder={my_Nick} width="60%" _onChange={editNick}></Input>
+                            </Grid>
+                
+                            <Grid is_flex  padding="4% 0">
+                                <Text size="18px">비밀번호 : </Text>
 
-                        <Grid display="flex" direction="column" width="60%">
-                        <Input  type="password" padding="10px" placeholder="비밀번호를 입력해주세요." width="100%" _onChange={editPwd}></Input>
-                        <Text size="11px" margin="3px 0 0 5px">특수문자, 문자, 숫자를 각 하나 이상 포함한 형태의 8~15자리 비밀번호를 설정해 주세요.</Text>
-                        </Grid>
-                        
-                        </Grid>
-            
-                        <Grid is_flex  padding="4% 0">
-                        <Text size="18px">비밀번호 확인 : </Text>
-                        <Input  type="password" padding="10px" placeholder="비밀번호를 다시 입력해주세요." width="60%" _onChange={editPwdCheck}></Input>
-                        </Grid>
-                        
-                        <Grid is_flex space="space-around" padding="50px 0 0 0">
-                            <Button height="45px" weight="bold" backgroundcolor="#c0dbef" borderradius="20px" text="수정" width="30%" _onClick={editMyInfo}></Button>
-                            <Button height="45px" weight="bold" backgroundcolor="#c0dbef" borderradius="20px" _onClick={closeModifyInfo} text="닫기" width="30%"></Button>
-                        </Grid>
+                                <Grid display="flex" direction="column" width="60%">
+                                    <Input  type="password" padding="10px" placeholder="비밀번호를 입력해주세요." width="100%" _onChange={editPwd}></Input>
+                                    <Text size="11px" margin="3px 0 0 5px">특수문자, 문자, 숫자를 각 하나 이상 포함한 형태의 8~15자리 비밀번호를 설정해 주세요.</Text>
+                                </Grid>
                         
                             </Grid>
+            
+                            <Grid is_flex  padding="4% 0">
+                                <Text size="18px">비밀번호 확인 : </Text>
+                                <Input  type="password" padding="10px" placeholder="비밀번호를 다시 입력해주세요." width="60%" _onChange={editPwdCheck}></Input>
+                            </Grid>
+                        
+                            <Grid is_flex space="space-around" padding="50px 0 0 0">
+                                <Button height="45px" weight="bold" backgroundcolor="#c0dbef" borderradius="20px" text="수정" width="30%" _onClick={editMyInfo}></Button>
+                                <Button height="45px" weight="bold" backgroundcolor="#c0dbef" borderradius="20px" _onClick={closeModifyInfo} text="닫기" width="30%"></Button>
+                            </Grid>
+                        
+                        </Grid>
                     </ModalBox>
                 ) : null
                 

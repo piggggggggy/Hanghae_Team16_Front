@@ -53,8 +53,8 @@ function App() {
           <Route path='/qnawrite' exact component={QnaWrite}/> */}
           <Route path='/study' exact component={Study}/>
           <Route path='/study/:id' exact component={StudyDetail}/>
-          <Route path='/login' exact component={Login}></Route>
-          <Route path='/signup' exact component={SignUp}></Route>
+          <Route path='/login' exact component={Login}/>
+          <Route path='/signup' exact component={SignUp}/>
         </Coontainer>
       </ConnectedRouter>
     </React.Fragment>

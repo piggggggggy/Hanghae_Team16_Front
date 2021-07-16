@@ -55,7 +55,6 @@ const CommentList = (props) => {
         // component.forceUpdate()
     };
 
-
     return (
         <React.Fragment>
             <CommentContainer>

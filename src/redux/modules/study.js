@@ -88,7 +88,6 @@ const detailStudyDB = (study_id='') => {
     };
 };
 
-{}
 
 // create
                             // 파라미터에 기본값 주기 - es6

@@ -14,22 +14,12 @@ const StudyDetail = (props) => {
 	const dispatch = useDispatch()
 	const {history} = props;
 
-	// const study_list = useSelector((state) => state.study.list);
-	let idx = parseInt(props.match.params.id);
-	// console.log(idx);
-	// const detail_study = study_list[idx];
-	// const study = useSelector((state) => state.study.sutdy);
-	// const comments = useSelector((state) => state.comment.comments);
-	
-	// React.useEffect(() => {
-        
-    //     dispatch(studyActions.detailStudyDB(idx));
-	// 	dispatch(commentActions.loadCmtDB(idx));
-	// }, [idx]);
+	let studyId = parseInt(props.match.params.id);
 
-    // console.log(study);
-    // console.log(comments);
-
+	React.useEffect(() => {
+		dispatch(studyActions.detailStudyDB(studyId));
+		dispatch(commentActions.loadCmtDB(studyId));
+	}, []);
 
 
  	return (
@@ -39,8 +29,8 @@ const StudyDetail = (props) => {
                 	<Text size="48px" weight="700">Study</Text>
             	</Grid>
 				<DetailBox>
-					<StudyDetailBody id={idx}/>
-					<CommentList id={idx}/>
+					<StudyDetailBody id={studyId}/>
+					<CommentList id={studyId}/>
 				</DetailBox>
 			</Grid>
 		</React.Fragment>

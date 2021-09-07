@@ -9,7 +9,7 @@ import { history } from "../redux/configStore";
 const SignUp = (props) => {
     
     const dispatch = useDispatch();
-
+    
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [group, setGroup] = React.useState("");

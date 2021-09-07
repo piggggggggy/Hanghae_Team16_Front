@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import { Helmet } from "react-helmet";
 import { Provider } from "react-redux";
 import store from "./redux/configStore";
-import Header from "./shared/Header";
 
 ReactDOM.render(
   <Provider store={store}>
@@ -18,7 +17,7 @@ ReactDOM.render(
           <meta property="og:description" content="항해를 준비하는 이들을 위한 스터디 매칭 서비스" />
           <meta property="og:image" content="https://s3.ap-northeast-2.amazonaws.com/lighthouse99.club/thumb.jpg" />
     </Helmet>
-    <Header/>
+
     <App />
   </Provider>,
   document.getElementById('root')

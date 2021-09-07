@@ -27,14 +27,14 @@ const Header = (props) => {
             <HeaderBg>
 
                 <HeaderGrid>
-                <div onClick={()=> {history.push('/')}}><Text color="white" size="50px" weight="700">등대99</Text></div>
-                <BtnBox>
-                    <IconButton onClick={() => {history.replace("/")}}><HomeSharpIcon style={{ color: "white" }} fontSize="large"/></IconButton>
-                    <IconButton onClick={() => {history.replace("/mypage")}}><PersonIcon style={{ color: "white" }} fontSize="large"/></IconButton>
-                    <IconButton onClick={logOutBtn}><ExitToAppSharpIcon style={{ color: "white" }} fontSize="large"/></IconButton>
-                    {/* <Button size="large" onClick={() => {history.replace("/mypage")}}>마이페이지</Button>
-                    <Button size="large" onClick={logOutBtn}>로그아웃</Button> */}
-                </BtnBox>
+                    <div style={{cursor: "pointer"}} onClick={()=> {history.push('/')}}>
+                        <Text color="white" size="50px" weight="700" cursor>등대99</Text>
+                    </div>
+                    <BtnBox>
+                        <IconButton onClick={() => {history.replace("/")}}><HomeSharpIcon style={{ color: "white" }} fontSize="large"/></IconButton>
+                        <IconButton onClick={() => {history.replace("/mypage")}}><PersonIcon style={{ color: "white" }} fontSize="large"/></IconButton>
+                        <IconButton onClick={logOutBtn}><ExitToAppSharpIcon style={{ color: "white" }} fontSize="large"/></IconButton>
+                    </BtnBox>
                 </HeaderGrid>
                 
 
@@ -78,7 +78,6 @@ const HeaderBg = styled.div`
 `;
 
 const HeaderGrid = styled.div`
-    /* background-color: black; */
     margin: auto;
     width: 1280px;
     position: relative;
@@ -88,7 +87,6 @@ const HeaderGrid = styled.div`
     align-items: center;
     box-sizing: border-box;
     padding: 0px 3%;
-    /* padding-top: 50px; */
 `;
 
 const BtnBox = styled.div`

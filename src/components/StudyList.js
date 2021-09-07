@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreator as studyActions } from "../redux/modules/study";
 import moment from "moment";
@@ -14,31 +14,17 @@ const StudyList = (props) => {
     const study_list = useSelector((state) => state.study.list);
 
 
-
-    React.useEffect(() => {
-
-        // dispatch(studyActions.loadStudyDB());
-        if(study_list.length === 0){
-            dispatch(studyActions.loadStudyDB());
-        }
-    },[]);
-
-
-    const [showToggle, setShow] = React.useState(false);
+    const [showToggle, setShow] = useState(false);
 
     const showAll = () => {
-
-        dispatch(studyActions.loadStudyDB());
+        // dispatch(studyActions.loadStudyDB());
         setShow(false);
     };
 
-    const showNotDead = (c) => {
+    const showNotDead = () => {
         setShow(true);
-        
     };
 
-
-    
     return (
         <React.Fragment>
             <Container>
@@ -71,7 +57,6 @@ const StudyList = (props) => {
 const Container = styled.div`
     max-width: 600px;
     width: 600px;
-    /* background: linear-gradient(to bottom,#00ff0000,black); */
 `;
 const ListBox = styled.div`
     max-width: 600px;
@@ -83,13 +68,6 @@ const ListBox = styled.div`
         display: none; /* Chrome, Safari, Opera*/
     }
 `; 
-// const KKK = styled.div`
-//     position: relative;
-//     width: 600px;
-//     height: 700px;
-//     z-index: 10px;
-//     background: linear-gradient(to bottom,#00ff0000,black);
-// `;
 
 
 export default StudyList;

@@ -6,7 +6,6 @@ import Comment from "./Comment";
 import { actionCreator as cmtActions } from "../../redux/modules/comment";
 import { actionCreator as studyActions } from "../../redux/modules/study";
 import moment from "moment";
-import { useReducer } from "react";
 
 
 const CommentList = (props) => {
@@ -17,18 +16,6 @@ const CommentList = (props) => {
 
     const commentList = useSelector((state) => state.comment.comments);
     const userId = localStorage.getItem("userId");
-    
-    console.log(commentList);
-
-    React.useEffect(() => {
-
-        dispatch(cmtActions.loadCmtDB(studyId));
-        // if(commentList.length === 0){
-        //     dispatch(cmtActions.loadCmtDB());
-        // }
-        console.log(commentList);
-    },[]);
-
 
     const [content, setContent] = React.useState('');
     const changeContent = (e) => {
@@ -46,13 +33,8 @@ const CommentList = (props) => {
             content: content,
             userId: userId,
             date: moment().format("YYYY.MM.DD hh:mm:ss"),
-            // checkTime: moment(),
         };
-        console.log(comment)
         dispatch(cmtActions.createCmtDB(comment));
-        // dispatch(cmtActions.loadCmtDB(studyId));
-        // forceUpdate()
-        // component.forceUpdate()
     };
 
     return (
@@ -64,7 +46,6 @@ const CommentList = (props) => {
                     {commentList === null ? '' : commentList.map((c, idx) => {
                         return (
                             <Comment key={idx} {...c}/>
-                            // <div>{c.studyCommentId}</div>
                         );
                     })}
                 </Grid>

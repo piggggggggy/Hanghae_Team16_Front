@@ -17,20 +17,8 @@ const StudyDetailBody = (props) => {
     const join = useSelector((state) => state.study.join);
     const userId = localStorage.getItem("userId");
     const [is_join, setJoin] = React.useState(false);
-    // const [already_join, setAJoin] = React.useState(false);
-    
- 
-
-    // detail load
-    React.useEffect(() => {
-        
-        dispatch(studyActions.detailStudyDB(_studyId));
-    }, []);
-
 
         
-
-
     // 모달 작업----------------------------------
     const [_Modal, _setModal] = React.useState(false);
 
@@ -47,9 +35,9 @@ const StudyDetailBody = (props) => {
     //--------------------------------------------
     
 
-    if (!study) { 
-        return <div>로딩중..</div>; 
-    }
+    // if (!study) { 
+    //     return <div>로딩중..</div>; 
+    // }
 
     const _study = study.detail[0];
     const members = study.members;
@@ -58,9 +46,6 @@ const StudyDetailBody = (props) => {
     // 인원현황
     const is_full = _study.joinNum+1 === _study.size;
 
-
-    // console.log("userId :"+userId);
-    // console.log("study :"+_study.userId);
     // 삭제
     const deleteStudy = () => {
         if(userId == _study.userId){
@@ -123,10 +108,6 @@ const StudyDetailBody = (props) => {
         }
 
     }
-    
-    console.log(members.length)
-    console.log(join.length)
-
 
     return (
         <React.Fragment>

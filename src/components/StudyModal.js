@@ -143,7 +143,7 @@ const StudyModal = (props) => {
                     </Grid>
                 </ModalBox>
                 ) : null
-            } <div/>
+            }
             
             
         </React.Fragment>

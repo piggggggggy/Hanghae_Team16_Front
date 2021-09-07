@@ -1,13 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { Text, Button, Grid } from "../elements";
-import { useSelector, useDispatch } from "react-redux";
 import SType from "../shared/StudyType";
 import { history } from "../redux/configStore";
 import moment from "moment";
 
 const StudyCard = (props) => {
-    // const {history} = props;
     const study_id = props.studyId
     
 
@@ -25,7 +23,6 @@ const StudyCard = (props) => {
                 </Grid>
                 <Grid padding="0px 10%">
                     <Text weight="800" size="24px" >{props.name}</Text>
-                    {/* <Text>{props.startDate} 시작</Text> */}
                     <Text>{props.explain}</Text>
                     <Text margin="20px 0px 0px">인원 : {props.joinNum + 1} / {props.size}</Text>
                     <Text>스터디 방식 : {SType(props.studyType)}</Text>

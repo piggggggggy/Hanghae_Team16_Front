@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configStore";
+import { useDispatch } from "react-redux";
+
+// components
 import Main from "../pages/Main";
 import MyPage from "../pages/MyPage";
 import Qna from "../pages/Qna";
@@ -11,9 +14,11 @@ import StudyDetail from "../pages/StudyDetail";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Header from "./Header"
-import './App.css';
-import { useDispatch } from "react-redux";
+
+// modules
 import { actionCreators as userActions } from "../redux/modules/user";
+
+// helmet
 import { Helmet } from "react-helmet";
 
 function App() {
@@ -49,8 +54,6 @@ function App() {
           <Route path='/' exact component={Main}/>
           <Route path='/mypage' exact component={MyPage}/>
           <Route path='/qna' exact component={Qna}/>
-          {/* <Route path='/qna/id' exact component={QnaDetail}/>
-          <Route path='/qnawrite' exact component={QnaWrite}/> */}
           <Route path='/study' exact component={Study}/>
           <Route path='/study/:id' exact component={StudyDetail}/>
           <Route path='/login' exact component={Login}/>

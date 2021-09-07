@@ -1,9 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { Text, Input, Button, Grid, Image } from "../elements";
 import { useDispatch } from "react-redux";
-import { actionCreators as userActions } from "../redux/modules/user";
 import { history } from "../redux/configStore";
+
+// components & elements
+import { Text, Input, Button, Grid, Image } from "../elements";
+
+// modules
+import { actionCreators as userActions } from "../redux/modules/user";
 import { actionCreators } from "../redux/modules/study";
 import { useSelector } from "react-redux";
 import { emailCheck, passwordCheck } from "../shared/common";

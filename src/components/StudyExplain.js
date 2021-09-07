@@ -1,16 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
-import { Text, Grid, Button } from "../elements";
-import { useState } from "react-redux";
-import StudyModal from "./StudyModal";
 import { history } from "../redux/configStore";
 import { useSelector } from "react-redux";
+
+// components & elements
+import { Text, Grid, Button } from "../elements";
+import StudyModal from "./StudyModal";
 
 const StudyExplain = (props) => {
 
     const is_login = useSelector((state) => state.user.is_login);
  
-	const [Modal, setModal] = React.useState(false);
+	const [Modal, setModal] = useState(false);
  
 	const ModalOpen = () => {
         if(is_login){

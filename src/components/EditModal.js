@@ -1,27 +1,32 @@
-import React from "react";
+import React, { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { Grid, Text, Input, DropBox, Button } from "../elements";
-import { useState, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
+
+// components & elements
+import { Grid, Text, Input, Button } from "../elements";
+
+// modules
 import { actionCreator as studyActions } from "../redux/modules/study";
+
+// moment
 import moment from "moment";
 
 
 const EditModal = (props) => {
     const dispatch = useDispatch();
-    // const userId = useSelector((state) => state.user.user.userId);
+    
     const userId = localStorage.getItem("userId");
     const {Open, Close} = props;
 
-    const [name, setName] = React.useState(props.name);
-    const [startDate, setStart] = React.useState(props.startDate);
-    const [endJoinDate, setEnd] = React.useState(props.endJoinDate);
-    const [schedule, setSchedule] = React.useState(props.schedule);
-    const [size, setSize] = React.useState(props.size);
-    const [explain, setExplain] = React.useState(props.explain);
-    const [joinLater, setJoin] = React.useState(props.joinLater);
-    const [studyType, setType] = React.useState(props.studyType);
-    const [level, setLevel] = React.useState(props.level);
+    const [name, setName] = useState(props.name);
+    const [startDate, setStart] = useState(props.startDate);
+    const [endJoinDate, setEnd] = useState(props.endJoinDate);
+    const [schedule, setSchedule] = useState(props.schedule);
+    const [size, setSize] = useState(props.size);
+    const [explain, setExplain] = useState(props.explain);
+    const [joinLater, setJoin] = useState(props.joinLater);
+    const [studyType, setType] = useState(props.studyType);
+    const [level, setLevel] = useState(props.level);
 
 
 
@@ -32,7 +37,6 @@ const EditModal = (props) => {
         }else{
             setJoin(false);
         }
-        // setJoin(e.target.value);
     };
 
     // studyType int형으로 바꿔주기

@@ -1,11 +1,15 @@
 import React from "react";
-import { Text, Grid, Button } from "../elements";
 import { history } from "../redux/configStore";
 import styled from "styled-components";
-import { actionCreators as userAction } from "../redux/modules/user";
 import { useSelector, useDispatch } from "react-redux";
+
+// components & elements
+import { Text, Grid, Button } from "../elements";
 import MyStudyCard from "./MyStudyCard";
 import MyStudyCardNoData from "./MyStudyCardNoData";
+
+// modules
+import { actionCreators as userAction } from "../redux/modules/user";
 
 const MyStudy = () => {
 

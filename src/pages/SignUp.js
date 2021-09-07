@@ -1,10 +1,14 @@
 import React from "react";
-import { Text, Input, Button, Grid } from "../elements";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
+import { history } from "../redux/configStore";
+
+// components & elements
+import { Text, Input, Button, Grid } from "../elements";
+
+// modules
 import { actionCreators as userActions } from "../redux/modules/user";
 import { emailCheck, passwordCheck } from "../shared/common";
-import { history } from "../redux/configStore";
 
 const SignUp = (props) => {
     

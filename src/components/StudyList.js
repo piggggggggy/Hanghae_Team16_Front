@@ -1,9 +1,14 @@
 import React, {useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
+
+// modules
 import { actionCreator as studyActions } from "../redux/modules/study";
+
+// moment
 import moment from "moment";
 
-import styled from "styled-components";
+// components & elements
 import { Grid, Button } from "../elements";
 import StudyCard from "./StudyCard";
 

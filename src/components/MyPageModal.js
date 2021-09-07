@@ -1,11 +1,19 @@
 import React from "react";
-import { Grid, Text, Button, Input } from "../elements";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
+
+// components & elements
+import { Grid, Text, Button, Input } from "../elements";
+
+// modules
 import { actionCreators as userAction } from "../redux/modules/user";
+
+// axios
 import instance from "../shared/instance";
-import { emailCheck, passwordCheck } from "../shared/common";
 import { getCookie } from "../shared/instance";
+
+// check
+import { emailCheck, passwordCheck } from "../shared/common";
 
 const MyPageModal = (props) => {
 
@@ -81,7 +89,6 @@ const MyPageModal = (props) => {
             return;
         }
 
-        console.log(my_Pwd_Edit, my_Nick_Edit);
         dispatch(userAction.editInfoDB(my_Pwd_Edit, my_Nick_Edit));
     }
     

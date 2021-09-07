@@ -1,14 +1,19 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
 import styled from "styled-components";
-import Container from '@material-ui/core/Container';
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as userActions } from "../redux/modules/user";
 import { history } from "../redux/configStore";
+
+// elements
+import { Text, Image } from "../elements";
+
+// modules
+import { actionCreators as userActions } from "../redux/modules/user";
+
+// material-ui
 import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppSharpIcon from '@material-ui/icons/ExitToAppSharp';
 import HomeSharpIcon from '@material-ui/icons/HomeSharp';
-import { Text, Image } from "../elements";
+import Button from "@material-ui/core/Button";
 
 
 const Header = (props) => {

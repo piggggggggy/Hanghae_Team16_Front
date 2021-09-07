@@ -1,10 +1,10 @@
 import React from "react";
-import styled from "styled-components";
+import { useDispatch } from "react-redux";
+
+// components & elements
 import StudyList from "../components/StudyList";
 import StudyExplain from "../components/StudyExplain";
-import StudyModal from "../components/StudyModal";
 import { Grid, Button } from "../elements";
-import { useDispatch } from "react-redux";
 
 // modules
 import { actionCreator as studyActions } from "../redux/modules/study"; 

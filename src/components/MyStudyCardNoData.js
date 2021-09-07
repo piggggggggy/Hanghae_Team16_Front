@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+
+// components & elements
 import { Text, Button, Grid } from "../elements";
 
 

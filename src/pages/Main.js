@@ -1,10 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import Banner from "../components/Banner";
-import {Grid, Text, Button, ATag} from "../elements";
-import { actionCreators as userAction } from "../redux/modules/user";
 import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configStore";
+
+// components & elements
+import Banner from "../components/Banner";
+import {Grid, Text, Button, ATag} from "../elements";
+
+// modules
+import { actionCreators as userAction } from "../redux/modules/user";
+
+// 스터디 type 함수
 import SType from "../shared/StudyType";
 
 const Main = (props) => {

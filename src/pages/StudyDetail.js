@@ -1,9 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+
+// components & elements
 import StudyDetailBody from "../components/StudyDetailBody";
 import { Grid, Text } from "../elements";
-import { useSelector, useDispatch } from "react-redux";
 import CommentList from "../components/comment/CommentList";
+
+// modules
 import { actionCreator as studyActions } from "../redux/modules/study";
 import { actionCreator as commentActions } from "../redux/modules/comment"; 
 

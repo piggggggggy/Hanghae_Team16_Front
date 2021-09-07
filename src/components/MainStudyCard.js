@@ -1,7 +1,12 @@
 import React from "react";
-import { Grid, Text, Button } from "../elements/index";
-import SType from "../shared/StudyType";
 import styled from "styled-components";
+
+// components & elements
+import { Grid, Text, Button } from "../elements/index";
+
+// 스터디Type 함수
+import SType from "../shared/StudyType";
+
 
 const MainStudyCard = (props) => {
 

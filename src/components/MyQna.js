@@ -1,4 +1,6 @@
 import React from "react";
+
+// components & elements
 import { Text, Grid, Button } from "../elements";
 
 const MyQna = (props) => {

@@ -1,9 +1,13 @@
 import React from "react";
-import { Text, Grid, Button, ATag } from "../elements";
 import { useDispatch, useSelector } from "react-redux";
-import { actionCreators as userAction } from "../redux/modules/user";
 import { history } from "../redux/configStore";
 import styled from "styled-components";
+
+// components & elemnets
+import { Text, Grid, Button, ATag } from "../elements";
+
+// modules
+import { actionCreators as userAction } from "../redux/modules/user";
 
 const MyComment = (props) => {
 

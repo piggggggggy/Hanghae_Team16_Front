@@ -1,39 +1,33 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { Grid, Button, Text, Input } from "../../elements";
-import moment from "moment";
-import { styles } from "ansi-colors";
+
+// components & elements
+import { Grid, Text } from "../../elements";
+
+// modules
 import { actionCreator as cmtActions } from "../../redux/modules/comment";
-import { history } from "../../redux/configStore";
 
 
 const Comment = (props) => {
+
     const dispatch = useDispatch();
-    // const userId = useSelector((state) => state.user.user.userId);
+
     const userId = localStorage.getItem("userId");
     const nickname = localStorage.getItem("nickname");
     const studyCommentId = props.studyCommentId;
-    console.log(props.userId)
 
-    // const time = props.checkTime.format("YYYY.MM.DD  hh:mm");
-    // const now = moment().format("YYYY.MM.DD hh:mm");
-    // console.log(time);
-    // console.log(now);
 
-    
-    // console.log("userId :"+userId);
-    // console.log("study :"+props.userId);
-
+    // 댓글삭제
     const deleteCmt = () => {
-        if (userId == props.userId){
-            dispatch(cmtActions.deleteCmtDB(studyCommentId))
-        }else{
-            window.alert("귀하의 댓글이 아닙니다.")
+        if (window.confirm("삭제하시겠어요?")) {
+            if (userId == props.userId){
+                dispatch(cmtActions.deleteCmtDB(studyCommentId))
+            }else{
+                window.alert("귀하의 댓글이 아닙니다.")
+            }
         }
-        
     };
-    console.log(props)
 
 
     return (

@@ -1,12 +1,17 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+
+// components & elements
 import { Text, Grid, Button } from "../elements";
 import MyStudy from "../components/MyStudy";
 import MyQna from "../components/MyQna";
 import MyComment from "../components/MyComment";
 import MyPageModal from "../components/MyPageModal";
-import { useDispatch, useSelector } from "react-redux";
+
+// modules
 import { actionCreators as userAction } from "../redux/modules/user";
-import styled from "styled-components";
+
 
 const MyPage = (props) => {
 
@@ -16,12 +21,10 @@ const MyPage = (props) => {
 	const myModal_Open = () => {
         setMyModal(true);
     };
-    
+     
     const myodal_Close = () => {
         setMyModal(false);
     }
-
-	
 
 		return (
 			<React.Fragment>

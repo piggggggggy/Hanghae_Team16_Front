@@ -1,8 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { Text, Button, Grid } from "../elements";
-import SType from "../shared/StudyType";
 import { history } from "../redux/configStore";
+
+// components & elements
+import { Text, Button, Grid } from "../elements";
+
+// 스터디type 함수
+import SType from "../shared/StudyType";
+
+// moments
 import moment from "moment";
 
 const StudyCard = (props) => {

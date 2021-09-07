@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState, useRef, useReducer } from "react";
 import styled from "styled-components";
-import { Grid, Text, Input, DropBox, Button } from "../elements";
-import { useState, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { actionCreator as studyActions } from "../redux/modules/study";
-import { useReducer } from "react";
-import moment from "moment";
+import { useDispatch } from "react-redux";
 
+// components & elements
+import { Grid, Text, Input, DropBox, Button } from "../elements";
+
+// modules
+import { actionCreator as studyActions } from "../redux/modules/study";
+
+// moment
+import moment from "moment";
 
 const StudyModal = (props) => {
     const dispatch = useDispatch();
-    // const userId = useSelector((state) => state.user.user.userId)
     const userId = localStorage.getItem("userId");
     const [, forceUpdate] = useReducer((x) => x + 1, 0);
     const {Open, Close} = props;
@@ -23,10 +25,9 @@ const StudyModal = (props) => {
     const schedule = useRef();
 
 
-    // const [explain, setExplain] = React.useState('');
-    const [joinLater, setJoin] = React.useState('');
-    const [studyType, setType] = React.useState('');
-    const [level, setLevel] = React.useState('');
+    const [joinLater, setJoin] = useState('');
+    const [studyType, setType] = useState('');
+    const [level, setLevel] = useState('');
 
     // joinLater 값 boolean으로 바꿔주기
     const changeJoin = (e) => {
@@ -35,7 +36,6 @@ const StudyModal = (props) => {
         }else{
             setJoin(false);
         }
-        // setJoin(e.target.value);
     };
 
     // studyType int형으로 바꿔주기
@@ -170,31 +170,3 @@ const DropDown = styled.select`
 `;
 
 export default StudyModal;
-
-
-
-
-    
-    // const editName = (e) => {
-    //     setName(e.target.value);
-    // };
-
-    // const editStart = (e) => {
-    //     setStart(e.target.value);
-    // };
-
-    // const editEnd = (e) => {
-    //     setEnd(e.target.value);
-    // };
-
-    // const editSize = (e) => {
-    //     setSize(e.target.value);
-    // };
-
-    // const editSchedule = (e) => {
-    //     setSchedule(e.target.value);
-    // };
-
-    // const editExplain = (e) => {
-    //     setExplain(e.target.value);
-    // };

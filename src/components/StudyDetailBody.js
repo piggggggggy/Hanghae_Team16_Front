@@ -1,20 +1,23 @@
 import React from "react";
 import styled from "styled-components";
+import history from "../redux/configStore";
+import { useSelector, useDispatch } from "react-redux";
+
+// components & modules
 import { Text, Grid, Button } from "../elements";
-import SType from "../shared/StudyType";
 import EditModal from "./EditModal";
 
-import configStore, {history} from "../redux/configStore";
-import { useSelector, useDispatch, useStore } from "react-redux";
+// modules
 import { actionCreator as studyActions } from "../redux/modules/study";
-import { red } from "@material-ui/core/colors";
+
+// 스터디type 함수
+import SType from "../shared/StudyType";
 
 
 const StudyDetailBody = (props) => {
     const dispatch = useDispatch();
     const _studyId = props.id;
     const study = useSelector((state) => state.study.study);
-    const join = useSelector((state) => state.study.join);
     const userId = localStorage.getItem("userId");
     const [is_join, setJoin] = React.useState(false);
 
@@ -114,10 +117,6 @@ const StudyDetailBody = (props) => {
             <DetailContainer>
                 <EditModal Open={_Modal} Close={_ModalClose} {..._study}/>
                 <Grid width="100%" is_flex margin="0px 0px 20px 0px">
-                    {/* <Grid width="15%" is_flex>
-                        <Text>팀장 : {props.userId}</Text>
-                        <Text>LEVEL : {props.level}</Text>
-                    </Grid> */}
                     <Grid width="20%">
                         {!is_full?
                         <Grid display="flex" space="center" align="center" radius="10px" width="100%" height="40px" bg="#00e676"><Text bold color="#ffffff" size="20px">모집중!!</Text></Grid> :

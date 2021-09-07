@@ -1,10 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import instance from "../../shared/instance";
-import moment from "moment";
-import { useSelector } from "react-redux";
-
-
 
 // actions
 const LOAD_STUDY = "study/LOAD_STUDY";
@@ -12,7 +8,6 @@ const CREATE_STUDY = "study/CREATE_STUDY";
 const EDIT_STUDY = "study/EDIT_STUDY";
 const DELETE_STUDY = "study/DELETE_STUDY";
 const DETAIL_STUDY = "study/DETAIL_STUDY";
-// const APPLY_STUDY = "study/APPY_STUDY";
 
 const JOIN_STUDY = "join/JOIN_STUDY";
 const WITHDRAW_STUDY = "join/WITHDRAW_STUDY";
